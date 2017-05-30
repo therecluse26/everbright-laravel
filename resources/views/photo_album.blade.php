@@ -85,7 +85,8 @@
                 <div class="links">
                     @foreach($album as $image)
                         @if(property_exists($image, 'base_uri'))
-                            <a href="{{$image->base_uri}}{{$image->file_uri}}"><img src="{{$image->base_uri}}{{$image->thumb_uri}}"></img></a>
+                            <a href="{{ url('/photos')}}/{{strtolower($image->title)}}/{{strtolower($image->slug)}}"><img src="{{$image->base_uri}}{{$image->thumb_uri}}"></img></a>
+
                         @endif
                     @endforeach
                 </div>

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Photos</title>
-        
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
@@ -85,10 +85,10 @@
                 </div>
 
                     <div class="links">
-                        
+
                     @foreach($a as $image)
                         @if(property_exists($image, 'base_uri'))
-                            <a href="{{$image->base_uri}}{{$image->file_uri}}"><img src="{{$image->base_uri}}{{$image->thumb_uri}}"></img></a>
+                            <a href="{{ url('/photos')}}/{{strtolower($image->title)}}"><img src="{{$image->base_uri}}{{$image->thumb_uri}}"></img></a>
                         @endif
                     @endforeach
                     <br>

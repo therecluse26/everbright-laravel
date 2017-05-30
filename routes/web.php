@@ -26,7 +26,8 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/test', 'TestController');
-
+//Route::get('/test', 'TestController');
 
 Route::get('/photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');
+
+Route::get('/imagerequest/{tag?}', 'ImagePullController@pullImages');
