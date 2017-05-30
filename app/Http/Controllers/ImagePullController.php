@@ -24,8 +24,6 @@ class ImagePullController extends Controller
 
     } else {
 
-      $context = array("alt"=>"everbright");
-
       $image_result = $image_api->resources_by_tag($tags, array("context"=>true, "tags"=>true));
 
     }
@@ -38,7 +36,8 @@ class ImagePullController extends Controller
   //Still needs work... meant to parse specific tags from API response
   public function parseImages($api_image_array, $tags = null, $context = null) {
 
-
+    $image_thumbs = array_search('thumb', $api_image_array['resources']);
+      
     $parsed_images = $api_image_array;
 
     return $parsed_images;
