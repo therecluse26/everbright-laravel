@@ -2,14 +2,23 @@
 namespace App\Http\Controllers;
 
 use Cloudinary;
+use Route;
 use DB;
 
 //To handle image uploads automatically
 class ImagePullController extends Controller
 {
 
+  public $collection = null;
+  public $tag = null;
+
+  public function __construct(){
+    $this->collection = Route::current()->parameter('collection');
+    $this->tag = Route::current()->parameter('tag');
+  }
+
   //Makes request to Cloudinary API
-  public function imageApiRequest($tags = null) {
+  public function imageApiRequest() {
 
     Cloudinary::config(array(
       "cloud_name" => env("CLOUDINARY_CLOUD_NAME", null),
@@ -19,13 +28,13 @@ class ImagePullController extends Controller
 
     $image_api = new Cloudinary\Api();
 
-    if($tags == null) {
+    if($this->tag == null) {
 
-      $image_result = $image_api->resources(array("context"=>true, "tags"=>true));
+      $image_result = $image_api->resources_by_context("album", $this->collection, array("context"=>true, "tags"=>true));
 
     } else {
 
-      $image_result = $image_api->resources_by_tag($tags, array("context"=>true, "tags"=>true));
+      $image_result = $image_api->resources_by_tag($this->tag, array("context"=>true, "tags"=>true));
 
     }
 
@@ -34,19 +43,38 @@ class ImagePullController extends Controller
   }
 
   //Still needs work... meant to parse specific tags from API response
-  public function parseImages($api_image_array, $tags = null, $context = null) {
+  public function parseApiImages($api_image_array, $search_term = null, $search_type = "type") {
 
     $parsed_images = array();
-    $this->tags = $tags;
+    $this->search_term = $search_term;
+
+    // print_r($api_image_array["resources"]);
+
 
     //Filters result by tag
     $filtered_result = array_where($api_image_array["resources"], function ($value, $key) {
 
-      if($value["context"]["custom"]["type"] == $this->tags) {
+      print_r($value);
+
+
+    if ($search_type = "type") {
+
+      if($value["context"]["custom"]["type"] == $this->search_term) {
 
         return $value["context"]["custom"]["type"];
 
       }
+
+    } elseif ($search_type = "tag") {
+
+      //if(array_search($this->search_term, $value["tags"])) {
+
+
+        return array_search($this->search_term, $value["tag"]);
+
+      //}
+
+    }
 
       //return array_search($this->tags, $value["context"]["custom"]);
 
@@ -79,23 +107,29 @@ class ImagePullController extends Controller
 
     }
 
-    print_r($parsed_images);
+    //print_r($parsed_images);
 
-    $parsed_images = $filtered_result;
+    //$parsed_images = $filtered_result;
 
     return $parsed_images;
 
   }
 
-  public function pullImages($tags = null, $context = null) {
+  public function pullApiImages($tags = null, $context = null) {
 
-    $api_response = $this->imageApiRequest("everbright");
+    // echo $this->tag;
 
-    $header_images = array("header_images" => $this->parseImages($api_response, "header"));
+    $api_response = $this->imageApiRequest($this->collection);
 
-    $thumb_images = array("thumb_images" => $this->parseImages($api_response, "thumb"));
+    $honeymoon_images = array($this->tag . "_images" => $this->parseApiImages($api_response, $this->tag, "tag"));
 
-    $final_result = $header_images + $thumb_images;
+    $header_images = array("header_images" => $this->parseApiImages($api_response, "header", "type"));
+
+    $thumb_images = array("thumb_images" => $this->parseApiImages($api_response, "thumb", "type"));
+
+
+
+    $final_result = /*$header_images + $thumb_images + */$honeymoon_images;
 
     //Perform Database updates here
 

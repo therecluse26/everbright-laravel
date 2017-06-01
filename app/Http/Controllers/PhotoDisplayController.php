@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use DB;
 
-class PhotoDisplayController extends Controller
+class PhotoDisplayController extends ImagePullController
 {
 
     public function getPhotos($album_title = null, $slug = null) {
