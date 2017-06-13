@@ -15,6 +15,7 @@ class ImagePullController extends Controller
   public function __construct(){
     $this->collection = Route::current()->parameter('collection');
     $this->tag = Route::current()->parameter('tag');
+    $this->type = Route::current()->parameter('type');
   }
 
   //Makes request to Cloudinary API
@@ -30,7 +31,7 @@ class ImagePullController extends Controller
 
     if($type == "collection") {
 
-      $image_result = $image_api->resources_by_context("album", $this->collection, array("context"=>true, "tags"=>true));
+      $image_result = $image_api->resources_by_context("album", $this->collection);
 
     } else {
 
