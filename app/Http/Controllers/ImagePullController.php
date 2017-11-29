@@ -19,7 +19,7 @@ class ImagePullController extends Controller
   }
 
   //Makes request to Cloudinary API
-  public function imageApiRequest($type = "collection") {
+public function imageApiRequest($type/* = "collection"*/) {
 
     Cloudinary::config(array(
       "cloud_name" => env("CLOUDINARY_CLOUD_NAME", null),
@@ -50,7 +50,6 @@ class ImagePullController extends Controller
     $this->search_term = $search_term;
 
     // print_r($api_image_array["resources"]);
-
 
     //Filters result by tag
     $filtered_result = array_where($api_image_array["resources"], function ($value, $key) {
@@ -120,7 +119,7 @@ class ImagePullController extends Controller
 
     // echo $this->tag;
 
-    $api_response = $this->imageApiRequest("collection");
+    $api_response = $this->imageApiRequest("asdf");
 
     $honeymoon_images = array($this->tag . "_images" => $this->parseApiImages($api_response, $this->tag, "tag"));
 

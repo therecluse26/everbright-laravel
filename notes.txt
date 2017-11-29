@@ -1,0 +1,47 @@
+Need to differentiate between users and admins in database
+
+User Panel
+  Edit additional user info
+    Billing info (maybe integrate stripe or paypal instead)
+  Allow writing of testimonials for public display
+  Create orders
+
+Admin panel
+  Edit author info
+    This will attach to blog posts
+  Create/edit blog posts
+  Create photo albums for users
+    Upload photos to album and edit album metadata
+      Generate 3 separate images: full-res, partial-res, and thumbnail
+        Should these be stored externally or on disc?
+    Assign photo album to user
+      Allow preview (partial-res) and download options (full-res)
+    Option to enable public view of album for web gallery display
+      Perhaps make separate public version of album with specific photos
+
+Order functionality
+  Shopping cart
+    Include custom items in this list
+  Email notifications when order status changes (custom work becomes available)
+    Possible text notifications if enabled as well through Twilio (0.0075 USD per text)
+
+Pages
+  Blog
+    Categories
+      Tags
+    Posts
+      Tags
+  About
+  Products
+    Standard products (fixed)
+    Custom products
+      Pay in advance
+      Include design lead-time on product data
+      Allow admin to upload finished copy for specific customers
+    Purchase capabilities
+      Integrate with paypal/stripe/etc
+      Enable download on confirmation
+      Possibly integrate web-to-print capabilities
+
+
+Advanced features
