@@ -15,17 +15,18 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 100);
-            $table->boolean('active')->default(0);
-            $table->string('tags');
-            $table->string('cover_photo');
-            $table->integer('user_id')->unsigned();
+            $table->string('title', 100)->unique();
+            $table->string('slug', 50)->unique();
+            $table->boolean('published')->default(0);
+            $table->string('tags')->nullable();
+            $table->string('cover_photo')->nullable();
+            $table->integer('author_id')->unsigned();
             $table->integer('cat_id')->unsigned();
-            $table->integer('album_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('album_id')->unsigned()->nullable();
+            $table->foreign('author_id')->references('id')->on('authors');
             $table->foreign('cat_id')->references('id')->on('categories');
             $table->foreign('album_id')->references('id')->on('albums');
-            $table->string('post_body', 15000);
+            $table->text('post_body');
             $table->timestamps();
 
         });

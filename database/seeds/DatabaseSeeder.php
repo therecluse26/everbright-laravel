@@ -32,9 +32,12 @@ class DatabaseSeeder extends Seeder
                     'album_id'=>'1',
                     'slug'=>'chair_kiss',
                     'photo_name'=>'Chair Kiss',
-                    'base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'file_uri'=>'v1493298371/ChairKiss_scaled.jpg',
-                    'thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',
+                    'local_base_uri'=> url('/').':8000/storage/photos/albums/',
+                    'local_file_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
+                    'local_thumb_uri'=>'honeymoon/thumbs/ChairKiss_thumb.jpg',
+                    'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
+                    'cdn_file_uri'=>'v1493298371/ChairKiss_scaled.jpg',
+                    'cdn_thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',
                     'tags'=>'kiss',
                     'cover_image'=>'0'
                 ],
@@ -43,9 +46,12 @@ class DatabaseSeeder extends Seeder
                     'album_id'=>'1',
                     'slug'=>'lighthouse',
                     'photo_name'=>'Lighthouse',
-                    'base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'file_uri'=>'v1493298630/Lighthouse_scaled.jpg',
-                    'thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',
+                    'local_base_uri'=> url('/').':8000/storage/photos/albums/',
+                    'local_file_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
+                    'local_thumb_uri'=>'honeymoon/thumbs/Lighthouse_thumb.jpg',
+                    'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
+                    'cdn_file_uri'=>'v1493298630/Lighthouse_scaled.jpg',
+                    'cdn_thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',
                     'tags'=>'people;landscape',
                     'cover_image'=>'1'
                 ],
@@ -54,9 +60,12 @@ class DatabaseSeeder extends Seeder
                     'album_id'=>'2',
                     'slug'=>'peacock',
                     'photo_name'=>'Peacock',
-                    'base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'file_uri'=>'v1493298478/Peacock_scaled.jpg',
-                    'thumb_uri'=>'v1493298535/Peacock_thumb.jpg',
+                    'local_base_uri'=> url('/').':8000/storage/photos/albums/',
+                    'local_file_uri'=>'misc/large/Peacock_scaled.jpg',
+                    'local_thumb_uri'=>'misc/thumbs/Peacock_thumb.jpg',
+                    'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
+                    'cdn_file_uri'=>'v1493298478/Peacock_scaled.jpg',
+                    'cdn_thumb_uri'=>'v1493298535/Peacock_thumb.jpg',
                     'tags'=>'animals',
                     'cover_image'=>'0'
                 ]
@@ -77,9 +86,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
               'id'=>'2',
-              'firstname'=>'Herp',
-              'lastname'=>'Derp',
-              'email'=>'herpderp@test.com',
+              'firstname'=>'Sadie',
+              'lastname'=>'Magyar',
+              'email'=>'sadieemagyar@gmail.com',
               'password'=>'$2y$10$eP8rEeOG2RIpf0vRscWMKOMajJPD5GKBWJukPK3DpK1HJKR.dOhiC',
               'remember_token'=>'wGRcs8Tfpoq6k0m8oV1A2aM5xKPbJ6peY9HWYposgL3Rj7TeZXM8MUhkjJe7',
               'created_at'=>'2017-11-24 01:47:49',
@@ -140,13 +149,39 @@ class DatabaseSeeder extends Seeder
               'id'=>'1',
               'user_id'=>'1',
               'admin_id'=>'1',
+              'firstname'=>'Brad',
+              'lastname'=>'Magyar',
+              'photo_url'=>'http://res.cloudinary.com/establishmysteps/image/upload/c_thumb,w_200,h_200,g_face,r_max,f_png/v1451527704/DSC00928_ydrtya.png',
               'bio'=>"I'm just a dude from Ohio who builds websites and loves his wife very much!"
             ],
             [
               'id'=>'2',
               'user_id'=>'2',
               'admin_id'=>'2',
+              'firstname'=>'Sadie',
+              'lastname'=>'Magyar',
+              'photo_url'=>'http://res.cloudinary.com/establishmysteps/image/upload/c_thumb,w_200,h_200,g_face,r_max,f_png/v1451527704/DSC00928_ydrtya.png',
               'bio'=>"Herp derp, I used to be an admin, but I was demoted."
+            ]
+          ]
+        );
+
+        DB::table('categories')->insert(
+          [
+            [
+              'id'=>'1',
+              'name'=>'portraits',
+              'tags'=>'photography;people'
+            ],
+            [
+              'id'=>'2',
+              'name'=>'wildlife',
+              'tags'=>'photography;wildlife'
+            ],
+            [
+              'id'=>'3',
+              'name'=>'landscape',
+              'tags'=>'photography;outdoors'
             ]
           ]
         );

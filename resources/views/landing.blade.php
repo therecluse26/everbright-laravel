@@ -148,12 +148,12 @@
           }
 
           #div-link-right {
-            background-image: url("{{URL::asset('storage/Photo3.jpg')}}");
+            background-image: url("{{URL::asset('storage/photos/site_images/Photo3.jpg')}}");
 
           }
 
           #div-link-left {
-            background-image: url("{{URL::asset('storage/Photo1.jpg')}}");
+            background-image: url("{{URL::asset('storage/photos/site_images/Photo1.jpg')}}");
 
           }
 
@@ -164,7 +164,7 @@
       <div class="container landing-full-pane">
 
         <div>
-          <img class="center-logo" width="35%" src="{{URL::asset('storage/TandemLogoSolo.png')}}" />
+          <img class="center-logo" width="35%" src="{{URL::asset('storage/photos/site_images/TandemLogoSolo.png')}}" />
         </div>
 
         <div class="row table-center">

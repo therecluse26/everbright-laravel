@@ -8,10 +8,12 @@
         "php": ">=5.6.4",
         "cloudinary/cloudinary_php": "dev-master",
         "guzzlehttp/guzzle": "^6.2",
+        "intervention/image": "^2.4",
         "jrm2k6/cloudder": "0.4.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "lsolesen/pel": "^0.9.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

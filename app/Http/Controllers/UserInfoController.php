@@ -61,11 +61,6 @@ class UserInfoController extends Controller
       $user['email_notifications'] = (array_key_exists('email_notifications', $input)) ? 1 : 0;
       $user['text_notifications'] = (array_key_exists('text_notifications', $input)) ? 1 : 0;
 
-      /*$this->validate($user, [
-          'phone' => 'required',
-
-      ]); */
-
       $user->save();
 
       //Update UserInfo if UserInfo record exists

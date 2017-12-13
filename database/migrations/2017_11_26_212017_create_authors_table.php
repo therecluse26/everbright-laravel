@@ -18,6 +18,8 @@ class CreateAuthorsTable extends Migration
           $table->increments('id');
           $table->integer('user_id')->unsigned()->nullable(false);
           $table->integer('admin_id')->unsigned()->nullable(false);
+          $table->string('firstname', 30);
+          $table->string('lastname', 30);
           $table->string('bio', 4000)->nullable();
           $table->string('photo_url', 500)->nullable();
           $table->timestamps();
