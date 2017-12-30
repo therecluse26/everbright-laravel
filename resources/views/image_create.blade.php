@@ -7,42 +7,27 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
 
-                <div class="panel-heading"><h4>New Post</h4></div>
+                <div class="panel-heading"><h4>Upload Images</h4></div>
 
                 <div class="panel-body">
 
-                  {!! Form::open(['route' => 'posts.store', 'id' => 'post-create-form']) !!}
+                  {!! Form::open(['route' => 'image.store', 'id' => 'image-create-form']) !!}
 
                   <div class="form-group" id="basic_info">
 
-                    {{ Form::label('title', 'Post Title') }}
-                    {{ Form::text('title', null, ['class' => 'form-control input-lg', 'style' => 'font-size:2.5rem;font-weight:bold;']) }}
+                    {{ Form::label('album', 'Album') }}
+                    {{ Form::select('album', $albums, null, ['class' => 'form-control custom-select']) }}
 
-                    {{ Form::label('slug', 'URL Slug') }}
-                    <div class="input-group">
-                      <div class="input-group-addon">{{ URL::to('/blog/posts') . '/' }}</div>
-                      {{ Form::text('slug', null, ['class' => 'form-control']) }}
-                    </div>
-
-
-                    {{ Form::label('category', 'Category') }}
-                    {{ Form::select('category', $categories, null, ['class' => 'form-control custom-select']) }}
-
-                    {!! Form::checkbox('published[]', null, null, ['id'=>'published']) !!}
-                    {{ Form::label('published', 'Published') }}
-
+                    {{ Form::label('tags', 'Tags') }}
+                    {{ Form::text('slug', null, ['class' => 'form-control']) }}
 
                   </div>
 
 
-                    {{ Form::label('post-body', 'Post Content') }}
-                    <br>
-                    {{ Form::textarea('post-body', null , ['id' => 'post-body']) }}
-
                   <br>
 
                   <div class="form-group">
-                     {!! Form::submit('Create Post', ['id' => 'submit-btn','class' => 'btn btn-primary form-control']) !!}
+                     {!! Form::submit('Upload Image', ['id' => 'submit-btn','class' => 'btn btn-primary form-control']) !!}
                   </div>
 
                   {!! Form::close() !!}
@@ -57,15 +42,6 @@
     </div>
 </div>
 
-<script>
-function slugify(text){
-  return text.toString().toLowerCase().trim()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/&/g, '-and-')         // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
-}
-</script>
 <script>
 $(document).ready(function(){
 

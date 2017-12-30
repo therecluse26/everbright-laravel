@@ -2,11 +2,14 @@
 
 @section('content')
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
+
           @foreach ($posts as $post)
+
             <h3 style="margin-bottom:-3px;">
               <a href="{{ '/blog/posts/'. $post->id }}">{{ $post->title }}</a>
 
@@ -20,6 +23,26 @@
             <small>
               {{ $post->author->firstname }} {{ $post->author->lastname }} - {{ $post->created_at->format('Y-m-d') }}
             </small>
+
+            <br>
+
+            @if (!empty($post->tags[0]))
+
+              <div id="tags-list">
+                  <small>Tags:
+                  @foreach ($post->tags as $tag)
+
+                    @if ($loop->last)
+                    <a href="{{ '/blog/tag/' . urlencode($tag->tag) }}"> {{ $tag->tag }} </a>
+                    @else
+                    <a href="{{ '/blog/tag/' . urlencode($tag->tag) }}"> {{ $tag->tag }} </a> -
+                    @endif
+
+                  @endforeach
+                </small>
+              </div>
+
+            @endif
 
             <div>
               {{ substr(strip_tags( \App\Post::select('post_body')->where('id', '=', $post->id)->get()[0]->post_body ), 0, 200) }}...

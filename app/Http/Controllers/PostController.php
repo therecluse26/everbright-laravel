@@ -14,7 +14,9 @@ class PostController extends Controller
       //Implements auth middleware
       $this->middleware('auth', ['except' => [
         'index',
-        'show'
+        'show',
+        'listTags',
+        'tagPostIndex'
       ]]);
     }
 
@@ -31,6 +33,64 @@ class PostController extends Controller
       return $author;
     }
 
+    //Attaches tags to a post
+    public function attachTags($post, $tags){
+
+      try {
+
+        foreach ($tags as $current_tag) {
+
+          $newtag = App\Tag::firstOrCreate(['tag'=>$current_tag]);
+
+          $post->tags()->attach($newtag);
+
+          return "Successful attach";
+
+        }
+
+      } catch (\Illuminate\Database\QueryException $e) {
+
+        return $e->getMessage();
+
+      }
+
+    }
+
+
+    public function listTags(){
+
+      //$tags = ["query" => "Unit", "suggestions" => []];
+
+      $tags = \App\Tag::all()->pluck('tag');
+
+      return $tags;
+
+    }
+
+    public function tagPostIndex($tag)
+    {
+
+      $tag = urldecode($tag);
+
+      $posts = \App\Post::where('published', '=', '1')->whereHas('tags', function($query) use ($tag) {
+
+          $query->where('tag', '=', $tag);
+
+      })->get();
+
+      $categories_all = \App\Category::all();
+
+      $categories = [];
+
+      foreach($categories_all as $cat){
+
+        $categories[$cat['id']] = ucfirst($cat['name']);
+
+    }
+
+      return view('posts/post_tag_index', ['posts'=>$posts, 'tag'=>$tag]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,14 +98,22 @@ class PostController extends Controller
      */
     public function index()
     {
-      $posts = \App\Post::select('id', 'title', 'created_at', 'author_id')->where('published', '=', '1')->orderBy('created_at', 'desc')->paginate(10);
+      $posts = \App\Post::select('id', 'title', 'created_at', 'author_id')
+        ->where('published', '=', '1')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
       $categories_all = \App\Category::all();
+
       $categories = [];
+
       foreach($categories_all as $cat){
+
         $categories[$cat['id']] = ucfirst($cat['name']);
+
       }
 
-      return view('post_index', ['categories'=>$categories, 'posts'=>$posts]);
+      return view('posts/post_index', ['categories'=>$categories, 'posts'=>$posts]);
     }
 
     /**
@@ -56,8 +124,8 @@ class PostController extends Controller
     public function create()
     {
       $author = PostController::pullLoggedInAuthor();
-      $categories_all = \App\Category::all();
 
+      $categories_all = \App\Category::all();
 
       $categories = [];
 
@@ -67,7 +135,7 @@ class PostController extends Controller
 
       }
 
-      return view('post_create', ['categories'=>$categories, 'user'=>$author]);
+      return view('posts/post_create', ['categories'=>$categories, 'user'=>$author]);
 
     }
 
@@ -84,6 +152,7 @@ class PostController extends Controller
       try {
         //Store post to database
         $author = PostController::pullLoggedInAuthor();
+
         $post = new Post;
 
         $post->title = $request['title'];
@@ -93,7 +162,19 @@ class PostController extends Controller
         $post->published = (int)$request['published'];
         $post->post_body = $request['post-body'];
 
+        //Stores new post (must be done before attaching tags to retrieve post id)
         $post->save();
+
+        //Attaches tags to new post
+        $tags = explode(',', $request->get('tags'));
+        $newtag_array = [];
+
+        foreach($tags as $tag){
+          $newtag = \App\Tag::firstOrCreate(['tag' => $tag]);
+          array_push($newtag_array, ['post_id'=>$post->id, 'tag_id'=>$newtag->id]);
+        }
+
+        $post->tags()->sync($newtag_array);
 
         $resp_array['status'] = 'success';
         $resp_array['msg'] = 'Post created successfully!';
@@ -133,11 +214,14 @@ class PostController extends Controller
     {
         //Show post
         $author = $post->load('author');
+
+        $tags = $post->tags();
+
         $post->author->email = \App\User::select('email')->where('id', $author->user_id)->first();
 
         //return $author;
 
-        return view('post', ['post'=>$post]);
+        return view('posts/post', ['post'=>$post]);
     }
 
     /**
@@ -148,10 +232,19 @@ class PostController extends Controller
      */
     public function edit(Post $post, Request $request)
     {
-        //
         $author = PostController::pullLoggedInAuthor();
+
         $categories_all = \App\Category::all();
+
+        $tags = $post->tags()->pluck('tag');
+
+        $tagstring = "";
+        foreach ($tags as $tag){
+          $tagstring .= $tag . ',';
+        }
+
         $categories = [];
+
         $response = $request->input('r');
 
         if(!is_null($response)){
@@ -164,7 +257,7 @@ class PostController extends Controller
 
         }
 
-        return view('post_edit', ['categories'=>$categories, 'author'=>$author, 'post'=>$post, 'response'=>$response]);
+        return view('posts/post_edit', ['categories'=>$categories, 'author'=>$author, 'post'=>$post, 'tags'=>$tagstring, 'response'=>$response]);
 
     }
 
@@ -178,24 +271,23 @@ class PostController extends Controller
     public function update(Request $request, $id)//Post $post)
     {
         try {
-          //$post_update->post_body = $post->post_body;
-          //$post_update->cat_id = $post->cat_id;
-
-          //return $request->input('published');
-
           $post = Post::find($id);
+
+          $tags = explode(',', $request->get('tags'));
+          $newtag_array = [];
+
+          foreach($tags as $tag){
+            $newtag = \App\Tag::firstOrCreate(['tag' => $tag]);
+            array_push($newtag_array, $newtag->id);
+          }
+
+          $post->tags()->sync($newtag_array);
+
           $post->title = $request->get('title');
           $post->slug = $request['slug'];
           $post->cat_id = $request->get('category');
           $post->published = $request->has('published') ? true: false;
           $post->post_body = $request->get('post-body');
-          $post->save();
-
-          /*foreach($post as $key => $value) {
-            if(!is_array($value) && $key != '_token'){
-              $post_update->$key = isset($post[$key]) ? $value : null;
-            }
-          } */
 
           $post->save();
 
@@ -207,6 +299,7 @@ class PostController extends Controller
         }
 
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -31,6 +31,14 @@ class ImageController extends Controller
     public function create()
     {
         //
+        $albums_all = \App\Album::all();
+        $albums = [];
+        foreach($albums_all as $alb){
+          $albums[$alb['id']] = ucfirst($alb['title']);
+        }
+
+        return view('image_create', ['albums'=>$albums]);
+
     }
 
     /**

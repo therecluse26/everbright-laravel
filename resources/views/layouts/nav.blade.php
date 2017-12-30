@@ -44,7 +44,7 @@
                                 </li>
                                 <hr>
                                 <li>
-                                    <a href="{{ url('admin/edit') }}">Edit User Info</a>
+                                    <a href="{{ route('user') }}">Edit User Info</a>
                                 </li>
                                 <li>
                                     <a href="{{ url('blog/posts/create') }}">New Blog Post</a>

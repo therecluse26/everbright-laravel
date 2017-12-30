@@ -186,5 +186,83 @@ class DatabaseSeeder extends Seeder
           ]
         );
 
+
+        DB::table('posts')->insert(
+          [
+            [
+              'id'=>1,
+              'title'=>'Test Post 1',
+              'slug'=>'test-post-1',
+              'published'=>1,
+              'author_id'=>1,
+              'cat_id'=>2,
+              'post_body'=>'Testing 1234 <br> This is a test post, yo! How you like them apples?',
+              'created_at'=>'2017-11-24 01:47:49'
+            ],
+            [
+              'id'=>2,
+              'title'=>'Test Post 2',
+              'slug'=>'test-post-2',
+              'published'=>1,
+              'author_id'=>1,
+              'cat_id'=>3,
+              'post_body'=>'This is just another test post... move along',
+              'created_at'=>'2017-11-24 01:47:49'
+            ]
+          ]
+        );
+
+        DB::table('tags')->insert(
+          [
+            [
+              'id'=>1,
+              'tag'=>'Honeymoon'
+            ],
+            [
+              'id'=>2,
+              'tag'=>'Misc'
+            ],
+            [
+              'id'=>3,
+              'tag'=>'Photography'
+            ],
+            [
+              'id'=>4,
+              'tag'=>'Outdoors'
+            ]
+          ]
+        );
+
+
+        DB::table('post_tag')->insert(
+          [
+            [
+              'post_id'=>1,
+              'tag_id'=>1
+            ],
+            [
+              'post_id'=>2,
+              'tag_id'=>4
+            ],
+            [
+              'post_id'=>1,
+              'tag_id'=>3
+            ],
+            [
+              'post_id'=>1,
+              'tag_id'=>4
+            ],
+            [
+              'post_id'=>2,
+              'tag_id'=>1
+            ],
+            [
+              'post_id'=>2,
+              'tag_id'=>2
+            ]
+          ]
+        );
+
+
     }
 }

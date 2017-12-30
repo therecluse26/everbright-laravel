@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+//use Request;
 use App\User;
+use Illuminate\Http\Request;
+
 
 class UserInfoController extends Controller
 {
@@ -21,6 +23,12 @@ class UserInfoController extends Controller
     return $user;
   }
 
+  public function show($id)
+  {
+      $user = User::with(['userinfo', 'author'])->where('id', $id)->first();
+      return view('user/user_show', ['user' => $user]);
+  }
+
   //Pull form for editing
   public function edit(){
 
@@ -28,11 +36,11 @@ class UserInfoController extends Controller
 
     if ( isset($user['admin']) && ($user['admin']['active'] == true) )
     {
-      return view('adminedit', ['user'=>$user]);
+      return view('admin/adminedit', ['user'=>$user]);
 
     } else {
 
-      return view('user', ['user'=>$user]);
+      return view('user/user', ['user'=>$user]);
 
     }
   }

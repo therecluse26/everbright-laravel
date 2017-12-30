@@ -31,6 +31,13 @@
                     {{ Form::label('category', 'Category') }}
                     {{ Form::select('category', $categories, $post->cat_id, ['class' => 'form-control custom-select']) }}
 
+                    <br>
+
+                    {{ Form::label('tags', 'Tags') }}
+                    {{ Form::text('tags', $tags, ['class' => 'form-control', 'autocomplete' => 'off']) }}
+
+                    <br><br>
+
                     {!! Form::checkbox('published', $post->published, null, ['id'=>'published'], $post->published) !!}
                     {{ Form::label('published', 'Published') }}
 
@@ -68,22 +75,35 @@ function slugify(text){
 <script>
 $(document).ready(function(){
 
+  //Tags input and typeahead
+  $('#tags').tagsinput({
+    cancelConfirmKeysOnEmpty: true,
+    autoSelect: false,
+    allowDuplicates: false,
+    typeahead: {
+      afterSelect: function(val) { this.$element.val(""); },
+      source: function(query) {
+        var taglist = $.get("/blog/tags");
+        return taglist;
+      }
+    }
+  })
+
+  //Automatic slug creation
   $('#title').on('change keyup keypress',function(t){
     var slugval = slugify(t.target.value);
     $('#slug').val(slugval);
   });
-
   $('#slug').on('change keyup keypress',function(t){
     var slugval = slugify(t.target.value);
     $('#slug').val(slugval);
   });
 
+  // Submit post form for update
   $('#post-edit-form').submit(function(e){
 
     e.preventDefault();
-
     var formData = $(this).serialize();
-
     $.ajax({
       type: "PUT",
       url: this.action,
@@ -91,22 +111,18 @@ $(document).ready(function(){
       success: function(result){
         if (result.status === 'success') {
 
-          console.log(result);
-
           $('#alert-msg').html('<div class="alert alert-success alert-dismissable">\
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
 
         } else {
-
-          console.log(result);
 
           $('#alert-msg').html('<div class="alert alert-danger alert-dismissable">\
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
         }
       }
     })
-
   });
+
 })
 </script>
 

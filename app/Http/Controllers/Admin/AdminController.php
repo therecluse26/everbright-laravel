@@ -32,7 +32,7 @@ class AdminController extends Controller
 
     if ($admin['active'] == 1)
     {
-      return view('admin');
+      return view('admin/admin');
 
     } else {
       //Sends user home if not admin
@@ -45,7 +45,7 @@ class AdminController extends Controller
   {
     $user = UserInfoController::pullCurrentUser();
 
-    return view('adminedit', ['user'=>$user]);
+    return view('admin/adminedit', ['user'=>$user]);
 
   }
 

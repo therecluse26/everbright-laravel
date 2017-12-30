@@ -24,15 +24,17 @@ Route::get('about', function () {
 });
 
 Route::prefix('blog')->group(function () {
-  Route::resource('posts', 'PostController', ['except'=>'index']);
+  Route::resource('posts', 'PostController', ['except'=>['index', 'tagPostIndex']]);
+  Route::get('tag/{tag_id}', 'PostController@tagPostIndex');
+  Route::get('tags', 'PostController@listTags');
   Route::get('/', 'PostController@index')->name('posts.index');
 });
+
+Route::resource('image', 'ImageController');
 
 Route::get('photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');
 Route::get('imagerequest/{tag?}/{collection?}', 'ImagePullController@pullApiImages');
 Route::get('gallery/{album_title?}', 'GalleryController@pullGallery');
-
-Route::resource('/image', 'ImageController');
 
 
 /*----------------------------------------------------------------------------*/
@@ -49,10 +51,11 @@ Route::namespace('Admin')->group(function(){
     return redirect()->route('admin_dash');
   });
 });
-Route::get('user','UserInfoController@edit')->middleware('auth')->name('user');
 
+//User Routes
+Route::get('user/edit','UserInfoController@edit')->middleware('auth')->name('user');
+Route::get('user/{id}','UserInfoController@show');
 Route::post('user','UserInfoController@update');
-
 
 
 /*----------------------------------------------------------------------------*/
