@@ -76,6 +76,11 @@ function slugify(text){
 <script>
 $(document).ready(function(){
 
+  $('#title').on('change keyup keypress',function(t){
+    var slugval = slugify(t.target.value);
+    $('#slug').val(slugval);
+  });
+
   //Tags input and typeahead
   $('#tags').tagsinput({
     cancelConfirmKeysOnEmpty: true,
@@ -89,11 +94,6 @@ $(document).ready(function(){
       }
     }
   })
-
-  $('#title').on('change keyup keypress',function(t){
-    var slugval = slugify(t.target.value);
-    $('#slug').val(slugval);
-  });
 
   //Submit new post for creation
   $('#post-create-form').submit(function(e){

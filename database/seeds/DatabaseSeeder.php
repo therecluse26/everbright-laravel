@@ -15,12 +15,19 @@ class DatabaseSeeder extends Seeder
         DB::table('albums')->insert(
             [
                 [
-                        'id'=>'1',
-                        'title'=>'Honeymoon',
+                    'id'=>'1',
+                    'title'=>'Honeymoon',
+                    'slug'=>'honeymoon',
+                    'cover_image'=>'3'
+                    'created_at'=>\Carbon\Carbon::now()
+
                 ],
                 [
-                        'id'=>'2',
-                        'title'=>'Test',
+                    'id'=>'2',
+                    'title'=>'Test',
+                    'slug'=>'test',
+                    'cover_image'=>'1'
+                    'created_at'=>\Carbon\Carbon::now()
                 ]
             ]
         );
@@ -31,7 +38,8 @@ class DatabaseSeeder extends Seeder
                     'id'=>'1',
                     'album_id'=>'1',
                     'slug'=>'chair_kiss',
-                    'photo_name'=>'Chair Kiss',
+                    'type'=>'full',
+                    'image_name'=>'Chair Kiss',
                     'local_base_uri'=> url('/').':8000/storage/photos/albums/',
                     'local_file_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
                     'local_thumb_uri'=>'honeymoon/thumbs/ChairKiss_thumb.jpg',
@@ -39,13 +47,14 @@ class DatabaseSeeder extends Seeder
                     'cdn_file_uri'=>'v1493298371/ChairKiss_scaled.jpg',
                     'cdn_thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',
                     'tags'=>'kiss',
-                    'cover_image'=>'0'
+                    'created_at'=>\Carbon\Carbon::now()
                 ],
                 [
                     'id'=>'2',
                     'album_id'=>'1',
                     'slug'=>'lighthouse',
-                    'photo_name'=>'Lighthouse',
+                    'type'=>'half',
+                    'image_name'=>'Lighthouse',
                     'local_base_uri'=> url('/').':8000/storage/photos/albums/',
                     'local_file_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
                     'local_thumb_uri'=>'honeymoon/thumbs/Lighthouse_thumb.jpg',
@@ -53,13 +62,14 @@ class DatabaseSeeder extends Seeder
                     'cdn_file_uri'=>'v1493298630/Lighthouse_scaled.jpg',
                     'cdn_thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',
                     'tags'=>'people;landscape',
-                    'cover_image'=>'1'
+                    'created_at'=>\Carbon\Carbon::now()
                 ],
                 [
                     'id'=>'3',
                     'album_id'=>'2',
                     'slug'=>'peacock',
-                    'photo_name'=>'Peacock',
+                    'type'=>'thumb',
+                    'image_name'=>'Peacock',
                     'local_base_uri'=> url('/').':8000/storage/photos/albums/',
                     'local_file_uri'=>'misc/large/Peacock_scaled.jpg',
                     'local_thumb_uri'=>'misc/thumbs/Peacock_thumb.jpg',
@@ -67,7 +77,7 @@ class DatabaseSeeder extends Seeder
                     'cdn_file_uri'=>'v1493298478/Peacock_scaled.jpg',
                     'cdn_thumb_uri'=>'v1493298535/Peacock_thumb.jpg',
                     'tags'=>'animals',
-                    'cover_image'=>'0'
+                    'created_at'=>\Carbon\Carbon::now()
                 ]
             ]
         );
@@ -81,8 +91,7 @@ class DatabaseSeeder extends Seeder
               'email'=>'braddmagyar@gmail.com',
               'password'=>'$2y$10$eP8rEeOG2RIpf0vRscWMKOMajJPD5GKBWJukPK3DpK1HJKR.dOhiC',
               'remember_token'=>'wGRcs8Tfpoq6k0m8oV1A2aM5xKPbJ6peY9HWYposgL3Rj7TeZXM8MUhkjJe7',
-              'created_at'=>'2017-11-24 01:47:49',
-              'updated_at'=>'2017-11-24 01:47:49'
+              'created_at'=>\Carbon\Carbon::now()
             ],
             [
               'id'=>'2',
@@ -91,8 +100,7 @@ class DatabaseSeeder extends Seeder
               'email'=>'sadieemagyar@gmail.com',
               'password'=>'$2y$10$eP8rEeOG2RIpf0vRscWMKOMajJPD5GKBWJukPK3DpK1HJKR.dOhiC',
               'remember_token'=>'wGRcs8Tfpoq6k0m8oV1A2aM5xKPbJ6peY9HWYposgL3Rj7TeZXM8MUhkjJe7',
-              'created_at'=>'2017-11-24 01:47:49',
-              'updated_at'=>'2017-11-24 01:47:49'
+              'created_at'=>\Carbon\Carbon::now()
             ]
           ]
         );
@@ -132,13 +140,15 @@ class DatabaseSeeder extends Seeder
               'id'=>'1',
               'user_id'=>'1',
               'active'=>1,
-              'post_author'=>1
+              'post_author'=>1,
+              'created_at'=>\Carbon\Carbon::now()
             ],
             [
               'id'=>'2',
               'user_id'=>'2',
               'active'=>0,
-              'post_author'=>0
+              'post_author'=>0,
+              'created_at'=>\Carbon\Carbon::now()
             ]
           ]
         );
@@ -152,7 +162,8 @@ class DatabaseSeeder extends Seeder
               'firstname'=>'Brad',
               'lastname'=>'Magyar',
               'photo_url'=>'http://res.cloudinary.com/establishmysteps/image/upload/c_thumb,w_200,h_200,g_face,r_max,f_png/v1451527704/DSC00928_ydrtya.png',
-              'bio'=>"I'm just a dude from Ohio who builds websites and loves his wife very much!"
+              'bio'=>"I'm just a dude from Ohio who builds websites and loves his wife very much!",
+              'created_at'=>\Carbon\Carbon::now()
             ],
             [
               'id'=>'2',
@@ -161,7 +172,8 @@ class DatabaseSeeder extends Seeder
               'firstname'=>'Sadie',
               'lastname'=>'Magyar',
               'photo_url'=>'http://res.cloudinary.com/establishmysteps/image/upload/c_thumb,w_200,h_200,g_face,r_max,f_png/v1451527704/DSC00928_ydrtya.png',
-              'bio'=>"Herp derp, I used to be an admin, but I was demoted."
+              'bio'=>"Herp derp, I used to be an admin, but I was demoted.",
+              'created_at'=>\Carbon\Carbon::now()
             ]
           ]
         );
@@ -171,17 +183,20 @@ class DatabaseSeeder extends Seeder
             [
               'id'=>'1',
               'name'=>'portraits',
-              'tags'=>'photography;people'
+              'tags'=>'photography;people',
+              'created_at'=>\Carbon\Carbon::now()
             ],
             [
               'id'=>'2',
               'name'=>'wildlife',
-              'tags'=>'photography;wildlife'
+              'tags'=>'photography;wildlife',
+              'created_at'=>\Carbon\Carbon::now()
             ],
             [
               'id'=>'3',
               'name'=>'landscape',
-              'tags'=>'photography;outdoors'
+              'tags'=>'photography;outdoors',
+              'created_at'=>\Carbon\Carbon::now()
             ]
           ]
         );
@@ -197,7 +212,7 @@ class DatabaseSeeder extends Seeder
               'author_id'=>1,
               'cat_id'=>2,
               'post_body'=>'Testing 1234 <br> This is a test post, yo! How you like them apples?',
-              'created_at'=>'2017-11-24 01:47:49'
+              'created_at'=>\Carbon\Carbon::now()
             ],
             [
               'id'=>2,
@@ -207,7 +222,7 @@ class DatabaseSeeder extends Seeder
               'author_id'=>1,
               'cat_id'=>3,
               'post_body'=>'This is just another test post... move along',
-              'created_at'=>'2017-11-24 01:47:49'
+              'created_at'=>\Carbon\Carbon::now()
             ]
           ]
         );

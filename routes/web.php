@@ -23,6 +23,7 @@ Route::get('about', function () {
     return view('about');
 });
 
+// Blog-related routes
 Route::prefix('blog')->group(function () {
   Route::resource('posts', 'PostController', ['except'=>['index', 'tagPostIndex']]);
   Route::get('tag/{tag_id}', 'PostController@tagPostIndex');
@@ -30,7 +31,15 @@ Route::prefix('blog')->group(function () {
   Route::get('/', 'PostController@index')->name('posts.index');
 });
 
-Route::resource('image', 'ImageController');
+// Image-related routes
+Route::resource('images', 'ImageController');
+Route::post('images/temp_store', 'ImageController@temp_store');
+Route::get('images/temp_delete/{folder}/{mode?}/{filename?}', 'ImageController@temp_delete');
+
+
+//Album-related routes
+Route::resource('albums', 'AlbumController');
+
 
 Route::get('photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');
 Route::get('imagerequest/{tag?}/{collection?}', 'ImagePullController@pullApiImages');

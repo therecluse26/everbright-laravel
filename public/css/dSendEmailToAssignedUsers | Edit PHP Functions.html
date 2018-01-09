@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" data-jr-instance-id="0"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+                    <meta name="robots" content="noindex,nofollow">
+                    <meta charset="utf-8">
+                    <link rel="shortcut icon" href="https://solutions.comdoc.com/akron/images/common/jr-fav-icon-designer.png" type="image/png">
+                    <link rel="apple-touch-icon" sizes="76x76" href="https://solutions.comdoc.com/akron/images/common/touch-icon-ipad.png">
+                    <link rel="apple-touch-icon" sizes="120x120" href="https://solutions.comdoc.com/akron/images/common/touch-icon-iphone-retina.png">
+                    <link rel="apple-touch-icon" sizes="152x152" href="https://solutions.comdoc.com/akron/images/common/touch-icon-ipad-retina.png">
+                    <script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/prototype.js"></script>
+                    <script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter-lib.js"></script> <script>
+                        var $j = jQuery.noConflict();
+                    </script>  <script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter-app.js"></script><script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/english.js"></script>
+                    <script>
+                        if (window['loadFirebugConsole'] != undefined) {
+                            window.loadFirebugConsole();
+                        } else if (window['console'] == undefined) {
+                            window.console = {};
+                            window.console.info =
+                            window.console.log =
+                            window.console.warn =
+                            window.console.error = function(){}
+                        }
+                    </script>
+                    <link rel="stylesheet" type="text/css" href="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jquery.css">
+<link rel="stylesheet" type="text/css" href="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter.css">
+<link rel="stylesheet" type="text/css" href="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter4.css">
+<link rel="stylesheet" type="text/css" href="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter4_designer.css">
+<link rel="stylesheet" href="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter4_theme.css"><script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/Layer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/TransparencyLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/LoadingLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/GenericFormLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/ConfirmLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/ErrorLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/ContentLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/FormLayer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/ace.js"></script><style id="ace_editor.css">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;word-wrap: normal;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/designer_edit_php_functions.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jquery.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jobrouter_core.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/designer.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/fastinit.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/tablekit.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/core.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/dialog.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jrWidgets.js"></script>
+<script>
+
+            var sendComment = function() {
+    
+                var newComment = $('newComment');
+    
+                if (newComment.value == '') {
+                    $('messageField').update('Comment may not be empty');
+                } else {
+                    $('messageField').update('');
+                    new Ajax.Request('index.php?cmd=ProcessComments', {
+                        method: 'post',
+                        parameters: { action: 'save', text: $F('newComment'), processname: 'Project_Management', version: '1'},
+                        onSuccess: function(transport) {
+                            document.fire('GenericFormLayer:close');
+                            if (window.location.search.substr(0, 20) == '?cmd=ProcessComments') {
+                                window.location.reload();
+                            }
+                        },
+                        onFailure: function(transport) {
+                           alert(transport.responseText);
+                        }
+                    });
+                }
+            };
+</script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/shortcut.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/docuware.js"></script>
+<script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/validation.js"></script>
+
+                <script>
+                var jr_step_onload = function() {};
+                var jr_print_onload = function() {};
+                var jr_step_onunload = function() {};
+                var jr_onload = function() {
+                    window.editor = ace.edit('sourceCodeAce');
+                    editor.$blockScrolling = 'Infinity';
+                    editor.setTheme('ace/theme/eclipse');
+                    editor.getSession().setMode('ace/mode/php');
+                ;scrollMenuWithPage();checkSession();shortcut.add('Ctrl+Alt+T', function() {
+            jQuery('#jr-header-nav-main-menu').trigger('click');
+        });editPhpFunctionsOnload(); showPHPsubmenu('dialogFields'); ;
+                };
+                var jr_onload_all = function() {
+                    initAspect();
+                    jr_onload();
+                    jr_step_onload();
+                    jr_print_onload();
+                };
+                document.observe('dom:loaded', jr_onload_all);
+                </script>
+                <script>var jr_onunload = function() {
+                };
+                    var jr_onunload_all = function() {
+                        jr_step_onunload();
+                        return jr_onunload();
+                    };
+                jQuery(window).on('beforeunload', jr_onunload_all)</script><title> dSendEmailToAssignedUsers | Edit PHP Functions</title><script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/theme-eclipse.js"></script><script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/mode-php.js"></script><style id="ace-eclipse">.ace-eclipse .ace_gutter {background: #ebebeb;border-right: 1px solid rgb(159, 159, 159);color: rgb(136, 136, 136);}.ace-eclipse .ace_print-margin {width: 1px;background: #ebebeb;}.ace-eclipse {background-color: #FFFFFF;color: black;}.ace-eclipse .ace_fold {background-color: rgb(60, 76, 114);}.ace-eclipse .ace_cursor {color: black;}.ace-eclipse .ace_storage,.ace-eclipse .ace_keyword,.ace-eclipse .ace_variable {color: rgb(127, 0, 85);}.ace-eclipse .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-eclipse .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-eclipse .ace_function {color: rgb(60, 76, 114);}.ace-eclipse .ace_string {color: rgb(42, 0, 255);}.ace-eclipse .ace_comment {color: rgb(113, 150, 130);}.ace-eclipse .ace_comment.ace_doc {color: rgb(63, 95, 191);}.ace-eclipse .ace_comment.ace_doc.ace_tag {color: rgb(127, 159, 191);}.ace-eclipse .ace_constant.ace_numeric {color: darkblue;}.ace-eclipse .ace_tag {color: rgb(25, 118, 116);}.ace-eclipse .ace_type {color: rgb(127, 0, 127);}.ace-eclipse .ace_xml-pe {color: rgb(104, 104, 91);}.ace-eclipse .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-eclipse .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-eclipse .ace_meta.ace_tag {color:rgb(25, 118, 116);}.ace-eclipse .ace_invisible {color: #ddd;}.ace-eclipse .ace_entity.ace_other.ace_attribute-name {color:rgb(127, 0, 127);}.ace-eclipse .ace_marker-layer .ace_step {background: rgb(255, 255, 0);}.ace-eclipse .ace_active-line {background: rgb(232, 242, 254);}.ace-eclipse .ace_gutter-active-line {background-color : #DADADA;}.ace-eclipse .ace_marker-layer .ace_selected-word {border: 1px solid rgb(181, 213, 255);}.ace-eclipse .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><script src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/ext-searchbox.js"></script><style id="ace_searchbox">.ace_search {background-color: #ddd;border: 1px solid #cbcbcb;border-top: 0 none;max-width: 325px;overflow: hidden;margin: 0;padding: 4px;padding-right: 6px;padding-bottom: 0;position: absolute;top: 0px;z-index: 99;white-space: normal;}.ace_search.left {border-left: 0 none;border-radius: 0px 0px 5px 0px;left: 0;}.ace_search.right {border-radius: 0px 0px 0px 5px;border-right: 0 none;right: 0;}.ace_search_form, .ace_replace_form {border-radius: 3px;border: 1px solid #cbcbcb;float: left;margin-bottom: 4px;overflow: hidden;}.ace_search_form.ace_nomatch {outline: 1px solid red;}.ace_search_field {background-color: white;border-right: 1px solid #cbcbcb;border: 0 none;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;float: left;height: 22px;outline: 0;padding: 0 7px;width: 214px;margin: 0;}.ace_searchbtn,.ace_replacebtn {background: #fff;border: 0 none;border-left: 1px solid #dcdcdc;cursor: pointer;float: left;height: 22px;margin: 0;padding: 0;position: relative;}.ace_searchbtn:last-child,.ace_replacebtn:last-child {border-top-right-radius: 3px;border-bottom-right-radius: 3px;}.ace_searchbtn:disabled {background: none;cursor: default;}.ace_searchbtn {background-position: 50% 50%;background-repeat: no-repeat;width: 27px;}.ace_searchbtn.prev {background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADFJREFUeNpiSU1NZUAC/6E0I0yACYskCpsJiySKIiY0SUZk40FyTEgCjGgKwTRAgAEAQJUIPCE+qfkAAAAASUVORK5CYII=);    }.ace_searchbtn.next {background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNpiTE1NZQCC/0DMyIAKwGJMUAYDEo3M/s+EpvM/mkKwCQxYjIeLMaELoLMBAgwAU7UJObTKsvAAAAAASUVORK5CYII=);    }.ace_searchbtn_close {background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAcCAYAAABRVo5BAAAAZ0lEQVR42u2SUQrAMAhDvazn8OjZBilCkYVVxiis8H4CT0VrAJb4WHT3C5xU2a2IQZXJjiQIRMdkEoJ5Q2yMqpfDIo+XY4k6h+YXOyKqTIj5REaxloNAd0xiKmAtsTHqW8sR2W5f7gCu5nWFUpVjZwAAAABJRU5ErkJggg==) no-repeat 50% 0;border-radius: 50%;border: 0 none;color: #656565;cursor: pointer;float: right;font: 16px/16px Arial;height: 14px;margin: 5px 1px 9px 5px;padding: 0;text-align: center;width: 14px;}.ace_searchbtn_close:hover {background-color: #656565;background-position: 50% 100%;color: white;}.ace_replacebtn.prev {width: 54px}.ace_replacebtn.next {width: 27px}.ace_button {margin-left: 2px;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;-ms-user-select: none;user-select: none;overflow: hidden;opacity: 0.7;border: 1px solid rgba(100,100,100,0.23);padding: 1px;-moz-box-sizing: border-box;box-sizing:    border-box;color: black;}.ace_button:hover {background-color: #eee;opacity:1;}.ace_button:active {background-color: #ddd;}.ace_button.checked {border-color: #3399ff;opacity:1;}.ace_search_options{margin-bottom: 3px;text-align: right;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;-ms-user-select: none;user-select: none;}</style></head>
+      <body class="lang-english cmd-in-designer cmd-editphpfunctions jr-nav-main-extended" cz-shortcut-listen="true"><header class="jr-header" id="jr-header">
+    <div class="jr-header-nav-main" aria-hidden="true">
+        <a id="jr-header-nav-main-menu" class="jr-header-nav-main-menu" href="#"><i class="jr-icon-menu"></i></a>
+    </div>
+    <div class="jr-header-brand">
+        <a href="https://solutions.comdoc.com/akron/designer.php">
+            <img src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/jr-designer-logo.svg" alt="JobRouter Designer">
+                    </a>
+    </div>
+    <nav class="jr-header-nav-user">
+        <ul>
+            <li class="jr-header-nav-user-settings-item">
+    <a href="https://solutions.comdoc.com/akron/designer.php" title="Overview">
+        <i class="jr-icon-home jr-header-home jr-header-nav-user-settings-icon"></i>
+    </a>
+</li><li class="jr-header-nav-user-settings-item">
+    <a href="https://solutions.comdoc.com/akron/designer.php?cmd=Simulator" title="Simulator">
+        <i class="jr-icon-designer-simulator jr-header-nav-user-settings-icon"></i>
+    </a>
+</li><li class="jr-header-nav-user-settings-item">
+    <a href="javascript:showManualListing()" title="Show Manual">
+        <i class="jr-icon-help-circle-outline jr-header-nav-user-settings-icon"></i>
+    </a>
+</li><li class="jr-header-nav-user-settings-item">
+    <a href="https://solutions.comdoc.com/akron/designer.php?cmd=Analyse" title="Process Analysis">
+        <i class="jr-icon-designer-process-analysis jr-header-nav-user-settings-icon"></i>
+    </a>
+</li><li class="jr-header-nav-user-settings-item">
+    <a href="#" title="Close" onclick="window.close(); return false;">
+        <i class="jr-icon-close jr-header-nav-user-settings-icon"></i>
+    </a>
+</li>        </ul>
+    </nav>
+</header><nav class="jr-nav-main mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" id="jr-nav-main" aria-label="Main Navigation" style="overflow: visible;"><div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><ul aria-live="polite"><li class="jr-nav-main-item jr-test-level1-process-map">
+    <a class="jr-nav-main-link-level1" href="https://solutions.comdoc.com/akron/designer.php?cmd=Map" target="_self">
+        <i class="jr-icon-designer-process-map jr-nav-main-icon" title="Process Flowchart"></i>
+        <span class="jr-nav-main-label-level1">Process Flowchart</span>
+        <span class="jr-nav-main-indicator" style="display:none;"></span>
+    </a>
+    
+</li><li class="jr-nav-main-item jr-test-level1-workflow has-open-children" aria-haspopup="true">
+    <a class="jr-nav-main-link-level1 has-children" href="#">
+        <i class="jr-icon-designer-workflow jr-nav-main-icon jr-nav-main-has-submenu" title="Workflow"></i>
+        <span class="jr-nav-main-label-level1">Workflow<i class="jr-icon-chevron-down pull-right jr-nav-main-icon-level1"></i></span>
+        <span class="jr-nav-main-indicator" style="display:none;"></span>
+    </a>
+    <div id="jr-nav-main-sub-__designerWorkflow__" class="jr-nav-main-sub" aria-expanded="true">
+    <h2 class="jr-nav-main-sub-header jr-nav-main-sub-category">Workflow</h2>
+    <ul><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Steps" target="_self">
+        
+        <span id="jr-checksteps" class="jr-nav-main-label-level2 has-count">Steps<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countsteps">7</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Dialogs" target="_self">
+        
+        <span id="jr-checkdialogs" class="jr-nav-main-label-level2 has-count">Forms<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countdialogs">3</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=ProcessTable" target="_self">
+        
+        <span id="jr-checkprocessTable" class="jr-nav-main-label-level2 has-count">Process Table<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countprocessTable">25</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Subtables" target="_self">
+        
+        <span id="jr-checksubtables" class="jr-nav-main-label-level2 has-count">Subtables<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countsubtables">4</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=SubtableViews" target="_self">
+        
+        <span id="jr-checksubtableViews" class="jr-nav-main-label-level2 has-count">Subtable Views<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countsubtableViews">6</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Processboxes" target="_self">
+        
+        <span id="jr-checkprocessboxes" class="jr-nav-main-label-level2 has-count">Process Inboxes<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countprocessboxes">4</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li></ul>
+</div>
+</li><li class="jr-nav-main-item jr-test-level1-resources has-open-children" aria-haspopup="true">
+    <a class="jr-nav-main-link-level1 has-children active-page" href="#">
+        <i class="jr-icon-designer-resources jr-nav-main-icon jr-nav-main-has-submenu" title="Resources"></i>
+        <span class="jr-nav-main-label-level1">Resources<i class="jr-icon-chevron-down pull-right jr-nav-main-icon-level1"></i></span>
+        <span class="jr-nav-main-indicator" style="display:none;"></span>
+    </a>
+    <div id="jr-nav-main-sub-__designerResources__" class="jr-nav-main-sub" aria-expanded="true">
+    <h2 class="jr-nav-main-sub-header jr-nav-main-sub-category">Resources</h2>
+    <ul><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=ProcessMessages" target="_self">
+        
+        <span id="jr-checkprocessMessages" class="jr-nav-main-label-level2 has-count">Process Messages<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countprocessMessages">0</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Jobs" target="_self">
+        
+        <span id="jr-checkjobs" class="jr-nav-main-label-level2 has-count">Job Functions<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countjobs">2</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Lists" target="_self">
+        
+        <span id="jr-checklists" class="jr-nav-main-label-level2 has-count">Lists<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countlists">12</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2 active-page" href="https://solutions.comdoc.com/akron/designer.php?cmd=Phpfunctions" target="_self">
+        
+        <span id="jr-checkphpfunctions" class="jr-nav-main-label-level2 has-count">PHP Functions<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countphpfunctions">11</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Connections" target="_self">
+        
+        <span id="jr-checkprocessConnections" class="jr-nav-main-label-level2 has-count">Database Connections<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countprocessConnections">0</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?module=mindox&amp;modcmd=JobMindBauFields" target="_self">
+        
+        <span id="jr-checkjobmindbaufields" class="jr-nav-main-label-level2 has-count">JobMind BAU fields<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countjobmindbaufields">0</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li></ul>
+</div>
+</li><li class="jr-nav-main-item jr-test-level1-settings has-open-children" aria-haspopup="true">
+    <a class="jr-nav-main-link-level1 has-children" href="#">
+        <i class="jr-icon-designer-settings jr-nav-main-icon jr-nav-main-has-submenu" title="Process Settings"></i>
+        <span class="jr-nav-main-label-level1">Process Settings<i class="jr-icon-chevron-down pull-right jr-nav-main-icon-level1"></i></span>
+        <span class="jr-nav-main-indicator" style="display:none;"></span>
+    </a>
+    <div id="jr-nav-main-sub-__designerProcessSettings__" class="jr-nav-main-sub" aria-expanded="true">
+    <h2 class="jr-nav-main-sub-header jr-nav-main-sub-category">Process Settings</h2>
+    <ul><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Properties" target="_self">
+        
+        <span class="jr-nav-main-label-level2">Properties</span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?module=jobtimer&amp;modcmd=Escalations" target="_self">
+        
+        <span id="jr-checkprocessEscalations" class="jr-nav-main-label-level2 has-count">Process Escalations<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countprocessEscalations">0</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=multilanguage_Languages" target="_self">
+        
+        <span id="jr-checkmultilanguage" class="jr-nav-main-label-level2 has-count">Manage Languages<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countmultilanguage">1</span>
+    <span class="jr-visually-hide">Entry found</span>
+</span></span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Configuration" target="_self">
+        
+        <span id="jr-checkprocessConfigurations" class="jr-nav-main-label-level2 has-count">Process Configurations<span class="jr-nav-main-count pull-right" aria-live="polite">
+    <span id="jr-countprocessConfigurations">0</span>
+    <span class="jr-visually-hide">Entries found</span>
+</span></span>
+        
+    </a>
+    
+</li></ul>
+</div>
+</li><li class="jr-nav-main-item jr-test-level1-documentation" aria-haspopup="true">
+    <a class="jr-nav-main-link-level1 has-children" href="#">
+        <i class="jr-icon-designer-documentation jr-nav-main-icon jr-nav-main-has-submenu" title="Documentation"></i>
+        <span class="jr-nav-main-label-level1">Documentation<i class="jr-icon-chevron-down pull-right jr-nav-main-icon-level1"></i></span>
+        <span class="jr-nav-main-indicator" style="display:none;"></span>
+    </a>
+    <div id="jr-nav-main-sub-__designerDocumentation__" class="jr-nav-main-sub" aria-expanded="false">
+    <h2 class="jr-nav-main-sub-header jr-nav-main-sub-category">Documentation</h2>
+    <ul><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=Documentation" target="_self">
+        
+        <span class="jr-nav-main-label-level2">Process Description</span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=ProcessLog" target="_self">
+        
+        <span class="jr-nav-main-label-level2">Change Log</span>
+        
+    </a>
+    
+</li><li class="">
+    <a class="jr-nav-main-link-level2" href="https://solutions.comdoc.com/akron/designer.php?cmd=ProcessComments" target="_self">
+        
+        <span class="jr-nav-main-label-level2">Process Comments</span>
+        
+    </a>
+    
+</li></ul>
+</div>
+</li></ul></div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></nav><main id="jr-main" class="jr-main" aria-label="Main Area"><header id="jr-headline" class="jr-headline">
+    <h1 class="jr-headline-title">
+        Edit PHP Functions:&nbsp;dSendEmailToAssignedUsers
+        
+    </h1>
+    <p class="jr-headline-right">Process: Project_Management, Version: 1 (Project Management)</p>
+</header><nav id="jr-actionbar" class="jr-actionbar clearfix" aria-label="Action Bar">
+    <ul class="jr-actionbar-buttons pull-left"><li id="jr-actionbar-button-back" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="https://solutions.comdoc.com/akron/designer.php?cmd=Phpfunctions"><i class="jr-icon-actionbar-back"></i><span class="jr-actionbar-button-label">Back</span></a></li><li id="jr-actionbar-button-save" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="#" onclick="submitForm('editphpfunctions','save','','', '', '','','', {});"><i class="jr-icon-actionbar-save"></i><span class="jr-actionbar-button-label">Save</span></a></li><li id="jr-actionbar-button-refresh" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="#" onclick="submitForm('editphpfunctions','update','','', '', '','','', {});"><i class="jr-icon-actionbar-refresh"></i><span class="jr-actionbar-button-label">Apply</span></a></li><li id="jr-actionbar-button-php" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="#" onclick="phpFunctionsValidation('PHP Syntax is correct');"><i class="jr-icon-actionbar-php"></i><span class="jr-actionbar-button-label">Validate PHP</span></a></li><li id="jr-actionbar-button-show-documentation" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="#" onclick="$('id_documentationVisibility').value='s'; documentationVisibility();"><i class="jr-icon-actionbar-show-documentation"></i><span class="jr-actionbar-button-label">Show Documentation</span></a></li><li id="jr-actionbar-button-hide-documentation" class="jr-actionbar-button" style="display: none;"><a class="jr-actionbar-button-link" href="#" onclick="$('id_documentationVisibility').value='h'; documentationVisibility();"><i class="jr-icon-actionbar-hide-documentation"></i><span class="jr-actionbar-button-label">Hide Documentation</span></a></li><li id="jr-actionbar-button-processlog" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="#" onclick="$JR.UTILITY.layerHeading = 'Modification Logs';showPopup('ShowProcessLog', '', '', '', '', {process: 'Project_Management', version: '1', objectType: 'PhpFunction', objectName: 'dSendEmailToAssignedUsers'});"><i class="jr-icon-actionbar-processlog"></i><span class="jr-actionbar-button-label">Modification Logs</span></a></li><li id="jr-actionbar-button-manual" class="jr-actionbar-button"><a class="jr-actionbar-button-link" href="#" onclick="newWin('help/english/phpfunctions/index.html',800,600);"><i class="jr-icon-actionbar-manual"></i><span class="jr-actionbar-button-label">Manual</span></a></li></ul>
+    
+    <ul class="jr-actionbar-buttons pull-right"><li id="jr-actionbar-button-processcomments" class="jr-actionbar-button jr-actionbar-button-position-right"><a id="jr-actionbar-button-processcomments-link" class="jr-actionbar-button-link" href="#" data-params="{&quot;processname&quot;:&quot;Project_Management&quot;,&quot;version&quot;:1}"><i class="jr-icon-actionbar-processcomments"></i><span class="jr-actionbar-button-label">Comments</span></a></li></ul>
+</nav><script>
+    var resizeScriptWindow = function () {
+        togglePHPsubmenu();
+        togglePHPsubmenu();
+    };
+
+    window.onresize = resizeScriptWindow;
+
+    var changeFunctionType = function () {
+
+        var newType = jQuery('#id_functionType').val();
+        var apiVersion = jQuery('#id_apiVersion').val();
+        var phpClassName = '';
+        var $parameterMenu = jQuery('#id_parameterMenu');
+        $parameterMenu.hide();
+
+        changePHPFunctionsList(newType, apiVersion);
+
+        if (newType == '') {
+            return;
+        }
+
+        if (apiVersion == '') {
+            return;
+        }
+
+        if (apiVersion == '1') {
+            if (newType == '1') {
+                phpClassName = 'PHPFunctionClass';
+            } else if (newType == '2') {
+                phpClassName = 'PHPFunctionClass';
+            } else if (newType == '3') {
+                phpClassName = 'BoxActionFunctionClass';
+            } else if (newType == '4') {
+                phpClassName = 'SystemActivityFunctionClass';
+            } else if (newType == '5') {
+                phpClassName = 'StepInitializationFunctionClass';
+            } else if (newType == '6') {
+                phpClassName = 'DialogFunctionClass';
+            }
+        }
+
+        if (apiVersion == '2') {
+            if (newType == '1') {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\RuleExecutionFunction';
+                $parameterMenu.show();
+            } else if (newType == '2') {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\RuleConditionFunction';
+                $parameterMenu.show();
+            } else if (newType == '3') {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\BoxActionFunction';
+            } else if (newType == '4') {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\SystemActivityFunction';
+            } else if (newType == '5') {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\StepInitializationFunction';
+            } else if (newType == '6') {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\DialogFunction';
+            } else {
+                phpClassName = 'JobRouter\\Engine\\Runtime\\PhpFunction\\AbstractFunction';
+            }
+        }
+
+        var code = String(window.editor.getSession().getValue());
+        code = code.replace(/className extends [^\{]+\s?\{/, 'className extends ' + phpClassName + "\r\n{");
+        if (apiVersion == '2' && newType != '3') {
+            code = code.replace(/function\s+execute\(\)/, 'function execute(\$rowId = null)');
+        } else {
+            code = code.replace(/function\s+execute\([^\)]+\)/, 'function execute()');
+        }
+        window.editor.getSession().setValue(code);
+    };
+
+    var changePHPFunctionsList = function (type, apiVersion) {
+
+        url = 'index.php?cmd=Ajax_HTMLProvider';
+        jQuery('#id_phpFunctions').load(
+            url, {
+                'cmd_target': 'phpFunctions',
+                'cmd_params': { 'type': type, 'apiVersion': apiVersion }
+            }
+        );
+    };
+
+</script>
+<div id="jr-main-content" class="jr-main-content">
+    
+		<script type="text/javascript">
+			$JR.JRFORM.setName('editphpfunctions');
+			$JR.JRFORM.setJRMode('designer');
+		</script><form id="form_editphpfunctions" name="editphpfunctions" action="?cmd=EditPhpFunctions" method="post"><input name="form_rand" value="1121259016" type="hidden"><input id="csrf_token" name="csrf_token" value="6d55b9e3ba22fa7def3b08c9015f68f3" type="hidden">
+
+        <div id="id_PhpFunctionsMenu" style="width:100%;" class=" panelContainerContentDefault "><fieldset id="wf_" class="jr-section "><legend class="jr-section-title">PHP Functions</legend>
+        <div id="contentBox_wf_" style="" class="fieldsetContent ">
+            <div id="div_id" class="jr-form-row"><label class="jr-form-label jr-required-field" title="" for="id_id">Function Name</label><span class="jr-form-control-wrapper"><input class="jr-form-control required validate-jr-internal-name" style="" name="id" id="id_id" value="dSendEmailToAssignedUsers" maxlength="50" readonly="readonly" onchange="" type="text"></span></div><div id="div_label" class="jr-form-row"><label class="jr-form-label" title="" for="id_label">Description</label><span class="jr-form-control-wrapper"><input class="jr-form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" name="label" id="id_label" value="dSendEmailToAssignedUsers" maxlength="50" onchange="" type="text"></span></div><div id="div_functionType" class="jr-form-row"><label for="id_functionType" class="jr-form-label jr-required-field">Type</label><span class="jr-form-control-wrapper"><select class="jr-form-control jr-form-select validate-selection" id="id_functionType" name="functionType" onchange="changeFunctionType()"><option value="" title="">-</option><option value="3" title="">Box Action Function</option><option value="2" title="">Condition Function</option><option value="6" title="">Dialog Function</option><option selected="selected" value="1" title="">Execution Function</option><option value="5" title="">Step Initialization Function</option><option value="4" title="">System Activity Function</option></select></span></div><div id="div_apiVersion" class="jr-form-row"><label for="id_apiVersion" class="jr-form-label jr-required-field">API version</label><span class="jr-form-control-wrapper"><select class="jr-form-control jr-form-select validate-selection" id="id_apiVersion" name="apiVersion" onchange="changeFunctionType()"><option value="1" title="">1</option><option selected="selected" value="2" title="">2</option></select></span></div>
+        </div></fieldset>
+        </div>
+
+        <div id="id_documentationMenu" style="width: 100%; display: none;" class=" panelContainerContentDefault "><fieldset id="wf_3" class="jr-section "><legend class="jr-section-title">Documentation</legend>
+        <div id="contentBox_wf_3" style="" class="fieldsetContent ">
+            <p id="div_documentation"><textarea class="jr-form-control " id="id_documentation" name="documentation" rows="0" cols="0" style="width:100%;height:50px;" onfocus="textareaResize(this.name, event, '100%','50px');" onblur="textareaResize(this.name, event, '100%','50px');" onkeydown="checkLength(this, 4000)"></textarea></p><table style="width:90%;"></table>
+        </div></fieldset>
+        </div>
+
+        <div id="id_phpFunctionsErrorMenu" style="width: 100%; display: none;" class=" panelContainerContentDefault "><fieldset id="wf_6" class="jr-section "><legend class="jr-section-title">Validate PHP</legend>
+        <div id="contentBox_wf_6" style="" class="fieldsetContent ">
+            <div id="id_output" class="phpFunctions_error"></div><iframe id="id_syntaxIframe" name="syntaxIframe" src="" style="display:none;"></iframe>
+        </div></fieldset>
+        </div>
+
+        <div id="id_parameterMenu" style="width:100%;" class=" panelContainerContentDefault "><fieldset id="wf_9" class="jr-section "><legend class="jr-section-title">Parameter</legend>
+        <div id="contentBox_wf_9" style="" class="fieldsetContent ">
+            <table>
+            </table><table id="functionParameters" class="jr-default-table jr-table-widget">
+            <thead>
+            <tr id="functionParameters_header"><th class="jr-box-header order" style="display:none;width:20px">Ordernum</th><th class="jr-box-header " style="width:250px">Name</th><th class="jr-box-header " style="width:px">Type</th><th colspan="3"></th>
+                </tr></thead>
+        
+                <tbody>
+                <tr id="functionParameters_row_template" style="display:none"><td class="order" style="display:none;"><input name="functionParameters_ordernum_template" id="id_functionParameters_ordernum_template" maxlength="100" onkeydown="focusNextWidgetTableField(event);" class="jr-form-control" style="width:20px;" type="text"></td><td class="" style=""><input name="functionParameters_name_template" id="id_functionParameters_name_template" maxlength="100" onkeydown="focusNextWidgetTableField(event);" class="jr-form-control required" style="width:250px;" type="text"></td><td class="" style=""><select id="id_functionParameters_type_template" name="functionParameters_type_template" class="jr-form-select jr-form-control required" style=""><option selected="selected" value="">-</option><option value="varchar">Text</option><option value="file">Attachment</option><option value="int">Integer</option><option value="bigint">Big Integer</option><option value="decimal">Decimal</option><option value="datetime">Date (DATETIME)</option><option value="jobarchive">JobArchive ID</option></select></td>
+                    <td class="cell-action"><i class="jr-icon-minus jr-form-widget-button jr-btn-alert" id="functionParameters_delete_template" onclick="removeListEntry('functionParameters', this);reorderTableWidget('functionParameters');showOrHideMoveImages('functionParameters');"></i><i class="jr-icon-plus jr-form-widget-button jr-btn-success" id="functionParameters_insert_template" onclick="addListEntry('functionParameters', this);reorderTableWidget('functionParameters');showOrHideMoveImages('functionParameters');"></i>
+                    </td><td class="cell-action"><i class="jr-icon-menu-up jr-cursor-pointer jr-table-widget-icon js-icon-move-up" onclick="moveRowUp(this);reorderTableWidget('functionParameters');"></i></td><td class="cell-action"><i class="jr-icon-menu-down jr-cursor-pointer jr-table-widget-icon js-icon-move-down" onclick="moveRowDown(this);reorderTableWidget('functionParameters');"></i></td>
+            </tr>
+            <tr id="functionParameters_row_empty" name="functionParameters_row_empty" style=""><td class="order" style="display:none;">-</td><td class="" style="">-</td><td class="" style="">-</td>
+                <td class="cell-action"><i class="jr-icon-minus jr-form-widget-button jr-btn-alert disabled" id="functionParameters_delete_empty" onclick="removeListEntry('functionParameters', this);reorderTableWidget('functionParameters');showOrHideMoveImages('functionParameters');"></i><i class="jr-icon-plus jr-form-widget-button jr-btn-success" id="functionParameters_insert_empty" onclick="addListEntry('functionParameters', this);reorderTableWidget('functionParameters');showOrHideMoveImages('functionParameters');"></i>
+                </td><td class="cell-action"></td><td class="cell-action"></td>
+            </tr>
+                </tbody>
+            </table><input name="functionParameters_maxcount" id="functionParameters_maxcount" value="0" type="hidden"><input name="functionParameters_count" id="functionParameters_count" value="0" type="hidden"><input name="functionParameters_min" id="functionParameters_min" value="0" type="hidden"><input name="functionParameters_max" id="functionParameters_max" value="999" type="hidden">
+                <script>
+                    showOrHideMoveImages('functionParameters');
+                </script>
+        </div></fieldset>
+        </div>
+
+        <div id="id_phpFunctionsSourceMenu" style="width:100%;" class=" panelContainerContentDefault "><fieldset id="wf_php_sourcecode" class="jr-section "><legend class="jr-section-title">Source Code</legend>
+        <div id="contentBox_wf_php_sourcecode" style="" class="fieldsetContent ">
+            
+        <script>
+            var insertCode = function(arg1, arg2) {
+                window.editor.insert(arg1);
+                window.editor.focus();
+            
+            };
+        
+            var showPhpFunctionClassMethodComment = function(obj) {
+        
+                if (obj.value !== '') {
+        
+                    url = 'index.php?cmd=Ajax_HTMLProvider';
+        
+                    hidePhpFunctionClassMethodComment();
+        
+                    var functionType = jQuery('#id_functionType').val();
+        
+                    if (!functionType) {
+                        functionType = 0;
+                    }
+        
+                    var apiVersion = jQuery('#id_apiVersion').val();
+        
+                    jQuery.ajax({
+                        url: url,
+                        type: "POST",
+                        dataType: "html",
+                        data: {'cmd_target': 'phpFunctionClassMethodComment', 'cmd_params' :
+                            {'functionType': functionType, 'apiVersion': apiVersion, 'methodName': obj.options[obj.selectedIndex].text}}
+                    }).done(function(data) {
+                        jQuery('#id_php_function_class_method_comment').html(data);
+                    }).always(function() {
+                        $('div_php_function_class_method_info').show();
+                    });
+        
+                } else {
+                    hidePhpFunctionClassMethodComment();
+                }
+            };
+        
+            var hidePhpFunctionClassMethodComment = function() {
+                $('div_php_function_class_method_info').hide();
+                $('id_php_function_class_method_comment').update('');
+            };
+        
+        </script>
+    <table class="jr-designer-script-table">
+        <colgroup>
+            <col width="200">
+            <col width="1">
+            <col width="100%">
+        </colgroup>
+        <tbody><tr id="div_sourceCode">
+            <td id="div_phpFunctions_submenu" rowspan="2" style="vertical-align:top;">
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('dialogFields');">Form Fields</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_dialogFields" name="dialogFields" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option><optgroup label="Initial_Form" title=""><option value="$this-&gt;getDialogValue('Branch')" title="">Branch</option><option value="$this-&gt;getDialogValue('Customer')" title="Customer">Customer</option><option value="$this-&gt;getDialogValue('CustomerName')" title="">CustomerName</option><option value="$this-&gt;getDialogValue('Department')" title="Department">Department</option><option value="$this-&gt;getDialogValue('DepartmentName')" title="">DepartmentName</option><option value="$this-&gt;getDialogValue('DueDate')" title="Due Date">DueDate</option><option value="$this-&gt;getDialogValue('NewProj_Description')" title="Project Description">NewProj_Description</option><option value="$this-&gt;getDialogValue('NewProj_Name')" title="Project Name">NewProj_Name</option><option value="$this-&gt;getDialogValue('NewProj_Submit')" title="Create Project">NewProj_Submit</option><option value="$this-&gt;getDialogValue('Project')" title="Project">Project</option><option value="$this-&gt;getDialogValue('ProjectDescription')" title="Project Description">ProjectDescription</option><option value="$this-&gt;getDialogValue('ProjectName')" title="">ProjectName</option><option value="$this-&gt;getDialogValue('Project_Attachments')" title="Attach Documents">Project_Attachments</option><option value="$this-&gt;getDialogValue('Project_Milestones')" title="Milestones">Project_Milestones</option><option value="$this-&gt;getDialogValue('Project_Tasks_Submit')" title="Tasks">Project_Tasks_Submit</option><option value="$this-&gt;getDialogValue('RequestDate')" title="Request Date">RequestDate</option></optgroup><optgroup label="Manage_Customers" title=""><option value="$this-&gt;getDialogValue('AddContact')" title="Add Contact">AddContact</option><option value="$this-&gt;getDialogValue('AddContactSubmit')" title="Add Contact">AddContactSubmit</option><option value="$this-&gt;getDialogValue('AddCustomer')" title="Add New Customer">AddCustomer</option><option value="$this-&gt;getDialogValue('AddCustomerSubmit')" title="Add Customer">AddCustomerSubmit</option><option value="$this-&gt;getDialogValue('AddDepartment')" title="Add Department">AddDepartment</option><option value="$this-&gt;getDialogValue('AddDepartmentSubmit')" title="Add Department">AddDepartmentSubmit</option><option value="$this-&gt;getDialogValue('CancelContact')" title="Cancel">CancelContact</option><option value="$this-&gt;getDialogValue('CancelCustomer')" title="Cancel">CancelCustomer</option><option value="$this-&gt;getDialogValue('CancelDepartment')" title="Cancel">CancelDepartment</option><option value="$this-&gt;getDialogValue('ContactDepartment')" title="Department">ContactDepartment</option><option value="$this-&gt;getDialogValue('ContactEmail')" title="Email">ContactEmail</option><option value="$this-&gt;getDialogValue('ContactName')" title="Contact Name">ContactName</option><option value="$this-&gt;getDialogValue('ContactPhone')" title="Phone">ContactPhone</option><option value="$this-&gt;getDialogValue('ContactsList')" title="Contact">ContactsList</option><option value="$this-&gt;getDialogValue('ContactType')" title="Type">ContactType</option><option value="$this-&gt;getDialogValue('CustomerActive')" title="Active">CustomerActive</option><option value="$this-&gt;getDialogValue('CustomerAddress')" title="Address">CustomerAddress</option><option value="$this-&gt;getDialogValue('CustomerAddress2')" title="Address 2">CustomerAddress2</option><option value="$this-&gt;getDialogValue('CustomerBranch')" title="Branch">CustomerBranch</option><option value="$this-&gt;getDialogValue('CustomerCity')" title="City">CustomerCity</option><option value="$this-&gt;getDialogValue('CustomerContacts')" title="Contacts">CustomerContacts</option><option value="$this-&gt;getDialogValue('CustomerDepartments')" title="Departments">CustomerDepartments</option><option value="$this-&gt;getDialogValue('CustomerID')" title="Customer ID">CustomerID</option><option value="$this-&gt;getDialogValue('CustomerName')" title="Customer Name">CustomerName</option><option value="$this-&gt;getDialogValue('CustomerPhone')" title="Phone">CustomerPhone</option><option value="$this-&gt;getDialogValue('CustomersList')" title="Customers">CustomersList</option><option value="$this-&gt;getDialogValue('CustomerState')" title="State">CustomerState</option><option value="$this-&gt;getDialogValue('CustomerZip')" title="Zip">CustomerZip</option><option value="$this-&gt;getDialogValue('DepartmentActive')" title="Active">DepartmentActive</option><option value="$this-&gt;getDialogValue('DepartmentName')" title="Department Name">DepartmentName</option><option value="$this-&gt;getDialogValue('DepartmentsList')" title="Department">DepartmentsList</option><option value="$this-&gt;getDialogValue('EditContact')" title="Edit Contact">EditContact</option><option value="$this-&gt;getDialogValue('EditContactSubmit')" title="Submit Changes">EditContactSubmit</option><option value="$this-&gt;getDialogValue('EditCustomer')" title="Edit Customer">EditCustomer</option><option value="$this-&gt;getDialogValue('EditCustomerSubmit')" title="Submit Changes">EditCustomerSubmit</option><option value="$this-&gt;getDialogValue('EditDepartment')" title="Edit Department">EditDepartment</option><option value="$this-&gt;getDialogValue('EditDepartmentSubmit')" title="Submit Changes">EditDepartmentSubmit</option><option value="$this-&gt;getDialogValue('EnableContactList')" title="Enable Contact List">EnableContactList</option><option value="$this-&gt;getDialogValue('EnableDepartmentList')" title="Enable Department List">EnableDepartmentList</option></optgroup><optgroup label="Manage_Project" title=""><option value="$this-&gt;getDialogValue('Billable_Hours_Nontech')" title="Billable Hours (Non-Technical)">Billable_Hours_Nontech</option><option value="$this-&gt;getDialogValue('Billable_Hours_Tech')" title="Billable Hours (Technical)">Billable_Hours_Tech</option><option value="$this-&gt;getDialogValue('Branch')" title="">Branch</option><option value="$this-&gt;getDialogValue('Completed')" title="Completed Tasks">Completed</option><option value="$this-&gt;getDialogValue('Customer')" title="Customer">Customer</option><option value="$this-&gt;getDialogValue('CustomerName')" title="Customer">CustomerName</option><option value="$this-&gt;getDialogValue('Department')" title="Department">Department</option><option value="$this-&gt;getDialogValue('DepartmentName')" title="Department">DepartmentName</option><option value="$this-&gt;getDialogValue('DueDate')" title="Due Date">DueDate</option><option value="$this-&gt;getDialogValue('Open_Brad')" title="Brad's Open Tasks">Open_Brad</option><option value="$this-&gt;getDialogValue('Open_Jason')" title="Jason's Open Tasks">Open_Jason</option><option value="$this-&gt;getDialogValue('Open_Zach')" title="Zach's Open Tasks">Open_Zach</option><option value="$this-&gt;getDialogValue('Project')" title="Project ID">Project</option><option value="$this-&gt;getDialogValue('ProjectDescription')" title="Project Description">ProjectDescription</option><option value="$this-&gt;getDialogValue('ProjectName')" title="Project">ProjectName</option><option value="$this-&gt;getDialogValue('ProjectNotes')" title="Project Notes">ProjectNotes</option><option value="$this-&gt;getDialogValue('ProjectStatus')" title="Project Status">ProjectStatus</option><option value="$this-&gt;getDialogValue('Project_Attachments')" title="Attach Documents">Project_Attachments</option><option value="$this-&gt;getDialogValue('Project_Milestones')" title="Milestones">Project_Milestones</option><option value="$this-&gt;getDialogValue('Project_Tasks')" title="Tasks">Project_Tasks</option><option value="$this-&gt;getDialogValue('Project_Time')" title="Time">Project_Time</option><option value="$this-&gt;getDialogValue('RequestDate')" title="Request Date">RequestDate</option></optgroup></select>
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('processConfigurations');">Process Configurations</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_processConfigurations" name="processConfigurations" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option></select>
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('processMessages');">Process Messages</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_processMessages" name="processMessages" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option></select>
+                <div class="jr-designer-script-properties-header" onclick="showPHPsubmenu('phpFunctions');">PHP Functions</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_phpFunctions" name="phpFunctions" onclick="showPhpFunctionClassMethodComment(this);" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option><optgroup label="RuleExecutionFunction" title=""><option value="$this-&gt;alert($message, $context)" title="Action must be taken immediately.&lt;br/&gt;Example: External database unavailable.">alert</option><option value="$this-&gt;attachFile($filepath, $fieldname, $row, $subtable)" title="Attaches a file to the processtable or a subtable.">attachFile</option><option value="$this-&gt;clearSubtable($subtable, $deleteAttachedFiles)" title="Deletes all entries from a subtable.">clearSubtable</option><option value="$this-&gt;convertToDefaultTimezone($dateTimeValueInUserTimezone, $userTimezone)" title="Converts the given date value from user timezone to default timezone.">convertToDefaultTimezone</option><option value="$this-&gt;convertToUserTimezone($dateTimeValueInDefaultTimezone, $userTimezone)" title="Converts the given date value from default timezone to user timezone.">convertToUserTimezone</option><option value="$this-&gt;critical($message, $context)" title="Critical conditions.&lt;br/&gt;Example: Unexpected exception.">critical</option><option value="$this-&gt;debug($message, $context)" title="Detailed debug information.">debug</option><option value="$this-&gt;deleteFile($fieldname, $row, $subtable)" title="Deletes a file from the processtable or a subtable.">deleteFile</option><option value="$this-&gt;deleteSubtableRow($subtable, $row)" title="Deletes a subtable row.">deleteSubtableRow</option><option value="$this-&gt;dump($var)" title="Writes a parsable string representation of the parameter to the log file.">dump</option><option value="$this-&gt;emergency($message, $context)" title="System is unusable.">emergency</option><option value="$this-&gt;error($message, $context)" title="Runtime errors that do not require immediate action but should typically be logged and monitored.">error</option><option value="$this-&gt;executeForRow($rowId)" title="">executeForRow</option><option value="$this-&gt;getBacklink()" title="Returns the backlink of the current step.">getBacklink</option><option value="$this-&gt;getConfiguration($configurationName)" title="Returns a configuration value.">getConfiguration</option><option value="$this-&gt;getCurrentSubtable()" title="Returns the current subtable name during rule execution.">getCurrentSubtable</option><option value="$this-&gt;getCurrentSubtableRowId()" title="Returns the current subtable row id during rule execution.">getCurrentSubtableRowId</option><option value="$this-&gt;getCurrentUsername()" title="Returns the current username.">getCurrentUsername</option><option value="$this-&gt;getDBConnection($connectionName)" title="Returns a database connection.">getDBConnection</option><option value="$this-&gt;getDefaultTimezone()" title="Returns the JobRouter default timezone.">getDefaultTimezone</option><option value="$this-&gt;getDialogValue($dialogElementName)" title="Returns a dialog element value.">getDialogValue</option><option value="$this-&gt;getFormattedDate($id, $date, $isTimestamp, $fullDateTime, $timezone)" title="Returns formatted date according to requested date format.">getFormattedDate</option><option value="$this-&gt;getFullDataPath($path, $processName, $processVersion)" title="Returns full path of file in data folder.">getFullDataPath</option><option value="$this-&gt;getFullFunctionsPath($path, $processName, $processVersion)" title="Returns full path of file in functions folder.">getFullFunctionsPath</option><option value="$this-&gt;getFullOutputPath()" title="Returns full path of output folder.">getFullOutputPath</option><option value="$this-&gt;getFullTempPath()" title="Returns full path of temp folder.">getFullTempPath</option><option value="$this-&gt;getFullUploadPath($path)" title="Returns full path of attached file.">getFullUploadPath</option><option value="$this-&gt;getGUID()" title="Generates and returns a globally unique identifier (GUID).">getGUID</option><option value="$this-&gt;getInDate()" title="Returns the indate of the current step.">getInDate</option><option value="$this-&gt;getIncident()" title="Returns the number of the current incident.">getIncident</option><option value="$this-&gt;getIncidentEscalationDate()" title="Returns the escalation date of the current incident.">getIncidentEscalationDate</option><option value="$this-&gt;getIncidentUrl($processId, $userName)" title="Returns the complete URL for opening the incident history with the given processid by the given user.">getIncidentUrl</option><option value="$this-&gt;getIncidentValue($attributeName)" title="Returns the value of an attribute of the current step or incident.">getIncidentValue</option><option value="$this-&gt;getInitiator()" title="Returns the initiator of the current incident.">getInitiator</option><option value="$this-&gt;getInputParameter($parameterName)" title="Returns the input parameter value with the given name.">getInputParameter</option><option value="$this-&gt;getJobArchiveResultListUrlBuilder($resultListId)" title="Returns an object which can be used to create URLs for accessing
+the given JobArchive result list from external applications.">getJobArchiveResultListUrlBuilder</option><option value="$this-&gt;getJobDB()" title="Returns the JobRouter DB connection.">getJobDB</option><option value="$this-&gt;getJobFunction()" title="Returns the jobfunction of the current step.">getJobFunction</option><option value="$this-&gt;getLanguage()" title="Returns the user language for current step.">getLanguage</option><option value="$this-&gt;getMessage($messageName, $languageName, $replacements)" title="Returns a process message.">getMessage</option><option value="$this-&gt;getName()" title="Returns the name of the PHP function.">getName</option><option value="$this-&gt;getNotice()" title="Returns the notice of the current step.">getNotice</option><option value="$this-&gt;getNotice2()" title="Returns the 2nd notice of the current step.">getNotice2</option><option value="$this-&gt;getOldTableValue($fieldName, $rawValue)" title="Returns a previous procestable field value (i. e. the value of a procestable field from the previous step).">getOldTableValue</option><option value="$this-&gt;getOriginalFilename($fieldname, $row, $subtable, $includeFolder)" title="Returns the original filename of an attachment.">getOriginalFilename</option><option value="$this-&gt;getPriority()" title="Returns the priority of the current step.">getPriority</option><option value="$this-&gt;getProcessId()" title="Returns the Process Id of the current incident.">getProcessId</option><option value="$this-&gt;getProcessName()" title="Returns the current process name.">getProcessName</option><option value="$this-&gt;getStartDate()" title="Returns the start date of the current incident.">getStartDate</option><option value="$this-&gt;getStep()" title="Returns the number of the current step.">getStep</option><option value="$this-&gt;getStepEscalationDate()" title="Returns the escalation date of the current step.">getStepEscalationDate</option><option value="$this-&gt;getStepId()" title="Returns the Process Step Id of the current step.">getStepId</option><option value="$this-&gt;getStepLabel()" title="Returns the label of the current step.">getStepLabel</option><option value="$this-&gt;getStepUrl($workflowId, $userName)" title="Returns the complete URL for opening the step with the given workflowid by the given user.">getStepUrl</option><option value="$this-&gt;getSubtableCount($subtable)" title="Returns the number of rows for the given subtable.">getSubtableCount</option><option value="$this-&gt;getSubtableRowIds($subtable)" title="Return the row ids of the rows of a given subtable for the current step.">getSubtableRowIds</option><option value="$this-&gt;getSubtableValue($subtable, $row, $fieldName, $rawValue)" title="Returns a subtable field value.">getSubtableValue</option><option value="$this-&gt;getTableValue($fieldName, $rawValue)" title="Returns a processtable field value.">getTableValue</option><option value="$this-&gt;getTimestamp($date)" title="Returns a UNIX timestamp for a given date.">getTimestamp</option><option value="$this-&gt;getUnformattedDate($dateFormat, $date)" title="Returns date in YYYY-MM-DD HH:II:SS format.">getUnformattedDate</option><option value="$this-&gt;getUserTimezone($userName)" title="Returns the timezone of the given user.">getUserTimezone</option><option value="$this-&gt;getUsername()" title="Returns the username of the current step.">getUsername</option><option value="$this-&gt;getVersion()" title="Returns the current process version.">getVersion</option><option value="$this-&gt;getWorkflowId()" title="Returns the Workflow Id of the current step.">getWorkflowId</option><option value="$this-&gt;hashPassword($password)" title="Creates a password hash.">hashPassword</option><option value="$this-&gt;info($message, $context)" title="Interesting events.&lt;br/&gt;Example: SQL logs.">info</option><option value="$this-&gt;insertSubtableRow($subtable, $row, $rowData)" title="Inserts a subtable row.">insertSubtableRow</option><option value="$this-&gt;isAnswer()" title="Checks if the current step is an answer for a request.">isAnswer</option><option value="$this-&gt;isRequest()" title="Checks if the current step is a request.">isRequest</option><option value="$this-&gt;isSimulation()" title="Checks if simulation mode is active for the current incident.">isSimulation</option><option value="$this-&gt;log($level, $message, $context)" title="Logs with an arbitrary level.&lt;br/&gt;
+
+Possible values for level: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY">log</option><option value="$this-&gt;notice($message, $context)" title="Normal but significant events.">notice</option><option value="$this-&gt;rawLog()" title="Disables the output formatting for log messages. Log messages are written as-is to log file.">rawLog</option><option value="$this-&gt;removeDir($path)" title="Removes the given directory including all subdirectories and files.">removeDir</option><option value="$this-&gt;setLogChannel($channel)" title="Set the log channel.&lt;br/&gt;
+
+Default: incidentNumber.stepNumber.functionClassName">setLogChannel</option><option value="$this-&gt;setLogFilePath($filePath)" title="Set the full path of the log file.&lt;br/&gt;
+
+Default: JobRouter output/log directory">setLogFilePath</option><option value="$this-&gt;setLogFilename($filename, $format, $dateFormat)" title="Set the name of the log file. You can also specify the format for the the filename.&lt;br/&gt;
+Default: processName_version_YYYYMMDD.log">setLogFilename</option><option value="$this-&gt;setLogLevel($level)" title="Set the minimum importance for log messages to be actually recorded.&lt;br/&gt;
+
+Default: CONST_LOG_LEVEL_FILE&lt;br/&gt;
+
+Possible values: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY">setLogLevel</option><option value="$this-&gt;setLogMessageFormat($format)" title="Set the output format for log messages.&lt;br/&gt;
+
+Default: %datetime% %channel%.%level_name%: %message% %context% %extra%&lt;br/&gt;
+
+The following variables can be used in the format string:
+%datetime%, %channel%, %level_name%, %message%, %context%, %extra%">setLogMessageFormat</option><option value="$this-&gt;setPriority($priority)" title="Sets the priority of the current step.">setPriority</option><option value="$this-&gt;setSubtableValue($subtable, $row, $fieldName, $value)" title="Sets a subtable field value.">setSubtableValue</option><option value="$this-&gt;setTableValue($fieldName, $fieldValue)" title="Sets a processtable field value.">setTableValue</option><option value="$this-&gt;verifyPassword($password, $hash)" title="Checks if the given hash matches the given password.">verifyPassword</option><option value="$this-&gt;warning($message, $context)" title="Exceptional occurrences that are not errors.&lt;br/&gt;Example: Undesirable things that are not necessarily wrong.">warning</option></optgroup><optgroup label="LogTrait" title=""><option value="$this-&gt;alert($message, $context)" title="Action must be taken immediately.&lt;br/&gt;Example: External database unavailable.">alert</option><option value="$this-&gt;critical($message, $context)" title="Critical conditions.&lt;br/&gt;Example: Unexpected exception.">critical</option><option value="$this-&gt;debug($message, $context)" title="Detailed debug information.">debug</option><option value="$this-&gt;dump($var)" title="Writes a parsable string representation of the parameter to the log file.">dump</option><option value="$this-&gt;emergency($message, $context)" title="System is unusable.">emergency</option><option value="$this-&gt;error($message, $context)" title="Runtime errors that do not require immediate action but should typically be logged and monitored.">error</option><option value="$this-&gt;info($message, $context)" title="Interesting events.&lt;br/&gt;Example: SQL logs.">info</option><option value="$this-&gt;log($level, $message, $context)" title="Logs with an arbitrary level.&lt;br/&gt;
+
+Possible values for level: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY">log</option><option value="$this-&gt;notice($message, $context)" title="Normal but significant events.">notice</option><option value="$this-&gt;rawLog()" title="Disables the output formatting for log messages. Log messages are written as-is to log file.">rawLog</option><option value="$this-&gt;setLogChannel($channel)" title="Set the log channel.&lt;br/&gt;
+
+Default: incidentNumber.stepNumber.functionClassName">setLogChannel</option><option value="$this-&gt;setLogFilePath($filePath)" title="Set the full path of the log file.&lt;br/&gt;
+
+Default: JobRouter output/log directory">setLogFilePath</option><option value="$this-&gt;setLogFilename($filename, $format, $dateFormat)" title="Set the name of the log file. You can also specify the format for the the filename.&lt;br/&gt;
+Default: processName_version_YYYYMMDD.log">setLogFilename</option><option value="$this-&gt;setLogLevel($level)" title="Set the minimum importance for log messages to be actually recorded.&lt;br/&gt;
+
+Default: CONST_LOG_LEVEL_FILE&lt;br/&gt;
+
+Possible values: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY">setLogLevel</option><option value="$this-&gt;setLogMessageFormat($format)" title="Set the output format for log messages.&lt;br/&gt;
+
+Default: %datetime% %channel%.%level_name%: %message% %context% %extra%&lt;br/&gt;
+
+The following variables can be used in the format string:
+%datetime%, %channel%, %level_name%, %message%, %context%, %extra%">setLogMessageFormat</option><option value="$this-&gt;warning($message, $context)" title="Exceptional occurrences that are not errors.&lt;br/&gt;Example: Undesirable things that are not necessarily wrong.">warning</option></optgroup></select>
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('phpTemplates');">PHP Templates</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_phpTemplates" name="phpTemplates" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option><optgroup label="PHP program logic related" title=""><option value="
+function fname() {
+    // Put function body code here!
+}
+" title="">function () {}</option><option value="
+private function mname() {
+        // Put method body code here!
+}
+" title="">private method () {}</option><option value="
+if ($b1 == $b2) {
+    // Put code to be executed if condition is complied with here!
+} else {
+    // Put code to be executed if condition is not complied with here!
+}
+" title="">if () {} else {}</option><option value="
+try {
+    // Put exception throwing code here!
+} catch (Exception $e) {
+    // Put exception handling code here!
+    throw new JobRouterException($e-&gt;getMessage());
+}
+" title="">try {} catch () {}</option></optgroup><optgroup label="JR program logic related" title=""><option value="
+$subtableName = 'Please replace this text with the name of the subtable!';
+$subtableRowIds = $this-&gt;getSubtableRowIds($subtableName);
+foreach ($subtableRowIds as $rowId) {
+	// Please replace this comment with your row-processing code!
+}
+" title="">Loop subtable rows</option></optgroup><optgroup label="JR database related" title=""><option value="
+$jobDB = $this-&gt;getJobDB();
+$sql = 'Please replace this text with your SQL SELECT statement!';
+$result = $jobDB-&gt;query($sql);
+if ($result === false) {
+    throw new JobRouterException($jobDB-&gt;getErrorMessage());
+}
+" title="">DB query</option><option value="
+while ($row = $jobDB-&gt;fetchRow($result)) {
+    // Please replace this comment with your row-processing code!
+}
+" title="">DB query result processing</option><option value="
+$jobDB = $this-&gt;getJobDB();
+$sql = 'Please replace this text with your SQL SELECT statement!';
+$result = $jobDB-&gt;query($sql);
+if ($result === false) {
+    throw new JobRouterException($jobDB-&gt;getErrorMessage());
+}
+while ($row = $jobDB-&gt;fetchRow($result)) {
+    // Please replace this comment with your row-processing code!
+}
+" title="">DB query and result processing</option><option value="
+$jobDB = $this-&gt;getJobDB();
+$sql = 'Please replace this text with your SQL INSERT, UPDATE, etc. statement!';
+$result = $jobDB-&gt;exec($sql);
+if ($result === false) {
+    throw new JobRouterException($jobDB-&gt;getErrorMessage());
+}
+" title="">DB exec</option></optgroup><optgroup label="JR external database related" title=""><option value="
+$externalDB = $this-&gt;getDBConnection('Replace this text with the name of the connection.');
+$sql = 'Please replace this text with your SQL SELECT statement!';
+$result = $externalDB-&gt;query($sql);
+if ($result === false) {
+    throw new JobRouterException($externalDB-&gt;getErrorMessage());
+}
+" title="">External DB query</option><option value="
+while ($row = $externalDB-&gt;fetchRow($result)) {
+    // Please replace this comment with your row-processing code!
+}
+" title="">DB query result processing</option><option value="
+$externalDB = $this-&gt;getDBConnection('Replace this text with the name of the connection.');
+$sql = 'Please replace this text with your SQL SELECT statement!';
+$result = $externalDB-&gt;query($sql);
+if ($result === false) {
+    throw new JobRouterException($externalDB-&gt;getErrorMessage());
+}
+while ($row = $externalDB-&gt;fetchRow($result)) {
+    // Please replace this comment with your row-processing code!
+}
+" title="">DB query and result processing</option><option value="
+$externalDB = $this-&gt;getDBConnection('Replace this text with the name of the connection.');
+$sql = 'Please replace this text with your SQL INSERT, UPDATE, etc. statement!';
+$result = $externalDB-&gt;exec($sql);
+if ($result === false) {
+    throw new JobRouterException($externalDB-&gt;getErrorMessage());
+}
+" title="">DB exec</option></optgroup></select>
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('tableFields');">Table Fields</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_tableFields" name="tableFields" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style=""><option selected="selected" value="" title="">-</option><option value="Billable_Hrs_Nontech" title="Nontechnical billable hours">Billable_Hrs_Nontech</option><option value="Billable_Hrs_Tech" title="Technical Billable Hours">Billable_Hrs_Tech</option><option value="Branch" title="">Branch</option><option value="Completed" title="Completed Tasks">Completed</option><option value="Customer" title="">Customer</option><option value="CustomerBranch" title="">CustomerBranch</option><option value="CustomerName" title="">CustomerName</option><option value="Department" title="">Department</option><option value="DepartmentName" title="">DepartmentName</option><option value="DueDate" title="">DueDate</option><option value="NewProj_Description" title="">NewProj_Description</option><option value="NewProj_Name" title="">NewProj_Name</option><option value="Next_Due_Brad" title="Most immanent due date for open tasks assigned to Brad">Next_Due_Brad</option><option value="Next_Due_Jason" title="">Next_Due_Jason</option><option value="Next_Due_Zach" title="">Next_Due_Zach</option><option value="Open_Brad" title="Open tasks for Brad">Open_Brad</option><option value="Open_Jason" title="Open tasks for Jason">Open_Jason</option><option value="Open_Zach" title="Open tasks for Zach">Open_Zach</option><option value="Project" title="">Project</option><option value="ProjectDescription" title="">ProjectDescription</option><option value="ProjectID" title="">ProjectID</option><option value="ProjectName" title="">ProjectName</option><option value="ProjectNotes" title="">ProjectNotes</option><option value="ProjectStatus" title="">ProjectStatus</option><option value="RequestDate" title="">RequestDate</option></select>
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('subtables');">Subtables</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_subtables" name="subtables" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option><option value="PROJECT_ATTACHMENTS" title="">PROJECT_ATTACHMENTS</option><option value="PROJECT_MILESTONES" title="">PROJECT_MILESTONES</option><option value="PROJECT_TASKS" title="">PROJECT_TASKS</option><option value="PROJECT_TIME" title="">PROJECT_TIME</option></select>
+                <div class="jr-designer-script-properties-header" onclick="hidePhpFunctionClassMethodComment(); showPHPsubmenu('subtableFields');">Subtable Fields</div>
+                <select class="jr-form-control jr-form-select jr-designer-script-properties-list" id="id_subtableFields" name="subtableFields" ondblclick="insertCode(this.value,false); this.selectedIndex=0;" size="10" style="display: none;"><option selected="selected" value="" title="">-</option><optgroup label="PROJECT_ATTACHMENTS" title=""><option value="FileDescription" title="">FileDescription</option><option value="FileLocation" title="">FileLocation</option></optgroup><optgroup label="PROJECT_MILESTONES" title=""><option value="MilestoneAssignment" title="">MilestoneAssignment</option><option value="MilestoneDescription" title="">MilestoneDescription</option><option value="MilestoneID" title="">MilestoneID</option></optgroup><optgroup label="PROJECT_TASKS" title=""><option value="AssignedTo" title="">AssignedTo</option><option value="Billable" title="">Billable</option><option value="DueDate" title="">DueDate</option><option value="HoursWorked" title="">HoursWorked</option><option value="Mass_Update" title="Binary field for mass-updating rows and triggering triggers to update totals">Mass_Update</option><option value="Product" title="">Product</option><option value="ProjectedDate" title="">ProjectedDate</option><option value="TaskDescription" title="">TaskDescription</option><option value="TaskID" title="">TaskID</option><option value="TaskPriority" title="">TaskPriority</option><option value="TaskStatus" title="">TaskStatus</option></optgroup><optgroup label="PROJECT_TIME" title=""><option value="Mass_Update" title="">Mass_Update</option><option value="TaskDate" title="">TaskDate</option><option value="TaskID" title="">TaskID</option><option value="TaskRate" title="">TaskRate</option><option value="TaskTime" title="">TaskTime</option><option value="TaskUser" title="">TaskUser</option><option value="Time_Description" title="">Time_Description</option></optgroup></select>
+            </td>
+            <td id="" rowspan="2" onclick="togglePHPsubmenu();" style="cursor:pointer; background: url(./images/icons/small/vertical_dotted_line.gif) repeat-y 16px;"><table><tbody><tr><td style="padding:0;"><img src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/action_toggle_left.png" style="width:12px;"></td><td style="padding:0;"><img src="dSendEmailToAssignedUsers%20|%20Edit%20PHP%20Functions_files/action_toggle_right.png" style="width:12px;"></td></tr></tbody></table></td>
+            <td id="id_sourceCode_td" style="vertical-align:top"><pre id="sourceCodeAce" class=" ace_editor ace-eclipse ace_focus" draggable="false"><textarea class="ace_text-input" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; height: 14.5px; width: 7.21667px; left: 852.333px; top: 91.7px;" wrap="off"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: -9.8px; height: 559px; width: 55px;"><div class="ace_gutter-cell " style="height: 14.5px;">127</div><div class="ace_gutter-cell " style="height: 14.5px;">128</div><div class="ace_gutter-cell " style="height: 14.5px;">129</div><div class="ace_gutter-cell " style="height: 14.5px;">130</div><div class="ace_gutter-cell " style="height: 14.5px;">131</div><div class="ace_gutter-cell " style="height: 14.5px;">132</div><div class="ace_gutter-cell " style="height: 14.5px;">133</div><div class="ace_gutter-cell " style="height: 14.5px;">134</div><div class="ace_gutter-cell " style="height: 14.5px;">135</div><div class="ace_gutter-cell " style="height: 14.5px;">136</div><div class="ace_gutter-cell " style="height: 14.5px;">137</div><div class="ace_gutter-cell " style="height: 14.5px;">138</div><div class="ace_gutter-cell " style="height: 14.5px;">139</div><div class="ace_gutter-cell " style="height: 14.5px;">140</div><div class="ace_gutter-cell " style="height: 14.5px;">141</div><div class="ace_gutter-cell " style="height: 14.5px;">142</div><div class="ace_gutter-cell " style="height: 14.5px;">143<span class="ace_fold-widget ace_start ace_open" style="height: 14.5px;"></span></div><div class="ace_gutter-cell " style="height: 14.5px;">144</div><div class="ace_gutter-cell " style="height: 14.5px;">145</div><div class="ace_gutter-cell " style="height: 14.5px;">146</div><div class="ace_gutter-cell " style="height: 14.5px;">147</div><div class="ace_gutter-cell " style="height: 14.5px;">148</div><div class="ace_gutter-cell " style="height: 14.5px;">149</div><div class="ace_gutter-cell " style="height: 14.5px;">150<span class="ace_fold-widget ace_start ace_open" style="height: 14.5px;"></span></div><div class="ace_gutter-cell " style="height: 14.5px;">151</div><div class="ace_gutter-cell " style="height: 14.5px;">152</div><div class="ace_gutter-cell " style="height: 14.5px;">153<span class="ace_fold-widget ace_start ace_open" style="height: 14.5px;"></span></div><div class="ace_gutter-cell " style="height: 14.5px;">154</div><div class="ace_gutter-cell " style="height: 14.5px;">155</div><div class="ace_gutter-cell " style="height: 14.5px;">156<span class="ace_fold-widget ace_start ace_open" style="height: 14.5px;"></span></div><div class="ace_gutter-cell " style="height: 14.5px;">157</div><div class="ace_gutter-cell " style="height: 14.5px;">158</div><div class="ace_gutter-cell " style="height: 14.5px;">159</div><div class="ace_gutter-cell " style="height: 14.5px;">160</div><div class="ace_gutter-cell " style="height: 14.5px;">161</div><div class="ace_gutter-cell " style="height: 14.5px;">162</div><div class="ace_gutter-cell " style="height: 14.5px;">163</div><div class="ace_gutter-cell " style="height: 14.5px;">164</div><div class="ace_gutter-cell " style="height: 14.5px;">165</div></div><div class="ace_gutter-active-line" style="top: 91.7px; height: 14.5px;"></div></div><div class="ace_scroller ace_scroll-left" style="left: 56px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: -9.8px; width: 1264px; height: 559px; margin-left: -44.8px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 581.333px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height:14.5px;top:101.5px;left:0;right:0;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_comment">//$mail-&gt;addCC('cc@example.com');</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_comment">//$mail-&gt;addBCC('bcc@example.com');</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_comment">//Content</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_variable">$mail</span><span class="ace_keyword ace_operator">-&gt;</span><span class="ace_identifier">isHTML</span><span class="ace_paren ace_lparen">(</span><span class="ace_constant ace_language">true</span><span class="ace_paren ace_rparen">)</span>;                                  <span class="ace_comment">// Set email format to HTML</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_variable">$mail</span><span class="ace_keyword ace_operator">-&gt;</span><span class="ace_identifier">Subject</span> <span class="ace_keyword ace_operator">=</span> <span class="ace_string">"New Project Created for </span><span class="ace_variable">$customername</span><span class="ace_string"> - </span><span class="ace_variable">$projectname</span><span class="ace_string">"</span>;</div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_variable">$task_list</span> <span class="ace_keyword ace_operator">=</span> <span class="ace_string">"Hi </span><span class="ace_variable">$fullname</span><span class="ace_string">, a new project (</span><span class="ace_variable">$projectname</span><span class="ace_string">) has been created for </span><span class="ace_variable">$customername</span><span class="ace_string"> and the following tasks have been assigned to you:&lt;br&gt;&lt;br&gt;</span></div><div class="ace_line" style="height:14.5px"></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    </span><span class="ace_variable">$projectdesc</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    </span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    &lt;br&gt;&lt;br&gt;</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    </span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    &lt;h3&gt;Assigned Tasks:&lt;/h3&gt;</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    &lt;table&gt;&lt;th&gt;Priority&lt;/th&gt;&lt;th&gt;Due Date&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;"</span>;</div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_keyword">foreach</span><span class="ace_paren ace_lparen">(</span><span class="ace_variable">$user_tasks</span> <span class="ace_keyword">as</span> <span class="ace_variable">$user_task</span><span class="ace_paren ace_rparen">)</span><span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_variable">$task_list</span> .<span class="ace_keyword ace_operator">=</span> <span class="ace_string">"&lt;tr&gt;&lt;td&gt;"</span>.<span class="ace_variable">$user_task</span><span class="ace_paren ace_lparen">[</span><span class="ace_string">'TaskPriority'</span><span class="ace_paren ace_rparen">]</span>.<span class="ace_string">"&lt;/td&gt;&lt;td&gt;"</span>.<span class="ace_variable">$user_task</span><span class="ace_paren ace_lparen">[</span><span class="ace_string">'DueDate'</span><span class="ace_paren ace_rparen">]</span>.<span class="ace_string">"&lt;/td&gt;&lt;td&gt;"</span>.<span class="ace_variable">$user_task</span><span class="ace_paren ace_lparen">[</span><span class="ace_string">'TaskDescription'</span><span class="ace_paren ace_rparen">]</span>.<span class="ace_string">"&lt;/td&gt;&lt;/tr&gt;"</span>;</div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_paren ace_rparen">}</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_variable">$mail</span><span class="ace_keyword ace_operator">-&gt;</span><span class="ace_identifier">Body</span> <span class="ace_keyword ace_operator">=</span> <span class="ace_string">"&lt;style&gt;</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    table {</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    border-collapse: collapse;</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    }</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    table, td, th {</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    border: 1px solid black;</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    }</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    th, td {</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    padding: 15px;s</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    text-align: left;</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    }</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_string">    &lt;/style&gt;"</span>.<span class="ace_variable">$task_list</span>.<span class="ace_string">"&lt;/table&gt;"</span>;</div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_comment">//$mail-&gt;AltBody = 'This is the body in plain text for non-HTML mail clients';</span></div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    </div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_variable">$mail</span><span class="ace_keyword ace_operator">-&gt;</span><span class="ace_identifier">send</span><span class="ace_paren ace_lparen">(</span><span class="ace_paren ace_rparen">)</span>;</div><div class="ace_line" style="height:14.5px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span>    <span class="ace_comment">//echo 'Message has been sent';</span></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer"><div class="ace_cursor" style="left: 841.133px; top: 101.5px; width: 7.21667px; height: 14.5px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="width: 20px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 20px; height: 2566.5px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="height: 20px; left: 56px; right: 0px;"><div class="ace_scrollbar-inner" style="height: 20px; width: 1264px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-language-override: inherit; font-feature-settings: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div><div class="ace_search right"><button type="button" action="hide" class="ace_searchbtn_close"></button><div class="ace_search_form"><input class="ace_search_field" placeholder="Search for" spellcheck="false" value="projectdesc"><button type="button" action="findNext" class="ace_searchbtn next"></button><button type="button" action="findPrev" class="ace_searchbtn prev"></button><button type="button" action="findAll" class="ace_searchbtn" title="Alt-Enter">All</button></div><div class="ace_replace_form" style="display: none;"><input class="ace_search_field" placeholder="Replace with" spellcheck="false"><button type="button" action="replaceAndFindNext" class="ace_replacebtn">Replace</button><button type="button" action="replaceAll" class="ace_replacebtn">All</button></div><div class="ace_search_options"><span action="toggleRegexpMode" class="ace_button" title="RegExp Search">.*</span><span action="toggleCaseSensitive" class="ace_button" title="CaseSensitive Search">Aa</span><span action="toggleWholeWords" class="ace_button" title="Whole Word Search">\b</span></div></div></pre>
+                <input name="sourceCode" id="sourceCode" value="" type="hidden">
+            </td>
+        </tr>
+        <tr id="div_php_function_class_method_info" style="display:none">
+            <td style="vertical-align:top"><div id="id_php_function_class_method_comment" style="padding:5px; background-color:#FFFFFF; border:1px solid #999999"></div></td>
+        </tr>
+    </tbody></table>
+        </div></fieldset>
+        </div><div id="div_documentationVisibility" class="jr-form-row" style="display:none"><label class="jr-form-label" title="" for="id_documentationVisibility"></label><span class="jr-form-control-wrapper"><input class="jr-form-control" style="" name="documentationVisibility" id="id_documentationVisibility" maxlength="50" onchange="" type="text"></span></div><div id="div_action" class="jr-form-row" style="display:none"><label class="jr-form-label" title="" for="id_action"></label><span class="jr-form-control-wrapper"><input class="jr-form-control" style="" name="action" id="id_action" value="save" maxlength="50" onchange="" type="text"></span></div><div id="div_submit_button" class="jr-form-row" style="display:none"><label class="jr-form-label" title="" for="id_submit_button"></label><span class="jr-form-control-wrapper"><input class="jr-form-control" style="" name="submit_button" id="id_submit_button" value="save" maxlength="50" onchange="" type="text"></span></div><div id="div_mode" class="jr-form-row" style="display:none"><label class="jr-form-label" title="" for="id_mode"></label><span class="jr-form-control-wrapper"><input class="jr-form-control" style="" name="mode" id="id_mode" maxlength="50" onchange="" type="text"></span></div><div id="div_as_validation_text" class="jr-form-row" style="display:none"><label class="jr-form-label" title="" for="id_as_validation_text"></label><span class="jr-form-control-wrapper"><input class="jr-form-control" style="" name="as_validation_text" id="id_as_validation_text" value="PHP Syntax is correct" maxlength="50" onchange="" type="text"></span></div><table></table>
+    <style type="text/css">
+        #sourceCodeAce div {
+            font-family: "Menlo","Monaco","Courier New",monospace !important;
+            font-size: 12px !important;
+        }
+
+        #sourceCodeAce {
+            position: relative;
+            border: 1px solid gray;
+            margin: 0;
+            display: block;
+            height: 530px;
+            background-color:#fff;
+        }
+    </style>
+        <script>
+            function formCallback(result, form) {
+                if (result == true) {
+                    $('sourceCode').value = (String(window.editor.getSession().getValue()));}}</script><input id="token" name="token" value="250325d5013fed788ec562a296c0746f" type="hidden"></form>
+							<script type="text/javascript">
+								if ($('id_id')) {
+									$('id_id').addClassName('required');
+								} else {
+									$('id').addClassName('required');
+								}
+							</script>
+							<script type="text/javascript">
+								$('id_id').addClassName('validate-jr-internal-name');
+							</script>
+							<script type="text/javascript">
+								if ($('id_id')) {
+									$('id_id').addClassName('required');
+								} else {
+									$('id').addClassName('required');
+								}
+							</script>
+							<script type="text/javascript">
+								$('id_id').addClassName('validate-jr-internal-name');
+							</script>
+							<script type="text/javascript">
+								$('id_functionType').addClassName('validate-selection');
+							</script>
+							<script type="text/javascript">
+								if ($('id_id')) {
+									$('id_id').addClassName('required');
+								} else {
+									$('id').addClassName('required');
+								}
+							</script>
+							<script type="text/javascript">
+								$('id_id').addClassName('validate-jr-internal-name');
+							</script>
+							<script type="text/javascript">
+								$('id_functionType').addClassName('validate-selection');
+							</script>
+							<script type="text/javascript">
+								$('id_apiVersion').addClassName('validate-selection');
+							</script>
+				<script type="text/javascript">
+					function defaultFormCallback(result, form) {
+						if (result == true) {
+						} else {
+							insertValidationErrorMessage();
+						}
+						formCallback(result, form);
+					}
+				</script>
+				<script type="text/javascript">
+                    var valid = new Validation('form_editphpfunctions', {immediate : true , onFormValidate : defaultFormCallback});
+                    Validation.addAllThese([
+                        
+                    ]);
+				</script>
+            </div><section role="alert" id="jr-notifications" class="jr-notifications" style="display:none;">
+    <div class="jr-notifications-inner">
+        <div class="jr-notification-header">
+            <a id="jr-notification-close-all" class="jr-notification-close-all" title="Close all notifications"><i class="jr-icon-notification-close"></i></a>
+        </div>
+    </div>
+</section>
+</main><footer class="jr-footer" id="jr-footer">
+    <div class="jr-footer-search"></div>
+    <div class="jr-footer-middle"></div>
+    <div class="jr-footer-status">
+                    </div>
+</footer>
+<div id="ajax_updater" style="display:none;">1</div><div id="popupLayer" style="display:none; position:absolute; background-color:#808080; opacity:0.8; -moz-opacity:0.8; z-index:400"></div>
+<div id="popup" style="position:absolute; display:none; width:auto; height:auto; opacity:1.00; -moz-opacity:1.00; visibility:visible; z-index:800"></div>
+<script>window.$JRApp.start();</script>
+
+</body></html>
