@@ -13,14 +13,14 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
+    /*protected $dontReport = [
         \Illuminate\Auth\AuthenticationException::class,
         \Illuminate\Auth\Access\AuthorizationException::class,
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
-    ];
+    ];*/
 
     /**
      * Report or log an exception.
@@ -32,7 +32,11 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+      if (app()->bound('sentry') && $this->shouldReport($exception)) {
+        app('sentry')->captureException($exception);
+      }
+
+      parent::report($exception);
     }
 
     /**
@@ -44,9 +48,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+      // Convert all non-http exceptions to a proper 500 http exception
+      // if we don't do this exceptions are shown as a default template
+      // instead of our own view in resources/views/errors/500.blade.php
+      if ($this->shouldReport($exception) && !$this->isHttpException($exception) && !config('app.debug')) {
+          $exception = new HttpException(500, 'Whoops!');
+      }
 
-      error_log($exception);
       return parent::render($request, $exception);
+
     }
 
     /**
@@ -64,4 +74,6 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest(route('login'));
     }
+
+
 }

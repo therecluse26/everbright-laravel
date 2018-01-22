@@ -35,8 +35,9 @@
                     <br><br>
 
                     {!! Form::checkbox('active[]', null, null, ['id'=>'active']) !!}
-                    {{ Form::label('active', 'Active') }}
+                    {{ Form::label('active', 'Album Active') }}
 
+                    <h4>Images</h4>
                       <div id="image-upload" class="dz-container dropzone">
                         <div class="dz-message" data-dz-message><span>Drop image files here</span></div>
                       </div>
@@ -79,6 +80,12 @@ function s4() {
 }
 function guid() {
   return s4() + s4() + s4() + s4() + s4() + s4();
+}
+function toObject(arr) {
+  var rv = {};
+  for (var i = 0; i < arr.length; ++i)
+    rv[i] = arr[i];
+  return rv;
 }
 
 //Generates global temporary folder variable
@@ -219,17 +226,27 @@ $(document).ready(function(){
 
     e.preventDefault();
 
+    var sendData = new FormData();
     var formData = $(this).serializeArray();
 
-    formData.images = allImages;
+    var images = [];
 
-    console.log(this.action);
+    images.push(toObject(allImages));
+
+    formData.push({"name": "images", "value": toObject(allImages)});
+
+    formBase64 = JSON.stringify(formData);
+
+    sendData.append("_token", $('[name=_token').val());
+    sendData.append('formData', formBase64);
 
     $.ajax({
       type: "POST",
       url: this.action,
       datatype: "json",
-      data: formData,
+      data: sendData,
+      processData: false,
+      contentType: false,
       success: function(result){
 
         //console.log(result);

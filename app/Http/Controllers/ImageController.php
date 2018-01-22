@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Isolesen\Pel;
 
+
 class ImageController extends Controller
 {
 
@@ -76,21 +77,30 @@ class ImageController extends Controller
     public function temp_store(Request $request)
     {
 
-      $temp_dir = 'temp/' . $request->input('temp_folder');
+      try {
 
-      if(!File::exists($temp_dir)) {
-        File::makeDirectory($temp_dir, 0775, true);
+        $temp_dir = 'temp/' . $request->input('temp_folder');
+
+        /* if(!File::exists($temp_dir)) {
+
+          File::makeDirectory($temp_dir, 0775);
+
+        } */
+
+        $image = $request->image;
+
+        $ext = $image->guessClientExtension();
+
+        $new_filename = uniqid() . '.' . $ext;
+
+        $image->storeAs( $temp_dir . '/', $new_filename);
+
+        return $new_filename;
+
+      } catch (Exception $e) {
+
+        return $e->getMessage();
       }
-
-      $image = $request->image;
-
-      $ext = $image->guessClientExtension();
-
-      $new_filename = uniqid() . '.' . $ext;
-
-      $image->storeAs( $temp_dir . '/', $new_filename);
-
-      return $new_filename;
 
     }
 
@@ -142,10 +152,52 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($img_data, $temp_folder)
     {
-        //
-        return $request;
+        //return $request;
+        $image = new Image;
+
+        error_log($temp_folder);
+
+        //Storage::move("$temp_folder/$image->file_name", 'new/file1.jpg');
+
+        $image->id = $img_data->photo_id;
+        $image->file_name = $img_data->file_name;
+        $image->title = $img_data->title;
+        $image->description = $img_data->description;
+
+
+
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function mass_store($images, $temp_folder)
+    {
+
+      try {
+
+        foreach($images as $image){
+
+          //error_log($image->file_name);
+          //Invoke Image store method here
+
+          $this->store($image, $temp_folder);
+        }
+
+        return "success";
+
+      } catch (Exception $e) {
+
+        return $e->getMessage();
+
+      }
+
     }
 
     /**
