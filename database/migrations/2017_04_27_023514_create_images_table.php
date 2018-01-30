@@ -14,21 +14,23 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('grouping_id')->unsigned();
-            $table->string('type');
+            $table->uuid('id')->primary();
+            //$table->integer('grouping_id')->unsigned();
             $table->integer('album_id')->unsigned();
-            $table->string('image_name');
-            $table->string('slug');
+            $table->string('image_name')->nullable();
+            $table->string('image_slug')->nullable();
+            $table->string('image_description')->nullable();
             $table->string('local_base_uri');
-            $table->string('local_file_uri');
+            $table->string('local_original_uri');
+            $table->string('local_optimized_uri');
             $table->string('local_thumb_uri');
-            $table->string('cdn_base_uri');
-            $table->string('cdn_file_uri');
-            $table->string('cdn_thumb_uri');
+            $table->string('cdn_base_uri')->nullable();
+            $table->string('cdn_original_uri')->nullable();
+            $table->string('cdn_optimized_uri')->nullable();
+            $table->string('cdn_thumb_uri')->nullable();
             $table->string('md5_checksum')->nullable();
-            $table->boolean('use_cdn')->default(true);
-            $table->timestamps('timestamp');
+            $table->boolean('use_cdn')->default(false);
+            $table->timestamps();
         });
 
         Schema::create('album_image', function (Blueprint $table) {

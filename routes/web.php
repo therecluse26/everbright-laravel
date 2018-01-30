@@ -38,12 +38,17 @@ Route::get('images/temp_delete/{folder}/{mode?}/{filename?}', 'ImageController@t
 
 
 //Album-related routes
-Route::resource('albums', 'AlbumController');
+Route::resource('albums', 'AlbumController', ['except'=>['show', 'edit']]);
+Route::get('albums/{slug}', 'AlbumController@show');
+Route::get('albums/{slug}/edit', 'AlbumController@edit');
 
 
 Route::get('photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');
 Route::get('imagerequest/{tag?}/{collection?}', 'ImagePullController@pullApiImages');
 Route::get('gallery/{album_title?}', 'GalleryController@pullGallery');
+
+
+Route::resource('files', 'RemoteFileHandler');
 
 
 /*----------------------------------------------------------------------------*/

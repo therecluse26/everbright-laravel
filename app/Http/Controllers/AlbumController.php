@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Album;
 use Illuminate\Http\Request;
 use App\Image;
 
@@ -75,10 +75,9 @@ class AlbumController extends Controller
         $album_active = (int)$form_data[5]->value;
         $images = $form_data[5]->images;*/
 
-        //Assign form data entries to variables
-
         $album = new \App\Album;
 
+        //Assign form data entries to variables
         foreach ($form_data as $entry){
           if($entry->name == 'images' || $entry->name == 'temp_folder'){
             ${$entry->name} = $entry->value;
@@ -87,21 +86,21 @@ class AlbumController extends Controller
           }
         }
 
+        $album->slug = str_slug($album->slug, '-');
+
         unset($album->_token, $album->tags);
 
         if (!isset($album->title, $album->slug) || $album->title == '' || $album->slug == '') {
           throw new \Exception("Title and slug are required");
         }
 
-
         //Pass $images array to image_mass_store method on ImageController
+        if (!isset($images)){
+          throw new \Exception("Images missing");
+        }
+
         $img_control = new ImageController;
-
-        $img_control->mass_store($images, $album->temp_folder);
-
-        //error_log($img_response);
-
-        //$images = end($form_data);
+        $img_control->mass_store($images, $temp_folder);
 
         //Stores new post (must be done before attaching tags to retrieve post id)
         $album->save();
@@ -118,7 +117,7 @@ class AlbumController extends Controller
 
         $resp_array['status'] = 'success';
         $resp_array['msg'] = 'Album created successfully!';
-        $resp_array['id'] = $album->id;
+        $resp_array['slug'] = $album->slug;
 
         return $resp_array;
         //return redirect()->route('posts.edit', ['id' => $id, 'r' => $resp_encrypted]);
@@ -156,11 +155,22 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
-        return 'AlbumController@show';
+        //return 'AlbumController@show';
+        //$album = Album::with(['images'])->where('slug', $slug)->first();
+        $album = Album::with(array('images' => function($query)
+        {
+            $query->select('id', 'album_id', 'image_name', 'image_description',
+            'local_base_uri', 'local_optimized_uri', 'local_thumb_uri',
+            'cdn_base_uri', 'cdn_optimized_uri', 'cdn_thumb_uri',
+            'created_at');
 
+        }))->select(['id', 'title', 'created_at'])->where('slug', $slug)->first();
+
+        return $album;
+
+        return view('albums/album_show', ['album'=>$album]);
     }
 
     /**

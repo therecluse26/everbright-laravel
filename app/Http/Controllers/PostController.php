@@ -98,10 +98,10 @@ class PostController extends Controller
      */
     public function index()
     {
-      $posts = \App\Post::select('id', 'title', 'created_at', 'author_id')
-        ->where('published', '=', '1')
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+      $posts = \App\Post::published()
+          ->select('id', 'title', 'created_at', 'author_id')
+          ->descending()
+          ->paginate(10);
 
       $categories_all = \App\Category::all();
 

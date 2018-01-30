@@ -10,12 +10,16 @@ class Album extends Model
   protected $active = false;
 
   protected $fillable = [
-      'id', 
+      'id',
   ];
 
-    public function images(){
+  public function images()
+  {
+    return $this->hasMany(Image::class);
+  }
 
-      return $this->hasMany(Image::class);
-
-    }
+  public function scopeActive($query)
+  {
+    return $query->where('active', 1);
+  }
 }

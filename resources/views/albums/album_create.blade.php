@@ -31,7 +31,6 @@
 
                     {{ Form::hidden('temp_folder', null, ['id' => 'temp_folder', 'class' => 'form-control', 'autocomplete' => 'off']) }}
 
-
                     <br><br>
 
                     {!! Form::checkbox('active[]', null, null, ['id'=>'active']) !!}
@@ -176,10 +175,8 @@ $(document).ready(function(){
         return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
 
       }
-
     }
   });
-
 
 
   $('#title').on('change keyup keypress',function(t){
@@ -228,7 +225,6 @@ $(document).ready(function(){
 
     var sendData = new FormData();
     var formData = $(this).serializeArray();
-
     var images = [];
 
     images.push(toObject(allImages));
@@ -253,10 +249,10 @@ $(document).ready(function(){
 
         if (result.status === 'success') {
 
-          var return_data = JSON.stringify(result);
+          //var return_data = JSON.stringify(result);
+
           //Pushes to database
-          $('#formdivhidden').html('<form style="display: hidden" action="/albums/'+ result.id +'/edit" method="GET" id="hiddenform">\
-                                  <input type="hidden" id="r" name="r" value="'+ btoa(return_data) +'"/>\
+          $('#formdivhidden').html('<form style="display: hidden" action="/albums/'+ result.slug +'" method="GET" id="hiddenform">\
                                 </form>');
 
           $('#hiddenform').submit();
@@ -267,15 +263,13 @@ $(document).ready(function(){
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
         }
       },
-      error: function( jqXHR, textStatus, errorThrown) {
+      error: function(jqXHR, textStatus, errorThrown) {
         console.log(jqXHR);
         console.log(textStatus);
         console.log(errorThrown);
       }
-
     })
   });
-
 })
 
 //Deletes temporary images from server on page unload

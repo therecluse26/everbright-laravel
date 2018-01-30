@@ -183,6 +183,8 @@ return [
         // sentry.io provider
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
+        GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
+
     ],
 
     /*
@@ -235,6 +237,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
     ],
 
 ];

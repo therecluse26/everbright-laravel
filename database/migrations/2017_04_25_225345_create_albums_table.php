@@ -17,7 +17,7 @@ class CreateAlbumsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('slug');
-            $table->string('cover_image');
+            $table->string('cover_image')->nullable();
             $table->boolean('active')->default(false);
             $table->timestamps('timestamp');
         });

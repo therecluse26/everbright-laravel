@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Isolesen\Pel;
+use Ramsey\Uuid\Uuid;
 
 
 class ImageController extends Controller
@@ -82,16 +83,17 @@ class ImageController extends Controller
         $temp_dir = 'temp/' . $request->input('temp_folder');
 
         /* if(!File::exists($temp_dir)) {
-
           File::makeDirectory($temp_dir, 0775);
-
         } */
 
         $image = $request->image;
 
         $ext = $image->guessClientExtension();
 
-        $new_filename = uniqid() . '.' . $ext;
+        //$new_filename = md5(uniqid().mt_rand(1,1000000)).'_'.time() . '.' . $ext;
+
+        $uuid = Uuid::uuid4();
+        $new_filename = $uuid->toString() . '.' . $ext;
 
         $image->storeAs( $temp_dir . '/', $new_filename);
 
@@ -157,17 +159,13 @@ class ImageController extends Controller
         //return $request;
         $image = new Image;
 
-        error_log($temp_folder);
-
         //Storage::move("$temp_folder/$image->file_name", 'new/file1.jpg');
 
         $image->id = $img_data->photo_id;
         $image->file_name = $img_data->file_name;
         $image->title = $img_data->title;
         $image->description = $img_data->description;
-
-
-
+        
 
     }
 
@@ -183,10 +181,7 @@ class ImageController extends Controller
       try {
 
         foreach($images as $image){
-
-          //error_log($image->file_name);
           //Invoke Image store method here
-
           $this->store($image, $temp_folder);
         }
 

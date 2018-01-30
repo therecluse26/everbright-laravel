@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class DatabaseSeeder extends Seeder
                     'id'=>'1',
                     'title'=>'Honeymoon',
                     'slug'=>'honeymoon',
-                    'cover_image'=>'3'
+                    'cover_image'=>'3',
                     'created_at'=>\Carbon\Carbon::now()
 
                 ],
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
                     'id'=>'2',
                     'title'=>'Test',
                     'slug'=>'test',
-                    'cover_image'=>'1'
+                    'cover_image'=>'1',
                     'created_at'=>\Carbon\Carbon::now()
                 ]
             ]
@@ -35,48 +36,51 @@ class DatabaseSeeder extends Seeder
         DB::table('images')->insert(
             [
                 [
-                    'id'=>'1',
+                    'id'=>UUID::uuid4()->toString(),
                     'album_id'=>'1',
-                    'slug'=>'chair_kiss',
-                    'type'=>'full',
+                    'image_slug'=>'chair_kiss',
                     'image_name'=>'Chair Kiss',
+                    'image_description'=>'Sadie and Brad in chairs near a beautiful lighthouse',
                     'local_base_uri'=> url('/').':8000/storage/photos/albums/',
-                    'local_file_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
+                    'local_original_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
+                    'local_optimized_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
                     'local_thumb_uri'=>'honeymoon/thumbs/ChairKiss_thumb.jpg',
                     'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'cdn_file_uri'=>'v1493298371/ChairKiss_scaled.jpg',
+                    'cdn_original_uri'=>'v1493298371/ChairKiss_scaled.jpg',
+                    'cdn_optimized_uri'=>'v1493298371/ChairKiss_scaled.jpg',
                     'cdn_thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',
-                    'tags'=>'kiss',
                     'created_at'=>\Carbon\Carbon::now()
                 ],
                 [
-                    'id'=>'2',
+                    'id'=>UUID::uuid4()->toString(),
                     'album_id'=>'1',
-                    'slug'=>'lighthouse',
-                    'type'=>'half',
+                    'image_slug'=>'lighthouse',
                     'image_name'=>'Lighthouse',
+                    'image_description'=>'Beautiful lighthouse',
                     'local_base_uri'=> url('/').':8000/storage/photos/albums/',
-                    'local_file_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
+                    'local_original_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
+                    'local_optimized_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
                     'local_thumb_uri'=>'honeymoon/thumbs/Lighthouse_thumb.jpg',
                     'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'cdn_file_uri'=>'v1493298630/Lighthouse_scaled.jpg',
+                    'cdn_original_uri'=>'v1493298630/Lighthouse_scaled.jpg',
+                    'cdn_optimized_uri'=>'v1493298630/Lighthouse_scaled.jpg',
                     'cdn_thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',
-                    'tags'=>'people;landscape',
                     'created_at'=>\Carbon\Carbon::now()
                 ],
                 [
-                    'id'=>'3',
+                    'id'=>UUID::uuid4()->toString(),
                     'album_id'=>'2',
-                    'slug'=>'peacock',
-                    'type'=>'thumb',
+                    'image_slug'=>'peacock',
                     'image_name'=>'Peacock',
+                    'image_description'=>'Just a peacock',
                     'local_base_uri'=> url('/').':8000/storage/photos/albums/',
-                    'local_file_uri'=>'misc/large/Peacock_scaled.jpg',
+                    'local_original_uri'=>'misc/large/Peacock_scaled.jpg',
+                    'local_optimized_uri'=>'misc/large/Peacock_scaled.jpg',
                     'local_thumb_uri'=>'misc/thumbs/Peacock_thumb.jpg',
                     'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'cdn_file_uri'=>'v1493298478/Peacock_scaled.jpg',
+                    'cdn_original_uri'=>'v1493298478/Peacock_scaled.jpg',
+                    'cdn_optimized_uri'=>'v1493298478/Peacock_scaled.jpg',
                     'cdn_thumb_uri'=>'v1493298535/Peacock_thumb.jpg',
-                    'tags'=>'animals',
                     'created_at'=>\Carbon\Carbon::now()
                 ]
             ]
