@@ -28,9 +28,15 @@ class RemoteFileHandler extends Controller
     public function index()
     {
         //
-        // $this->flysystem->put('hi.txt', 'foo');
+        //$this->flysystem->createDir('test1');
+        //$this->flysystem->put('test1/test.txt', 'test123');
 
-        return $this->flysystem->read('hi.txt');
+        //return $this->flysystem->listContents();
+
+        // Set the content type header - in this case image/jpeg
+
+       return \Storage::disk('b2')->get('11164838_10153000733263557_299277979517595318_n.jpg');
+
     }
 
     /**
@@ -64,6 +70,8 @@ class RemoteFileHandler extends Controller
     public function show($id)
     {
         //
+        return $this->flysystem->read($id);
+
     }
 
     /**

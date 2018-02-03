@@ -184,6 +184,7 @@ return [
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
         GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
+        \Hpolthof\Backblaze\BackblazeServiceProvider::class,
 
     ],
 
