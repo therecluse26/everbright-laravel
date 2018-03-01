@@ -95,7 +95,7 @@ class ImageController extends Controller
         $uuid = Uuid::uuid4();
         $new_filename = $uuid->toString() . '.' . $ext;
 
-        $image->storeAs( $temp_dir . '/', $new_filename);
+        $image->storeAs( $temp_dir . '/', $new_filename );
 
         return $new_filename;
 
@@ -154,18 +154,40 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($img_data, $temp_folder)
+    public function store($img_data, $temp_folder, $album_slug, $album_id)
     {
-        //return $request;
+      try {
+
+        /*error_log($temp_folder);
+        error_log($img_data->file_name);
+        error_log($album_slug);*/
+
         $image = new Image;
-
-        //Storage::move("$temp_folder/$image->file_name", 'new/file1.jpg');
-
         $image->id = $img_data->photo_id;
-        $image->file_name = $img_data->file_name;
-        $image->title = $img_data->title;
-        $image->description = $img_data->description;
-        
+        $image->album_id = $album_id;
+        $image->original_file = $img_data->file_name;
+        $image->image_name = $img_data->title;
+        $image->image_description = $img_data->description;
+
+        $temp_file = "temp/$temp_folder/$img_data->file_name";
+        $new_folder = "private_albums/$album_slug";
+        $new_file_path = "$new_folder/$img_data->file_name";
+        $remote_file_path = "$album_slug/$img_data->file_name";
+
+        $image->original_file_path = $new_file_path;
+
+        if (!Storage::move($temp_file, $new_file_path) ){
+          throw new Exception($temp_file);
+        }
+
+        $image->save();
+
+        return $remote_file_path;
+
+      } catch (Exception $e) {
+
+        return $e->getMessage();
+      }
 
     }
 
@@ -175,22 +197,26 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function mass_store($images, $temp_folder)
+    public function mass_store($images, $temp_folder, $album_slug, $url_folder, $album_id)
     {
-
       try {
 
         foreach($images as $image){
           //Invoke Image store method here
-          $this->store($image, $temp_folder);
+          $folder = $this->store($image, $temp_folder, $album_slug, $album_id);
         }
 
-        return "success";
+        //Push Images to B2
+        $b2 = new RemoteFileHandler;
+        $b2->mass_store($folder, $url_folder);
+
+        //error_log(print_r($files, true));
+
+        return true;
 
       } catch (Exception $e) {
 
         return $e->getMessage();
-
       }
 
     }
@@ -203,7 +229,8 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-        //
+      return $image;
+      //return view('image_show', ['image'=>$image]);
     }
 
     /**

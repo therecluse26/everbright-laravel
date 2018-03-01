@@ -38,49 +38,49 @@ class DatabaseSeeder extends Seeder
                 [
                     'id'=>UUID::uuid4()->toString(),
                     'album_id'=>'1',
-                    'image_slug'=>'chair_kiss',
+                    'original_file'=>'chair_kiss.jpg',
                     'image_name'=>'Chair Kiss',
                     'image_description'=>'Sadie and Brad in chairs near a beautiful lighthouse',
-                    'local_base_uri'=> url('/').':8000/storage/photos/albums/',
+                    /*'local_base_uri'=> url('/').':8000/storage/photos/albums/',
                     'local_original_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
                     'local_optimized_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
                     'local_thumb_uri'=>'honeymoon/thumbs/ChairKiss_thumb.jpg',
                     'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
                     'cdn_original_uri'=>'v1493298371/ChairKiss_scaled.jpg',
                     'cdn_optimized_uri'=>'v1493298371/ChairKiss_scaled.jpg',
-                    'cdn_thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',
+                    'cdn_thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',*/
                     'created_at'=>\Carbon\Carbon::now()
                 ],
                 [
                     'id'=>UUID::uuid4()->toString(),
                     'album_id'=>'1',
-                    'image_slug'=>'lighthouse',
+                    'original_file'=>'lighthouse.jpg',
                     'image_name'=>'Lighthouse',
                     'image_description'=>'Beautiful lighthouse',
-                    'local_base_uri'=> url('/').':8000/storage/photos/albums/',
+                    /*'local_base_uri'=> url('/').':8000/storage/photos/albums/',
                     'local_original_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
                     'local_optimized_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
                     'local_thumb_uri'=>'honeymoon/thumbs/Lighthouse_thumb.jpg',
                     'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
                     'cdn_original_uri'=>'v1493298630/Lighthouse_scaled.jpg',
                     'cdn_optimized_uri'=>'v1493298630/Lighthouse_scaled.jpg',
-                    'cdn_thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',
+                    'cdn_thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',*/
                     'created_at'=>\Carbon\Carbon::now()
                 ],
                 [
                     'id'=>UUID::uuid4()->toString(),
                     'album_id'=>'2',
-                    'image_slug'=>'peacock',
+                    'original_file'=>'peacock.jpg',
                     'image_name'=>'Peacock',
                     'image_description'=>'Just a peacock',
-                    'local_base_uri'=> url('/').':8000/storage/photos/albums/',
+                    /*'local_base_uri'=> url('/').':8000/storage/photos/albums/',
                     'local_original_uri'=>'misc/large/Peacock_scaled.jpg',
                     'local_optimized_uri'=>'misc/large/Peacock_scaled.jpg',
                     'local_thumb_uri'=>'misc/thumbs/Peacock_thumb.jpg',
                     'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
                     'cdn_original_uri'=>'v1493298478/Peacock_scaled.jpg',
                     'cdn_optimized_uri'=>'v1493298478/Peacock_scaled.jpg',
-                    'cdn_thumb_uri'=>'v1493298535/Peacock_thumb.jpg',
+                    'cdn_thumb_uri'=>'v1493298535/Peacock_thumb.jpg',*/
                     'created_at'=>\Carbon\Carbon::now()
                 ]
             ]

@@ -12,7 +12,21 @@ class Image extends Model
 
   public function albums(){
 
-    return $this->belongsToMany(Album::class);
+    return $this->belongsTo(Album::class);
 
   }
+
+  public function getOriginalUrlAttribute($image)
+  {
+    return $image->blah = $this->album->slug;
+
+    /*return env("PRIVATE_ALBUM_DIR", "")."/".
+      Image::with(
+        array('albums'=>function($query){
+            $query->select('slug')->where('id', $this->album_id);
+          }
+        )
+      )->get()->first()."/".$image->original_file;*/
+  }
+
 }

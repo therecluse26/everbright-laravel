@@ -62,11 +62,13 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
+
         'b2' => [
             'driver'         => 'b2',
             'accountId'      => 'cbfb849a9e1d',
             'applicationKey' => '001236df503f0bcabdc1fedb7c86daea5dd4396522',
             'bucketName'     => 'TandemAssets',
+            'privateBucketName'  => 'TandemPrivateAlbums',
         ],
 
 

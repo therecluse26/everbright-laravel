@@ -15,20 +15,30 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            //$table->integer('grouping_id')->unsigned();
             $table->integer('album_id')->unsigned();
             $table->string('image_name')->nullable();
-            $table->string('image_slug')->nullable();
             $table->string('image_description')->nullable();
-            $table->string('local_base_uri');
-            $table->string('local_original_uri');
-            $table->string('local_optimized_uri');
-            $table->string('local_thumb_uri');
+            $table->string('original_file');
+            $table->string('original_file_path')->nullable();
+            $table->string('original_url_remote')->nullable();
+            $table->string('web_file')->nullable();
+            $table->string('web_file_path')->nullable();
+            $table->string('web_url_remote')->nullable();
+            $table->string('thumb_file')->nullable();
+            $table->string('thumb_file_path')->nullable();
+            $table->string('thumb_url_remote')->nullable();
+            /*
+            $table->string('local_base_uri')->nullable();
+            $table->string('local_original_uri')->nullable();
+            $table->string('local_optimized_uri')->nullable();
+            $table->string('local_thumb_uri')->nullable();
             $table->string('cdn_base_uri')->nullable();
             $table->string('cdn_original_uri')->nullable();
             $table->string('cdn_optimized_uri')->nullable();
             $table->string('cdn_thumb_uri')->nullable();
+            */
             $table->string('md5_checksum')->nullable();
+            $table->boolean('cdn_version_uploaded')->default(false);
             $table->boolean('use_cdn')->default(false);
             $table->timestamps();
         });

@@ -47,7 +47,7 @@ Route::get('photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');
 Route::get('imagerequest/{tag?}/{collection?}', 'ImagePullController@pullApiImages');
 Route::get('gallery/{album_title?}', 'GalleryController@pullGallery');
 
-
+//Router::get('files/{params?}', 'RemoteFileHandler@show')->where('params');
 Route::resource('files', 'RemoteFileHandler');
 
 

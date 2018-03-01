@@ -78,6 +78,7 @@ class AlbumController extends Controller
         $album = new \App\Album;
 
         //Assign form data entries to variables
+
         foreach ($form_data as $entry){
           if($entry->name == 'images' || $entry->name == 'temp_folder'){
             ${$entry->name} = $entry->value;
@@ -99,13 +100,16 @@ class AlbumController extends Controller
           throw new \Exception("Images missing");
         }
 
-        $img_control = new ImageController;
-        $img_control->mass_store($images, $temp_folder);
+        $url_folder = "albums/$album->slug";
 
-        //Stores new post (must be done before attaching tags to retrieve post id)
+        //Stores album
         $album->save();
 
-        /*//Attaches tags to new post
+        $img_control = new ImageController;
+        $img_control->mass_store($images, $temp_folder, $album->slug, $url_folder, $album->id);
+
+
+        /*//Attaches tags to new album
         $tags = explode(',', $request->get('tags'));
         $newtag_array = [];
         foreach($tags as $tag){
@@ -157,16 +161,12 @@ class AlbumController extends Controller
      */
     public function show($slug)
     {
-        //return 'AlbumController@show';
-        //$album = Album::with(['images'])->where('slug', $slug)->first();
-        $album = Album::with(array('images' => function($query)
-        {
-            $query->select('id', 'album_id', 'image_name', 'image_description',
-            'local_base_uri', 'local_optimized_uri', 'local_thumb_uri',
-            'cdn_base_uri', 'cdn_optimized_uri', 'cdn_thumb_uri',
-            'created_at');
 
-        }))->select(['id', 'title', 'created_at'])->where('slug', $slug)->first();
+        $album = Album::pullBySlug($slug);
+
+        /*foreach($album['images'] as $image){
+          $image->getOriginalFileUrl($image);
+        }*/
 
         return $album;
 
@@ -179,10 +179,21 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        return 'AlbumController@edit';
+
+        $album = Album::pullBySlug($slug);
+
+        return $album;
+
+        /*$album = Album::with(array('images' => function($query)
+        {   $query->select('id', 'album_id', 'image_name', 'image_description',
+            'original_file', 'created_at');
+        }))->select(['id', 'title', 'created_at'])->where('slug', $slug)->first();*/
+
+
+        return view('albums/album_edit', ['album'=>$album]);
 
     }
 
