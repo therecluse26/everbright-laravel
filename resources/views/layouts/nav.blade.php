@@ -11,8 +11,8 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img width="100px" src="{{ asset('storage/photos/site_images/TandemLogoBlack.png') }}"></img>
+                <a href="{{ url('/') }}">
+                    <img class="navbar-brand" width="100px" src="{{ asset('storage/photos/site_images/TandemLogoBlack.png') }}"></img>
                 </a>
 
             </div>

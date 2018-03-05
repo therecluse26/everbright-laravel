@@ -80,3 +80,7 @@ Route::post('user','UserInfoController@update');
 /**********************
 *    UNUSED ROUTES    *
 ***********************/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

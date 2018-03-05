@@ -10,7 +10,7 @@
 <div class="container">
 
   <div class="row col-md-12 text-center">
-    
+
       <h2>{{ $album->title }}</h2>
       <small>{{ date('m-d-Y', strtotime($album->created_at)) }}</small>
 
