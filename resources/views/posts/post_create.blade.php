@@ -63,69 +63,83 @@
         </div>
     </div>
 </div>
+@endsection
 
-<script>
-function slugify(text){
-  return text.toString().toLowerCase().trim()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/&/g, '-and-')         // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
-}
-</script>
-<script>
-$(document).ready(function(){
+@section('specific_foot')
+  <!-- Wysiwyg editor -->
+  <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 
-  $('#title').on('change keyup keypress',function(t){
-    var slugval = slugify(t.target.value);
-    $('#slug').val(slugval);
-  });
+  <!-- For post/image tag functionality -->
+  <script src="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet"></link>
+  <script src="{{ asset('js/bootstrap-tagsinput/lib/bootstrap3-typeahead.min.js') }}"></script>
 
-  //Tags input and typeahead
-  $('#tags').tagsinput({
-    cancelConfirmKeysOnEmpty: true,
-    autoSelect: false,
-    allowDuplicates: false,
-    typeahead: {
-      afterSelect: function(val) { this.$element.val(""); },
-      source: function(query) {
-        var taglist = $.get("/blog/tags");
-        return taglist;
-      }
-    }
-  })
+  <script>
+    tinymce.init({
+      selector: '#post-body'
+    });
+  </script>
 
-  //Submit new post for creation
-  $('#post-create-form').submit(function(e){
-    e.preventDefault();
-    var formData = $(this).serialize();
-    $.ajax({
-      type: "POST",
-      url: this.action,//"post/create",
-      data: formData,
-      success: function(result){
+  <script>
+  function slugify(text){
+    return text.toString().toLowerCase().trim()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/&/g, '-and-')         // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+  }
+  </script>
+  
+  <script>
+  $(document).ready(function(){
 
-        if (result.status === 'success') {
+    $('#title').on('change keyup keypress',function(t){
+      var slugval = slugify(t.target.value);
+      $('#slug').val(slugval);
+    });
 
-          var return_data = JSON.stringify(result);
-          //Pushes to database
-          $('#formdivhidden').html('<form style="display: hidden" action="/blog/posts/'+ result.id +'/edit" method="GET" id="hiddenform">\
-                                  <input type="hidden" id="r" name="r" value="'+ btoa(return_data) +'"/>\
-                                </form>');
-
-          $('#hiddenform').submit();
-
-        } else {
-
-          $('#alert-msg').html('<div class="alert alert-danger alert-dismissable">\
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
+    //Tags input and typeahead
+    $('#tags').tagsinput({
+      cancelConfirmKeysOnEmpty: true,
+      autoSelect: false,
+      allowDuplicates: false,
+      typeahead: {
+        afterSelect: function(val) { this.$element.val(""); },
+        source: function(query) {
+          var taglist = $.get("/blog/tags");
+          return taglist;
         }
       }
     })
-  });
 
+    //Submit new post for creation
+    $('#post-create-form').submit(function(e){
+      e.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        type: "POST",
+        url: this.action,//"post/create",
+        data: formData,
+        success: function(result){
 
-})
-</script>
+          if (result.status === 'success') {
 
+            var return_data = JSON.stringify(result);
+            //Pushes to database
+            $('#formdivhidden').html('<form style="display: hidden" action="/blog/posts/'+ result.id +'/edit" method="GET" id="hiddenform">\
+                                    <input type="hidden" id="r" name="r" value="'+ btoa(return_data) +'"/>\
+                                  </form>');
+
+            $('#hiddenform').submit();
+
+          } else {
+
+            $('#alert-msg').html('<div class="alert alert-danger alert-dismissable">\
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
+          }
+        }
+      })
+    });
+  })
+  </script>
 @endsection

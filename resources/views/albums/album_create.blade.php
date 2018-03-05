@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('specific_head')
+
+<script src="{{ asset('js/uploader/dropzone.js')}}"></script>
+<script type="text/javascript">// Immediately after the js include
+  Dropzone.autoDiscover = false;
+</script>
+<link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -62,7 +72,12 @@
 </div>
 
 @include('partials/dropzone_preview')
+  <script type="text/javascript" src="{{ URL::asset('js/page_includes/album_create.js') }}"></script>
+@endsection
 
-<script type="text/javascript" src="{{ URL::asset('js/page_includes/album_create.js') }}"></script>
-
+@section('specific_foot')
+  <!-- For post/image tag functionality -->
+  <script src="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet"></link>
+  <script src="{{ asset('js/bootstrap-tagsinput/lib/bootstrap3-typeahead.min.js') }}"></script>
 @endsection

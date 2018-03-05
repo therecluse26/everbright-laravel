@@ -37,7 +37,7 @@
 
                             <ul class="dropdown-menu" role="menu">
 
-                              @if( Auth::user()->admin->active == 1)
+                              @if( Auth::user()->Admin )
 
                                 <li>
                                     <a href="{{ url('admin') }}">Admin Dashboard</a>
@@ -67,8 +67,6 @@
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
-
-
 
                             </ul>
                         </li>

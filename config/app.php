@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -178,13 +178,13 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // image.intervention.io Provider
-        Intervention\Image\ImageServiceProvider::class,
+        //Intervention\Image\ImageServiceProvider::class,
 
         // sentry.io provider
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
-        GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
-        \Hpolthof\Backblaze\BackblazeServiceProvider::class,
+        //GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
+        //\Hpolthof\Backblaze\BackblazeServiceProvider::class,
 
     ],
 
@@ -205,7 +205,7 @@ return [
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
-        'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
+        //'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,
@@ -236,9 +236,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class,
+        //'Intervention' => Intervention\Image\Facades\Image::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
-        'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
+        //'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
     ],
 
 ];

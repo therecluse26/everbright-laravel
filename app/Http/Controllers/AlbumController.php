@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Album;
 use Illuminate\Http\Request;
 use App\Image;
+use \Cache;
 
 class AlbumController extends Controller
 {
@@ -12,8 +13,7 @@ class AlbumController extends Controller
     {
       //Implements auth middleware
       $this->middleware('auth', ['except' => [
-        'index',
-        'show'
+        'index'
       ]]);
     }
 
@@ -66,7 +66,7 @@ class AlbumController extends Controller
 
         $form_data = json_decode($request->get('formData'));
 
-        error_log($request->get('formData'));
+        //error_log($request->get('formData'));
 
         /*$album_title = $form_data[1]->value;
         $album_slug = $form_data[2]->value;
@@ -161,16 +161,13 @@ class AlbumController extends Controller
      */
     public function show($slug)
     {
+      //$album = Album::pullBySlug($slug);
 
-        $album = Album::pullBySlug($slug);
+      $album = Cache::rememberForever('album_'.$slug, function() use ($slug) {
+        return Album::pullBySlug($slug);
+      });
 
-        /*foreach($album['images'] as $image){
-          $image->getOriginalFileUrl($image);
-        }*/
-
-        return $album;
-
-        return view('albums/album_show', ['album'=>$album]);
+        return view('albums/album_show', [ 'album' => $album, 'cacheparam' => uniqid() ]);
     }
 
     /**

@@ -12,8 +12,22 @@
       <div class="file_name"></div>
 
       <input type="text" class="photo_title form-control" placeholder="Title"></input>
-      
+
       <input type="text" class="photo_description form-control" placeholder="Description"></input>
+
+      <select class="photo_watermark form-control">
+        <option value="center middle" disabled selected>-- Watermark Position --</option>
+        <option value="center middle">Center Middle</option>
+        <option value="center right">Center Right</option>
+        <option value="center left">Center Left</option>
+        <option value="top middle">Top Middle</option>
+        <option value="top right">Top Right</option>
+        <option value="top left">Top Left</option>
+        <option value="bottom middle">Bottom Middle</option>
+        <option value="bottom right">Bottom Right</option>
+        <option value="bottom left">Bottom Left</option>
+      </select>
+
 
       <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
 

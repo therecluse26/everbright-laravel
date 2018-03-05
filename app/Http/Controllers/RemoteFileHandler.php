@@ -59,7 +59,8 @@ class RemoteFileHandler extends Controller
      */
     public function store($file_name, $file_path)
     {
-      try {
+
+      /*try {
 
           $file = $this->client->upload([
             'BucketName' => $this->public_bucket_name,
@@ -72,7 +73,7 @@ class RemoteFileHandler extends Controller
       } catch (Exception $e) {
 
         return $e->getMessage();
-      }
+      }*/
     }
 
    /**
@@ -87,26 +88,26 @@ class RemoteFileHandler extends Controller
 
         $return_array = [];
 
+        error_log('$file_path: ' . $file_path);
+
         foreach (Storage::files($file_path) as $filename){
 
-            array_push($return_array,
-              $this->client->upload([
-                'BucketName' => $this->public_bucket_name,
-                'FileName' => $filename,
-                'Body' => fopen(Storage::get($filename), 'r')
-              ])
-            );
+          error_log($filename);
 
-            error_log($filename);
-            
+          $this->client->upload([
+            'BucketName' => $this->public_bucket_name,
+            'FileName' => $filename,
+            'Body' => fopen(Storage::get($filename), 'r')
+          ]);
+
             sleep(0.1);
         }
 
         //foreach($files as $file){  }
 
-        error_log(print_r($return_array));
+        //error_log(print_r($return_array, true));
 
-        return $return_array;
+        return true;
 
       } catch (Exception $e) {
 

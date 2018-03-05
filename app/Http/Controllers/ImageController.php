@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Image;
+use App\Events\ImageUploaded;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
 use Isolesen\Pel;
 use Ramsey\Uuid\Uuid;
-
+use App\Jobs\GenerateThumbnail;
+use App\Jobs\GenerateWebImage;
 
 class ImageController extends Controller
 {
@@ -21,6 +22,9 @@ class ImageController extends Controller
         'index',
         'show'
       ]]);
+
+      $this->image_storage_schema = config('file_handling.albums.image_storage_schema');
+      $this->image_url_schema = config('file_handling.albums.image_url_schema');
     }
 
 
@@ -80,20 +84,25 @@ class ImageController extends Controller
 
       try {
 
+        //error_log($request->input('temp_folder'));
+
         $temp_dir = 'temp/' . $request->input('temp_folder');
 
-        /* if(!File::exists($temp_dir)) {
+        /*if(!File::exists($temp_dir)) {
           File::makeDirectory($temp_dir, 0775);
-        } */
+        }*/
 
         $image = $request->image;
 
-        $ext = $image->guessClientExtension();
+        $ext = $image->getClientOriginalExtension();
 
         //$new_filename = md5(uniqid().mt_rand(1,1000000)).'_'.time() . '.' . $ext;
 
         $uuid = Uuid::uuid4();
+
         $new_filename = $uuid->toString() . '.' . $ext;
+
+        //error_log($temp_dir . '/' . $new_filename);
 
         $image->storeAs( $temp_dir . '/', $new_filename );
 
@@ -157,32 +166,45 @@ class ImageController extends Controller
     public function store($img_data, $temp_folder, $album_slug, $album_id)
     {
       try {
-
-        /*error_log($temp_folder);
-        error_log($img_data->file_name);
-        error_log($album_slug);*/
-
         $image = new Image;
         $image->id = $img_data->photo_id;
         $image->album_id = $album_id;
         $image->original_file = $img_data->file_name;
         $image->image_name = $img_data->title;
         $image->image_description = $img_data->description;
+        $image->watermark_position = $img_data->watermark;
 
         $temp_file = "temp/$temp_folder/$img_data->file_name";
-        $new_folder = "private_albums/$album_slug";
-        $new_file_path = "$new_folder/$img_data->file_name";
-        $remote_file_path = "$album_slug/$img_data->file_name";
 
-        $image->original_file_path = $new_file_path;
+        $image_meta = [];
+        $image_meta['album_slug'] = $album_slug;
+        $image_meta['image_id'] = $img_data->photo_id;
+        $image_meta['new_original_file_path'] = "private_albums/$album_slug/$img_data->file_name";
+        $image_meta['remote_original_file_path'] = "$album_slug/$img_data->file_name";
+        $image_file_info = pathinfo($image_meta['new_original_file_path']);
+        $image_meta['extension'] = $image_file_info['extension'];
+        $image_meta['thumb_file_name'] = $image_file_info['filename'].'_thumb.'.$image_file_info['extension'];
+        $image_meta['web_file_name'] = $image_file_info['filename'].'_web.'.$image_file_info['extension'];
+        $image_meta['parent_dir'] = $image_file_info['dirname'];
+        $image_meta['thumb_dir'] = $image_meta['parent_dir'].'/thumbs/';
+        $image_meta['web_dir'] = $image_meta['parent_dir'].'/web/';
 
-        if (!Storage::move($temp_file, $new_file_path) ){
+        //Constructs image URL
+        $image->original_file_url = str_replace("{{image}}", $img_data->photo_id, str_replace("{{album}}", $album_slug, $this->image_url_schema));
+        //$image->thumb_file_url = str_replace("{{image}}", $img_data->photo_id . "_thumb", str_replace("{{album}}", $album_slug, $this->image_url_schema));
+
+        if (!Storage::move($temp_file, $image_meta['new_original_file_path']) ){
           throw new Exception($temp_file);
         }
 
         $image->save();
 
-        return $remote_file_path;
+        // Dispatches gobs for thumbnail and web version generation and uploading
+        dispatch(new GenerateThumbnail($image_meta));
+        dispatch(new GenerateWebImage($image_meta));
+        //dispatch(new RemoteStoreImage($image_meta));
+
+        return "true";
 
       } catch (Exception $e) {
 
@@ -201,14 +223,23 @@ class ImageController extends Controller
     {
       try {
 
+        $folder = $album_slug;
+
         foreach($images as $image){
           //Invoke Image store method here
-          $folder = $this->store($image, $temp_folder, $album_slug, $album_id);
+          $this->store($image, $temp_folder, $album_slug, $album_id);
         }
 
+        //error_log('$folder: ' . $folder);
+        //error_log('$url_folder: ' . $url_folder);
+
+
+        //Create thumbnails and web versions
+
+
         //Push Images to B2
-        $b2 = new RemoteFileHandler;
-        $b2->mass_store($folder, $url_folder);
+        //$b2 = new RemoteFileHandler;
+        //$b2->mass_store($folder, $url_folder);
 
         //error_log(print_r($files, true));
 
@@ -232,6 +263,7 @@ class ImageController extends Controller
       return $image;
       //return view('image_show', ['image'=>$image]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

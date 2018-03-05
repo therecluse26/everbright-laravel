@@ -62,68 +62,83 @@
         </div>
     </div>
 </div>
+@endsection
 
-<script>
-function slugify(text){
-  return text.toString().toLowerCase().trim()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/&/g, '-and-')         // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
-}
-</script>
-<script>
-$(document).ready(function(){
+@section('specific_foot')
+  <!-- Wysiwyg editor -->
+  <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 
-  //Tags input and typeahead
-  $('#tags').tagsinput({
-    cancelConfirmKeysOnEmpty: true,
-    autoSelect: false,
-    allowDuplicates: false,
-    typeahead: {
-      afterSelect: function(val) { this.$element.val(""); },
-      source: function(query) {
-        var taglist = $.get("/blog/tags");
-        return taglist;
-      }
-    }
-  })
+  <!-- For post/image tag functionality -->
+  <script src="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet"></link>
+  <script src="{{ asset('js/bootstrap-tagsinput/lib/bootstrap3-typeahead.min.js') }}"></script>
 
-  //Automatic slug creation
-  $('#title').on('change keyup keypress',function(t){
-    var slugval = slugify(t.target.value);
-    $('#slug').val(slugval);
-  });
-  $('#slug').on('change keyup keypress',function(t){
-    var slugval = slugify(t.target.value);
-    $('#slug').val(slugval);
-  });
+  <script>
+    tinymce.init({
+      selector: '#post-body'
+    });
+  </script>
 
-  // Submit post form for update
-  $('#post-edit-form').submit(function(e){
+  <script>
+  function slugify(text){
+    return text.toString().toLowerCase().trim()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/&/g, '-and-')         // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+  }
+  </script>
+  
+  <script>
+  $(document).ready(function(){
 
-    e.preventDefault();
-    var formData = $(this).serialize();
-    $.ajax({
-      type: "PUT",
-      url: this.action,
-      data: formData,
-      success: function(result){
-        if (result.status === 'success') {
-
-          $('#alert-msg').html('<div class="alert alert-success alert-dismissable">\
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
-
-        } else {
-
-          $('#alert-msg').html('<div class="alert alert-danger alert-dismissable">\
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
+    //Tags input and typeahead
+    $('#tags').tagsinput({
+      cancelConfirmKeysOnEmpty: true,
+      autoSelect: false,
+      allowDuplicates: false,
+      typeahead: {
+        afterSelect: function(val) { this.$element.val(""); },
+        source: function(query) {
+          var taglist = $.get("/blog/tags");
+          return taglist;
         }
       }
     })
-  });
 
-})
-</script>
+    //Automatic slug creation
+    $('#title').on('change keyup keypress',function(t){
+      var slugval = slugify(t.target.value);
+      $('#slug').val(slugval);
+    });
+    $('#slug').on('change keyup keypress',function(t){
+      var slugval = slugify(t.target.value);
+      $('#slug').val(slugval);
+    });
 
+    // Submit post form for update
+    $('#post-edit-form').submit(function(e){
+
+      e.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        type: "PUT",
+        url: this.action,
+        data: formData,
+        success: function(result){
+          if (result.status === 'success') {
+
+            $('#alert-msg').html('<div class="alert alert-success alert-dismissable">\
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
+
+          } else {
+
+            $('#alert-msg').html('<div class="alert alert-danger alert-dismissable">\
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ result.msg +'</div>');
+          }
+        }
+      })
+    });
+  })
+  </script>
 @endsection

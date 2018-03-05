@@ -40,7 +40,7 @@ $(document).ready(function(){
     parallelUploads: 2,
     thumbnailHeight: 300,
     thumbnailWidth: 300,
-    maxFilesize: 1,
+    maxFilesize: 20,
     filesizeBase: 1024,
     addRemoveLinks: true,
     paramName: "image",
@@ -74,6 +74,7 @@ $(document).ready(function(){
 
       $(file.previewElement).find('.photo_title').attr('id', photo_id + '_title');
       $(file.previewElement).find('.photo_description').attr('id', photo_id + '_description');
+      $(file.previewElement).find('.photo_watermark').attr('id', photo_id + '_watermark');
 
     },
     removedfile: function(file){
@@ -133,10 +134,7 @@ $(document).ready(function(){
   //Submit new album for creation
   $('#album-create-form').submit(function(e){
 
-    // allImages.find(function(res){ return res.photo_id == '5a53d0191be44' });
-
     $('.photo_title').each(function(x){
-
       if(x < allImages.length){
         var photo_id = this.id.substring(0, this.id.indexOf('_'));
         var index = allImages.findIndex(function(res){ return res.photo_id == photo_id });
@@ -145,11 +143,18 @@ $(document).ready(function(){
     })
 
     $('.photo_description').each(function(x){
-
         if(x < allImages.length){
           var photo_id = this.id.substring(0, this.id.indexOf('_'));
           var index = allImages.findIndex(function(res){ return res.photo_id == photo_id });
           allImages[index].description = this.value;
+        }
+    })
+
+    $('.photo_watermark').each(function(x){
+        if(x < allImages.length){
+          var photo_id = this.id.substring(0, this.id.indexOf('_'));
+          var index = allImages.findIndex(function(res){ return res.photo_id == photo_id });
+          allImages[index].watermark = this.value;
         }
     })
 
@@ -201,7 +206,6 @@ $(document).ready(function(){
 
         $('#alert-msg').html('<div class="alert alert-danger alert-dismissable">\
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ jqXHR.responseText +'</div>');
-
 
         console.log(jqXHR);
         console.log(textStatus);

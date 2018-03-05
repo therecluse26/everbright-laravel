@@ -1,3 +1,0 @@
-(function($) {
-	$JR.widget = {};
-})(jQuery);

@@ -36,13 +36,15 @@ class Album extends Model
             'image_name',
             'image_description',
             'original_file',
-            'original_file_path',
+            'original_file_url',
             'original_url_remote',
+            'thumb_file_url',
+            'web_file_url',
             'created_at'
           );
         }
       )
-    )->select(['id', 'title', 'created_at'])
+    )->select(['id', 'title', 'slug', 'created_at'])
      ->where('slug', $slug)
      ->first();
   }

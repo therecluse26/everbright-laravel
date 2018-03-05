@@ -37,10 +37,13 @@ Route::post('images/temp_store', 'ImageController@temp_store');
 Route::get('images/temp_delete/{folder}/{mode?}/{filename?}', 'ImageController@temp_delete');
 
 
+
 //Album-related routes
 Route::resource('albums', 'AlbumController', ['except'=>['show', 'edit']]);
 Route::get('albums/{slug}', 'AlbumController@show');
 Route::get('albums/{slug}/edit', 'AlbumController@edit');
+Route::get('albums/{slug}/images/{image_id}', 'ImageLoadController@show_album_image');
+
 
 
 Route::get('photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');

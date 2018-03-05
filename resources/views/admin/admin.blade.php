@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading"><h3>Dashboard</h3></div>
 
-                <div class="panel-body">
+                <div class="panel-body col-md-6">
 
                   <ul id="admin-controls">
                     <h4>Blog</h4>
@@ -20,7 +20,7 @@
                     <br>
                     <h4>Photo Management</h4>
                     <li>
-                      <a href="{{ route('posts.index') }}">Create Album</a>
+                      <a href="{{ route('albums.create') }}">Create Album</a>
                     </li>
                     <li>
                       <a href="{{ route('posts.create') }}">Add Photos</a>
@@ -31,6 +31,10 @@
 
                   </ul>
 
+                </div>
+
+                <div class="panel-body col-md-6">
+                  blah blah
                 </div>
             </div>
         </div>
