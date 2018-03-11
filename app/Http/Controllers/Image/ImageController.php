@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Image;
 
+use App\Http\Controllers\Controller;
 use App\Image;
 use App\Events\ImageUploaded;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Isolesen\Pel;
 use Ramsey\Uuid\Uuid;
 use App\Jobs\GenerateThumbnail;
 use App\Jobs\GenerateWebImage;
+use App\Events\AlbumAltered;
 
 class ImageController extends Controller
 {
@@ -179,30 +181,38 @@ class ImageController extends Controller
         $image_meta = [];
         $image_meta['album_slug'] = $album_slug;
         $image_meta['image_id'] = $img_data->photo_id;
-        $image_meta['new_original_file_path'] = "private_albums/$album_slug/$img_data->file_name";
+        $image_meta['original_file_path'] = "albums/$album_slug/originals/$img_data->file_name";
         $image_meta['remote_original_file_path'] = "$album_slug/$img_data->file_name";
-        $image_file_info = pathinfo($image_meta['new_original_file_path']);
+        $image_file_info = pathinfo($image_meta['original_file_path']);
         $image_meta['extension'] = $image_file_info['extension'];
         $image_meta['thumb_file_name'] = $image_file_info['filename'].'_thumb.'.$image_file_info['extension'];
         $image_meta['web_file_name'] = $image_file_info['filename'].'_web.'.$image_file_info['extension'];
-        $image_meta['parent_dir'] = $image_file_info['dirname'];
+        $image_meta['parent_dir'] = dirname($image_file_info['dirname']);
         $image_meta['thumb_dir'] = $image_meta['parent_dir'].'/thumbs/';
         $image_meta['web_dir'] = $image_meta['parent_dir'].'/web/';
 
+        list($width, $height) = getimagesize(storage_path().'/app/'.$temp_file);
+
         //Constructs image URL
         $image->original_file_url = str_replace("{{image}}", $img_data->photo_id, str_replace("{{album}}", $album_slug, $this->image_url_schema));
-        //$image->thumb_file_url = str_replace("{{image}}", $img_data->photo_id . "_thumb", str_replace("{{album}}", $album_slug, $this->image_url_schema));
+        $image->original_dimensions = $width . "x" . $height;
 
-        if (!Storage::move($temp_file, $image_meta['new_original_file_path']) ){
+        if (!Storage::move($temp_file, $image_meta['original_file_path']) ){
           throw new Exception($temp_file);
         }
 
         $image->save();
 
+        event(new AlbumAltered($album_slug));
+
         // Dispatches gobs for thumbnail and web version generation and uploading
         dispatch(new GenerateThumbnail($image_meta));
         dispatch(new GenerateWebImage($image_meta));
+        //dispatch(new GenerateBlurThumbnail($image_meta));
         //dispatch(new RemoteStoreImage($image_meta));
+
+
+        unset($imagick, $image, $image_meta, $temp_file, $image_file_info, $height, $width);
 
         return "true";
 

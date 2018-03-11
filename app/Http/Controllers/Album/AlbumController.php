@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Album;
+
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Image\ImageController;
 use App\Album;
 use Illuminate\Http\Request;
 use App\Image;
@@ -36,6 +39,10 @@ class AlbumController extends Controller
      */
     public function create()
     {
+        if(!$this->authorize('create', Album::class)){
+
+        };
+
         $categories_all = \App\Category::all();
 
         $categories = [];
@@ -166,6 +173,8 @@ class AlbumController extends Controller
       $album = Cache::rememberForever('album_'.$slug, function() use ($slug) {
         return Album::pullBySlug($slug);
       });
+
+      //return $album;
 
         return view('albums/album_show', [ 'album' => $album, 'cacheparam' => uniqid() ]);
     }

@@ -29,7 +29,7 @@
 
                     </div>
 
-                  @if ($user->admin->post_author == 1)
+                  @if ( $user->isAuthor() )
 
                     <div class="form-group">
 
@@ -44,7 +44,7 @@
                     </div>
 
                   @endif
-                  
+
                   <div class="form-group">
 
                     {!! Form::submit('Update', ['id' => 'submit-btn','class' => 'btn btn-primary form-control']) !!}

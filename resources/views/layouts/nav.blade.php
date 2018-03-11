@@ -37,7 +37,7 @@
 
                             <ul class="dropdown-menu" role="menu">
 
-                              @if( Auth::user()->Admin )
+                              @if( Auth::user()->isAdmin() )
 
                                 <li>
                                     <a href="{{ url('admin') }}">Admin Dashboard</a>

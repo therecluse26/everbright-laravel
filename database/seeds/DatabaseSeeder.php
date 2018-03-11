@@ -12,79 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        DB::table('albums')->insert(
-            [
-                [
-                    'id'=>'1',
-                    'title'=>'Honeymoon',
-                    'slug'=>'honeymoon',
-                    'cover_image'=>'3',
-                    'created_at'=>\Carbon\Carbon::now()
-
-                ],
-                [
-                    'id'=>'2',
-                    'title'=>'Test',
-                    'slug'=>'test',
-                    'cover_image'=>'1',
-                    'created_at'=>\Carbon\Carbon::now()
-                ]
-            ]
-        );
-
-        DB::table('images')->insert(
-            [
-                [
-                    'id'=>UUID::uuid4()->toString(),
-                    'album_id'=>'1',
-                    'original_file'=>'chair_kiss.jpg',
-                    'image_name'=>'Chair Kiss',
-                    'image_description'=>'Sadie and Brad in chairs near a beautiful lighthouse',
-                    /*'local_base_uri'=> url('/').':8000/storage/photos/albums/',
-                    'local_original_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
-                    'local_optimized_uri'=>'honeymoon/large/ChairKiss_scaled.jpg',
-                    'local_thumb_uri'=>'honeymoon/thumbs/ChairKiss_thumb.jpg',
-                    'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'cdn_original_uri'=>'v1493298371/ChairKiss_scaled.jpg',
-                    'cdn_optimized_uri'=>'v1493298371/ChairKiss_scaled.jpg',
-                    'cdn_thumb_uri'=>'v1493298117/ChairKiss_thumb.jpg',*/
-                    'created_at'=>\Carbon\Carbon::now()
-                ],
-                [
-                    'id'=>UUID::uuid4()->toString(),
-                    'album_id'=>'1',
-                    'original_file'=>'lighthouse.jpg',
-                    'image_name'=>'Lighthouse',
-                    'image_description'=>'Beautiful lighthouse',
-                    /*'local_base_uri'=> url('/').':8000/storage/photos/albums/',
-                    'local_original_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
-                    'local_optimized_uri'=>'honeymoon/large/Lighthouse_scaled.jpg',
-                    'local_thumb_uri'=>'honeymoon/thumbs/Lighthouse_thumb.jpg',
-                    'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'cdn_original_uri'=>'v1493298630/Lighthouse_scaled.jpg',
-                    'cdn_optimized_uri'=>'v1493298630/Lighthouse_scaled.jpg',
-                    'cdn_thumb_uri'=>'v1493298707/Lighthouse_thumb.jpg',*/
-                    'created_at'=>\Carbon\Carbon::now()
-                ],
-                [
-                    'id'=>UUID::uuid4()->toString(),
-                    'album_id'=>'2',
-                    'original_file'=>'peacock.jpg',
-                    'image_name'=>'Peacock',
-                    'image_description'=>'Just a peacock',
-                    /*'local_base_uri'=> url('/').':8000/storage/photos/albums/',
-                    'local_original_uri'=>'misc/large/Peacock_scaled.jpg',
-                    'local_optimized_uri'=>'misc/large/Peacock_scaled.jpg',
-                    'local_thumb_uri'=>'misc/thumbs/Peacock_thumb.jpg',
-                    'cdn_base_uri'=>'http://res.cloudinary.com/establishmysteps/image/upload/',
-                    'cdn_original_uri'=>'v1493298478/Peacock_scaled.jpg',
-                    'cdn_optimized_uri'=>'v1493298478/Peacock_scaled.jpg',
-                    'cdn_thumb_uri'=>'v1493298535/Peacock_thumb.jpg',*/
-                    'created_at'=>\Carbon\Carbon::now()
-                ]
-            ]
-        );
 
         DB::table('users')->insert(
           [
@@ -105,7 +32,76 @@ class DatabaseSeeder extends Seeder
               'password'=>'$2y$10$eP8rEeOG2RIpf0vRscWMKOMajJPD5GKBWJukPK3DpK1HJKR.dOhiC',
               'remember_token'=>'wGRcs8Tfpoq6k0m8oV1A2aM5xKPbJ6peY9HWYposgL3Rj7TeZXM8MUhkjJe7',
               'created_at'=>\Carbon\Carbon::now()
+            ],
+            [
+              'id'=>'3',
+              'firstname'=>'Herp',
+              'lastname'=>'Derpington',
+              'email'=>'herp@derp.com',
+              'password'=>'$2y$10$eP8rEeOG2RIpf0vRscWMKOMajJPD5GKBWJukPK3DpK1HJKR.dOhiC',
+              'remember_token'=>'wGRcs8Tfpoq6k0m8oV1A2aM5xKPbJ6peY9HWYposgL3Rj7TeZXM8MUhkjJe7',
+              'created_at'=>\Carbon\Carbon::now()
+            ],
+            [
+              'id'=>'4',
+              'firstname'=>'Walt',
+              'lastname'=>'Nobody',
+              'email'=>'no@body.com',
+              'password'=>'$2y$10$eP8rEeOG2RIpf0vRscWMKOMajJPD5GKBWJukPK3DpK1HJKR.dOhiC',
+              'remember_token'=>'wGRcs8Tfpoq6k0m8oV1A2aM5xKPbJ6peY9HWYposgL3Rj7TeZXM8MUhkjJe7',
+              'created_at'=>\Carbon\Carbon::now()
             ]
+          ]
+        );
+
+        DB::table('roles')->insert(
+          [
+            [
+              'id'=>'1',
+              'name'=>'Administrator'
+            ],
+            [
+              'id'=>'2',
+              'name'=>'Author'
+            ],
+            [
+              'id'=>'3',
+              'name'=>'Customer'
+            ],
+            [
+              'id'=>'4',
+              'name'=>'Guest'
+            ]
+          ]
+        );
+
+        DB::table('user_roles')->insert(
+          [
+            [
+              'id'=>'1',
+              'user_id'=>'1',
+              'role_id'=>'1'
+            ],
+            [
+              'id'=>'2',
+              'user_id'=>'1',
+              'role_id'=>'2'
+            ],
+            [
+              'id'=>'3',
+              'user_id'=>'2',
+              'role_id'=>'2'
+            ],
+            [
+              'id'=>'4',
+              'user_id'=>'3',
+              'role_id'=>'3'
+            ],
+            [
+              'id'=>'5',
+              'user_id'=>'4',
+              'role_id'=>'4'
+            ],
           ]
         );
 
@@ -138,31 +134,13 @@ class DatabaseSeeder extends Seeder
           ]
         ); */
 
-        DB::table('admins')->insert(
-          [
-            [
-              'id'=>'1',
-              'user_id'=>'1',
-              'active'=>1,
-              'post_author'=>1,
-              'created_at'=>\Carbon\Carbon::now()
-            ],
-            [
-              'id'=>'2',
-              'user_id'=>'2',
-              'active'=>0,
-              'post_author'=>0,
-              'created_at'=>\Carbon\Carbon::now()
-            ]
-          ]
-        );
+
 
         DB::table('authors')->insert(
           [
             [
               'id'=>'1',
               'user_id'=>'1',
-              'admin_id'=>'1',
               'firstname'=>'Brad',
               'lastname'=>'Magyar',
               'photo_url'=>'http://res.cloudinary.com/establishmysteps/image/upload/c_thumb,w_200,h_200,g_face,r_max,f_png/v1451527704/DSC00928_ydrtya.png',
@@ -172,7 +150,6 @@ class DatabaseSeeder extends Seeder
             [
               'id'=>'2',
               'user_id'=>'2',
-              'admin_id'=>'2',
               'firstname'=>'Sadie',
               'lastname'=>'Magyar',
               'photo_url'=>'http://res.cloudinary.com/establishmysteps/image/upload/c_thumb,w_200,h_200,g_face,r_max,f_png/v1451527704/DSC00928_ydrtya.png',

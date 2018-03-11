@@ -17,7 +17,6 @@ class CreateAuthorsTable extends Migration
           //Fields
           $table->increments('id');
           $table->integer('user_id')->unsigned()->nullable(false);
-          $table->integer('admin_id')->unsigned()->nullable(false);
           $table->string('firstname', 30);
           $table->string('lastname', 30);
           $table->string('bio', 4000)->nullable();
@@ -25,7 +24,6 @@ class CreateAuthorsTable extends Migration
           $table->timestamps();
           //Constraints
           $table->foreign('user_id')->references('id')->on('users');
-          $table->foreign('admin_id')->references('id')->on('admins');
         });
     }
 

@@ -12,6 +12,8 @@ class PostController extends Controller
     public function __construct()
     {
       //Implements auth middleware
+      $this->authorizeResource(Post::class);
+
       $this->middleware('auth', ['except' => [
         'index',
         'show',
@@ -22,13 +24,15 @@ class PostController extends Controller
 
     public static function pullLoggedInAuthor(){
 
-      $user_id = \Auth::user()->id;
-      $author = Author::where('user_id', $user_id)->first();
+      //$user_id = \Auth::user()->id;
+      $author = \Auth::user()->Author();
+
+      //Author::where('user_id', $user_id)->first();
 
       //Removes admin section from array if user is not admin (security measure)
-      if ( $author['admin']['active'] !== 1 ) {
+      /*if ( $author['admin']['active'] !== 1 ) {
         unset($author['admin']);
-      }
+      }*/
 
       return $author;
     }
@@ -123,6 +127,9 @@ class PostController extends Controller
      */
     public function create()
     {
+
+      //$this->authorize('create', Post::class);
+
       $author = PostController::pullLoggedInAuthor();
 
       $categories_all = \App\Category::all();

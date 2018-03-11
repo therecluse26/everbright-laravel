@@ -23,6 +23,13 @@ Route::get('about', function () {
     return view('about');
 });
 
+Route::get('/testtest', function(){
+
+  echo \App\Http\Controllers\Image\ImageTransformController::generateBlurThumb('albums/blur-test-7/11f6bdeb-bdf5-4501-9111-1b123ab3a998.JPG');
+
+});
+
+
 // Blog-related routes
 Route::prefix('blog')->group(function () {
   Route::resource('posts', 'PostController', ['except'=>['index', 'tagPostIndex']]);
@@ -32,18 +39,16 @@ Route::prefix('blog')->group(function () {
 });
 
 // Image-related routes
-Route::resource('images', 'ImageController');
-Route::post('images/temp_store', 'ImageController@temp_store');
-Route::get('images/temp_delete/{folder}/{mode?}/{filename?}', 'ImageController@temp_delete');
-
+Route::resource('images', 'Image\ImageController');
+Route::post('images/temp_store', 'Image\ImageController@temp_store');
+Route::get('images/temp_delete/{folder}/{mode?}/{filename?}', 'Image\ImageController@temp_delete');
 
 
 //Album-related routes
-Route::resource('albums', 'AlbumController', ['except'=>['show', 'edit']]);
-Route::get('albums/{slug}', 'AlbumController@show');
-Route::get('albums/{slug}/edit', 'AlbumController@edit');
-Route::get('albums/{slug}/images/{image_id}', 'ImageLoadController@show_album_image');
-
+Route::resource('albums', 'Album\AlbumController', ['except'=>['show', 'edit']]);
+Route::get('albums/{slug}', 'Album\AlbumController@show');
+Route::get('albums/{slug}/edit', 'Album\AlbumController@edit');
+Route::get('albums/{slug}/images/{image_id}', 'Image\ImageLoadController@showAlbumImage');
 
 
 Route::get('photos/{album_title?}/{slug?}', 'PhotoDisplayController@getPhotos');
@@ -64,6 +69,7 @@ Route::resource('files', 'RemoteFileHandler');
 Route::namespace('Admin')->group(function(){
   Route::get('admin/dashboard', 'AdminController@index')->name('admin_dash');
   //Redirects /admin to admin dashboard
+  Route::get('admin/users', 'AdminController@userIndex');
   Route::get('admin', function(){
     return redirect()->route('admin_dash');
   });

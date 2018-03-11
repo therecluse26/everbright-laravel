@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Image;
 
+use App\Http\Controllers\Controller;
 use App\Image;
 use Request;
 use Illuminate\Support\Facades\Storage;
@@ -9,13 +10,16 @@ use Illuminate\Support\Facades\Storage;
 class ImageLoadController extends Controller
 {
 
-    public function show_album_image($album_slug, $image_id)
+    public function showAlbumImage($album_slug, $image_id)
     {
         $img_type = Request::get('img_type');
 
-        $image_meta = Image::select('original_file', 'web_file', 'thumb_file', 'watermark_position')
+        $image_meta = Image::select('original_file', 'web_file', 'thumb_file', 'watermark_position', 'album_id')
           ->where('id', $image_id)
           ->first();
+
+        //return $image_meta->owner();
+
 
         if ($img_type == 'thumb') {
 
@@ -36,17 +40,17 @@ class ImageLoadController extends Controller
         } else if ($img_type == 'web'){
 
           $image_path = config('file_handling.albums.album_storage_location').$album_slug.'/web/'.$image_meta->web_file;
-          $this->verifyAndDisplayImage($image_path, $album_slug, $image_id, $image_meta->watermark_position);
+          $this->verifyAndDisplayImage($image_path, $album_slug, $image_meta);
 
         } else {
 
-          $image_path = config('file_handling.albums.album_storage_location').$album_slug.'/'.$image_meta->original_file;
-          $this->verifyAndDisplayImage($image_path, $album_slug, $image_id, $image_meta->watermark_position);
+          $image_path = config('file_handling.albums.album_storage_location').$album_slug.'/originals/'.$image_meta->original_file;
+          $this->verifyAndDisplayImage($image_path, $album_slug, $image_meta);
         }
 
     }
 
-    public function verifyAndDisplayImage($image_path, $album_slug, $image_id, $watermark_position)
+    public function verifyAndDisplayImage($image_path, $album_slug, $image_meta)
     {
       /*
         // CHECK IF USER HAS RIGHTS TO VIEW ALBUM. IF NOT, ONLY DISPLAY PUBLIC PHOTOS
@@ -57,7 +61,7 @@ class ImageLoadController extends Controller
 
       if (Storage::exists($image_path)){
 
-        if(\Auth::user()->Admin  /* || if user has paid for album */){
+      if( \Auth::user()->can('view', $image_meta)  /* || if user has paid for album */){
 
           //Display image without watermark
           $ext = pathinfo($image_path, PATHINFO_EXTENSION);
@@ -67,7 +71,7 @@ class ImageLoadController extends Controller
 
         } else {
           //Apply watermark to image and output
-          echo ImageTransformController::watermark($image_path, $watermark_position);
+          echo ImageTransformController::watermark($image_path, $image_meta->watermark_position);
         }
 
       } else {
@@ -77,5 +81,29 @@ class ImageLoadController extends Controller
 
       }
     }
+
+    /*public static function checkAlbumPermissions($token, $album_id) : array
+    {
+      $return = [];
+
+      // Validate token
+      $status = "";
+
+      switch ($status){
+
+        case 1:
+          $return['status'] = true;
+          $return['message'] = "Valid share token";
+          break;
+        default:
+          $return['status'] = false;
+          $return['message'] = "Invalid or expired share token";
+          break;
+
+      }
+
+      return $return;
+
+    }*/
 
 }

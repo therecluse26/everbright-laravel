@@ -26,4 +26,20 @@ class UserController extends Controller
         return view('user/user_edit');
     }
 
+
+    // Remove this
+    public static function checkPermissions( $type, $status, array $options[] )
+    {
+
+      switch ($type){
+
+        case "Album":
+          $status == "Paid" ? return true : return false;
+          break;
+
+
+      }
+
+    }
+
 }

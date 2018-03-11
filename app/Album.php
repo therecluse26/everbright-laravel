@@ -10,7 +10,7 @@ class Album extends Model
   protected $active = false;
 
   protected $fillable = [
-      'id',
+      'id', 'owner_id'
   ];
 
   public function images()
@@ -35,16 +35,18 @@ class Album extends Model
             'album_id',
             'image_name',
             'image_description',
-            'original_file',
+            /*'original_file',
             'original_file_url',
-            'original_url_remote',
+            'original_url_remote',*/
             'thumb_file_url',
+            'thumb_dimensions',
             'web_file_url',
+            'web_dimensions',
             'created_at'
           );
         }
       )
-    )->select(['id', 'title', 'slug', 'created_at'])
+    )->select(['id', 'owner_id', 'title', 'slug', 'created_at'])
      ->where('slug', $slug)
      ->first();
   }

@@ -16,18 +16,21 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->integer('album_id')->unsigned();
-            $table->string('image_name')->nullable();
+            $table->string('image_name', 100)->nullable();
             $table->string('image_description')->nullable();
-            $table->string('watermark_position')->nullable();
-            $table->string('original_file');
+            $table->string('watermark_position', 20)->nullable();
+            $table->string('original_file', 60);
             $table->string('original_file_url')->nullable();
             $table->string('original_url_remote')->nullable();
-            $table->string('web_file')->nullable();
+            $table->string('original_dimensions', 13)->nullable();
+            $table->string('web_file', 60)->nullable();
             $table->string('web_file_url')->nullable();
             $table->string('web_url_remote')->nullable();
-            $table->string('thumb_file')->nullable();
+            $table->string('web_dimensions', 13)->nullable();
+            $table->string('thumb_file', 60)->nullable();
             $table->string('thumb_file_url')->nullable();
             $table->string('thumb_url_remote')->nullable();
+            $table->string('thumb_dimensions', 9)->nullable();
             $table->string('md5_checksum')->nullable();
             $table->boolean('original_stored_remotely')->default(false);
             $table->boolean('cdn_version_uploaded')->default(false);

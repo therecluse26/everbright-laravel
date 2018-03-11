@@ -10,23 +10,20 @@ class Image extends Model
 
   protected $primaryKey = "id";
 
-  public function albums(){
+  public function albums()
+  {
 
     return $this->belongsTo(Album::class);
 
   }
 
-  public function getOriginalUrlAttribute($image)
+  public function owner()
   {
-    return $image->blah = $this->album->slug;
 
-    /*return env("PRIVATE_ALBUM_DIR", "")."/".
-      Image::with(
-        array('albums'=>function($query){
-            $query->select('slug')->where('id', $this->album_id);
-          }
-        )
-      )->get()->first()."/".$image->original_file;*/
+    return \App\Album::select('owner_id')->where('id', $this->album_id)->first()->owner_id;
+
   }
+
+
 
 }

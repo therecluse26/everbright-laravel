@@ -22,7 +22,9 @@
         "mhetreramesh/flysystem-backblaze": "^1.0",
         "predis/predis": "^1.1",
         "sentry/sentry": "^1.8",
-        "sentry/sentry-laravel": "^0.8.0"
+        "sentry/sentry-laravel": "^0.8.0",
+        "tymon/jwt-auth": "dev-develop",
+        "nesbot/carbon": "1.20"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

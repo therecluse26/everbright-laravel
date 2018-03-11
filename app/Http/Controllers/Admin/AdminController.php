@@ -26,11 +26,7 @@ class AdminController extends Controller
   public function index()
   {
 
-    $id = \Auth::user()->id;
-
-    $admin = \App\Admin::select('active')->where('user_id', $id)->first();
-
-    if ($admin['active'] == 1)
+    if ( \Auth::user()->isAdmin() )
     {
       return view('admin/admin');
 
@@ -41,6 +37,22 @@ class AdminController extends Controller
     }
   }
 
+  public function userIndex () {
+
+    //if ( \Auth::user()->isAdmin() ){
+      // List all users
+      $users = \App\User::all();
+
+      $roles = \App\Role::all();
+
+      //return $users;
+
+      return view('admin/admin_user_index', ['users'=>$users, 'roles'=>$roles]);
+
+    //}
+
+
+  }
   public function edit()
   {
     $user = UserInfoController::pullCurrentUser();

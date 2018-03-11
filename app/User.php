@@ -28,18 +28,39 @@ class User extends Authenticatable
         'password', 'remember_token', '_token',
     ];
 
+
+    public function Roles()
+    {
+      return $this->belongsToMany(Role::class, 'user_roles');
+    }
+
+    public function Author()
+    {
+      if ( $this->isAuthor() ) {
+
+        return $this->hasOne('App\Author');
+
+      } else {
+        
+        return false;
+      }
+    }
+
     public function UserInfo()
     {
       return $this->hasOne('App\UserInfo');
     }
 
-    public function Admin()
+    // Role checks
+    public function isAdmin()
     {
-      return $this->hasOne('App\Admin');
+       return $this->roles()->where('name', 'Administrator')->exists();
     }
 
-    public function Author()
+    public function isAuthor()
     {
-      return $this->hasOne('App\Author');
+       return $this->roles()->where('name', 'Author')->exists();
     }
+
+
 }

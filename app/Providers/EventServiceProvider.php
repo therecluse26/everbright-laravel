@@ -13,10 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        /*'App\Events\ImageUploaded' => [
-            'App\Listeners\GenerateThumbnailImage',
-            'App\Listeners\GenerateWebImage',
-        ],*/
+        'App\Events\AlbumAltered' => [
+            'App\Listeners\ReloadAlbumCache'
+        ],
     ];
 
     /**
@@ -27,7 +26,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

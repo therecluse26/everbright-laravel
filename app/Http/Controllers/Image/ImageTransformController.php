@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Image;
 
+use App\Http\Controllers\Controller;
 use Imagick;
 use Illuminate\Http\Request;
 
@@ -114,6 +115,31 @@ class ImageTransformController extends Controller
       // Returns thumbnail with proper header
       header("Content-Type: image/" . $thumb->getImageFormat());
       return $thumb->getImageBlob;*/
+
+    }
+
+    public static function generateBlurThumb($image_path)
+    {
+      $thumb_max_width = config('file_handling.images.thumb_max_width');
+
+      $image = new Imagick(storage_path()."/app/".$image_path);
+
+      // Resize based on width
+
+      $image->resizeImage(400, 0, Imagick::FILTER_BOX, 1);
+
+      $image->blurImage(30, 30);
+
+      //$image->setImageFormat("jpg");
+      $image->setImageCompression(Imagick::COMPRESSION_JPEG);
+      $image->setImageCompressionQuality(70);
+
+      // Strip out unneeded meta data
+      $image->stripImage();
+
+      header("Content-Type: image/jpg");
+
+      return $image->getImageBlob();
 
     }
 

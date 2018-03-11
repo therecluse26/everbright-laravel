@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'development'),
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,8 @@ return [
 
         // sentry.io provider
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         //GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
         //\Hpolthof\Backblaze\BackblazeServiceProvider::class,

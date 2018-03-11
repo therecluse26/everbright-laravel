@@ -12,12 +12,9 @@ class UserInfoController extends Controller
   public static function pullCurrentUser(){
 
     $id = \Auth::user()->id;
-    $user = User::with(['userinfo', 'admin', 'author'])->where('id', $id)->first();
+    $user = User::with(['userinfo', 'author'])->where('id', $id)->first();
 
-    //Removes admin section from array if user is not admin (security measure)
-    if ( $user['admin']['active'] !== 1 ) {
-      unset($user['admin']);
-    }
+
 
     return $user;
   }
@@ -33,13 +30,13 @@ class UserInfoController extends Controller
 
     $user = UserInfoController::pullCurrentUser();
 
-    if ( isset($user['admin']) && ($user['admin']['active'] == true) )
+    if ( \Auth::user()->isAdmin() )
     {
-      return view('admin/adminedit', ['user'=>$user]);
+      return view('admin/admin_edit', ['user'=>$user]);
 
     } else {
 
-      return view('user/user', ['user'=>$user]);
+      return view('user/user_edit', ['user'=>$user]);
 
     }
   }
