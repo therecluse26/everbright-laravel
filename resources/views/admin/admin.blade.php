@@ -5,9 +5,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Dashboard</h3></div>
-
-                <div class="panel-body col-md-6">
+                <div class="panel-heading"><h3>Dashboard</h3>
+                <hr>
 
                   <ul id="admin-controls">
                     <h4>Blog</h4>
@@ -28,14 +27,15 @@
                     <li>
                       <a href="{{ route('posts.create') }}">Manage Tags & Categories</a>
                     </li>
-
+                    <li>
+                      <a href="{{ route('albums.index') }}">View Albums</a>
+                    </li>
                   </ul>
 
                 </div>
 
-                <div class="panel-body col-md-6">
-                  blah blah
-                </div>
+
+                
             </div>
         </div>
     </div>

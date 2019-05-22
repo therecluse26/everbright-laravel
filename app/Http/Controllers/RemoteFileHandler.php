@@ -82,7 +82,7 @@ class RemoteFileHandler extends Controller
     * @param $file_path
     * @return \Illuminate\Http\Response
     */
-    public function mass_store($file_path)
+    public function massStore($file_path)
     {
       try {
 

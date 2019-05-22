@@ -178,12 +178,15 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // image.intervention.io Provider
-        //Intervention\Image\ImageServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         // sentry.io provider
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+        // Debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         //GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
         //\Hpolthof\Backblaze\BackblazeServiceProvider::class,
@@ -238,8 +241,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        //'Intervention' => Intervention\Image\Facades\Image::class,
+        'Intervention' => Intervention\Image\Facades\Image::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
         //'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
     ],
 

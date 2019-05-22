@@ -12,7 +12,7 @@
 
                 <!-- Branding Image -->
                 <a href="{{ url('/') }}">
-                    <img class="navbar-brand" width="100px" src="{{ asset('storage/photos/site_images/TandemLogoBlack.png') }}"></img>
+                    <img class="navbar-brand" width="100px" src="{{ asset('storage/photos/site_images/TandemLogoNew.png') }}" />
                 </a>
 
             </div>

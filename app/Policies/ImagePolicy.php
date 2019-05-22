@@ -19,8 +19,7 @@ class ImagePolicy
      */
     public function view(User $user, Image $image)
     {
-
-      return $image->owner() == $user->id || $user->isAdmin();
+        return $image->owner() == $user->id || $user->isAdmin();
     }
 
     /**

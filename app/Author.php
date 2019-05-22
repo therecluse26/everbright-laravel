@@ -6,21 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-  protected $fillable = [
-      'bio', 'photo_url'
-  ];
+    protected $primaryKey = 'id';
 
-  protected $hidden = [
-      'admin_id', 'user_id', 'created_at', 'updated_at'
-  ];
+    protected $fillable = [
+        'bio', 'photo_url'
+    ];
 
-  public function Posts()
-  {
-      return $this->hasManyThrough('App\Post', 'App\User');
-  }
+    protected $hidden = [
+        'admin_id', 'user_id', 'created_at', 'updated_at'
+    ];
 
-  public function User()
-  {
-      return $this->belongsTo('App\User');
-  }
+    public function Posts()
+    {
+        return $this->hasManyThrough('App\Post', 'App\User');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

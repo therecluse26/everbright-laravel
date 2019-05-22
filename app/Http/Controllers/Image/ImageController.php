@@ -16,24 +16,24 @@ use App\Events\AlbumAltered;
 
 class ImageController extends Controller
 {
-
     public function __construct()
     {
-      //Implements auth middleware
-      $this->middleware('auth', ['except' => [
+
+        //Implements auth middleware
+        $this->middleware('auth', ['except' => [
         'index',
         'show'
-      ]]);
+        ]]);
 
-      $this->image_storage_schema = config('file_handling.albums.image_storage_schema');
-      $this->image_url_schema = config('file_handling.albums.image_url_schema');
+        $this->image_storage_schema = config('file_handling.albums.image_storage_schema');
+        $this->image_url_schema = config('file_handling.albums.image_url_schema');
     }
 
 
-    public function image_checksum(Image $image){
+    public function imageChecksum(Image $image)
+    {
 
       // string Imagick::getImageSignature ( void )
-
     }
 
     /**
@@ -52,7 +52,6 @@ class ImageController extends Controller
         $img2_checksum = md5_file('storage/photos/site_images/Photo1.jpg');
 
         return $img1_checksum . '<br>' . $img2_checksum;
-
     }
 
     /**
@@ -66,10 +65,8 @@ class ImageController extends Controller
 
         $albums = [];
 
-        foreach($albums_all as $alb){
-
-          $albums[$alb['id']] = ucfirst($alb['title']);
-
+        foreach ($albums_all as $alb) {
+            $albums[$alb['id']] = ucfirst($alb['title']);
         }
 
         return view('image_create', ['albums'=>$albums]);
@@ -81,40 +78,33 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function temp_store(Request $request)
+    public function tempStore(Request $request)
     {
+        try {
+            $temp_dir = 'temp/' . $request->input('temp_folder');
 
-      try {
+            /*if(!File::exists($temp_dir)) {
+              File::makeDirectory($temp_dir, 0775);
+            }*/
 
-        //error_log($request->input('temp_folder'));
+            $image = $request->image;
 
-        $temp_dir = 'temp/' . $request->input('temp_folder');
+            $ext = $image->getClientOriginalExtension();
 
-        /*if(!File::exists($temp_dir)) {
-          File::makeDirectory($temp_dir, 0775);
-        }*/
+            //$new_filename = md5(uniqid().mt_rand(1,1000000)).'_'.time() . '.' . $ext;
 
-        $image = $request->image;
+            $uuid = Uuid::uuid4();
 
-        $ext = $image->getClientOriginalExtension();
+            $new_filename = $uuid->toString() . '.' . $ext;
 
-        //$new_filename = md5(uniqid().mt_rand(1,1000000)).'_'.time() . '.' . $ext;
+            //error_log($temp_dir . '/' . $new_filename);
 
-        $uuid = Uuid::uuid4();
+            $image->storeAs($temp_dir . '/', $new_filename);
 
-        $new_filename = $uuid->toString() . '.' . $ext;
-
-        //error_log($temp_dir . '/' . $new_filename);
-
-        $image->storeAs( $temp_dir . '/', $new_filename );
-
-        return $new_filename;
-
-      } catch (Exception $e) {
-
-        return $e->getMessage();
-      }
-
+            return $new_filename;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -123,40 +113,27 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function temp_delete($folder, $mode = 'single', $filename = null)
+    public function tempDelete($folder, $mode = 'single', $filename = null)
     {
-      try {
+        try {
+            $folder_path = storage_path().'/app/temp/' . $folder;
 
-        $folder_path = storage_path().'/app/temp/' . $folder;
+            $path = $folder_path . '/' . $filename;
 
-        $path = $folder_path . '/' . $filename;
+            if ($mode == 'single') {
+                $resp = File::delete($path);
 
-        if ($mode == 'single'){
+                if (sizeof(Storage::files('temp/'.$folder)) == 0) {
+                    File::deleteDirectory($folder_path);
+                };
+            } elseif ($mode == 'all') {
+                $resp = File::deleteDirectory($folder_path);
+            }
 
-          $resp = File::delete($path);
-
-          if( sizeof(Storage::files('temp/'.$folder)) == 0 ){
-
-            File::deleteDirectory($folder_path);
-
-          };
-
-        } elseif ($mode == 'all') {
-
-          $resp = File::deleteDirectory($folder_path);
-
-        }
-
-        echo $resp;
-
-      } catch (Exception $e){
-
-        echo $e->getMessage();
-
-      };
-
-
-
+            echo $resp;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        };
     }
 
     /**
@@ -167,60 +144,62 @@ class ImageController extends Controller
      */
     public function store($img_data, $temp_folder, $album_slug, $album_id)
     {
-      try {
-        $image = new Image;
-        $image->id = $img_data->photo_id;
-        $image->album_id = $album_id;
-        $image->original_file = $img_data->file_name;
-        $image->image_name = $img_data->title;
-        $image->image_description = $img_data->description;
-        $image->watermark_position = $img_data->watermark;
+        try {
+            $image = new Image;
+            $image->id = $img_data->photo_id;
+            $image->album_id = $album_id;
+            $image->original_file = $img_data->file_name;
+            $image->image_name = $img_data->title;
+            $image->image_description = $img_data->description;
+            $image->watermark_position = $img_data->watermark;
 
-        $temp_file = "temp/$temp_folder/$img_data->file_name";
+            $temp_file = "temp/$temp_folder/$img_data->file_name";
 
-        $image_meta = [];
-        $image_meta['album_slug'] = $album_slug;
-        $image_meta['image_id'] = $img_data->photo_id;
-        $image_meta['original_file_path'] = "albums/$album_slug/originals/$img_data->file_name";
-        $image_meta['remote_original_file_path'] = "$album_slug/$img_data->file_name";
-        $image_file_info = pathinfo($image_meta['original_file_path']);
-        $image_meta['extension'] = $image_file_info['extension'];
-        $image_meta['thumb_file_name'] = $image_file_info['filename'].'_thumb.'.$image_file_info['extension'];
-        $image_meta['web_file_name'] = $image_file_info['filename'].'_web.'.$image_file_info['extension'];
-        $image_meta['parent_dir'] = dirname($image_file_info['dirname']);
-        $image_meta['thumb_dir'] = $image_meta['parent_dir'].'/thumbs/';
-        $image_meta['web_dir'] = $image_meta['parent_dir'].'/web/';
+            $image_meta = [];
+            $image_meta['album_slug'] = $album_slug;
+            $image_meta['image_id'] = $img_data->photo_id;
+            $image_meta['original_file_path'] = "albums/$album_slug/originals/$img_data->file_name";
+            $image_meta['remote_original_file_path'] = "$album_slug/$img_data->file_name";
+            $image_file_info = pathinfo($image_meta['original_file_path']);
+            $image_meta['extension'] = $image_file_info['extension'];
+            $image_meta['thumb_file_name'] = $image_file_info['filename'].'_thumb.'.$image_file_info['extension'];
+            $image_meta['web_file_name'] = $image_file_info['filename'].'_web.'.$image_file_info['extension'];
+            $image_meta['parent_dir'] = dirname($image_file_info['dirname']);
+            $image_meta['thumb_dir'] = $image_meta['parent_dir'].'/thumbs/';
+            $image_meta['web_dir'] = $image_meta['parent_dir'].'/web/';
 
-        list($width, $height) = getimagesize(storage_path().'/app/'.$temp_file);
+            list($width, $height) = getimagesize(storage_path().'/app/'.$temp_file);
 
-        //Constructs image URL
-        $image->original_file_url = str_replace("{{image}}", $img_data->photo_id, str_replace("{{album}}", $album_slug, $this->image_url_schema));
-        $image->original_dimensions = $width . "x" . $height;
+            //Constructs image URL
+            $image->original_file_url = str_replace(
+                "{{image}}",
+                $img_data->photo_id,
+                str_replace("{{album}}", $album_slug, $this->image_url_schema)
+            );
 
-        if (!Storage::move($temp_file, $image_meta['original_file_path']) ){
-          throw new Exception($temp_file);
+            $image->original_dimensions = $width . "x" . $height;
+
+            if (!Storage::move($temp_file, $image_meta['original_file_path'])) {
+                throw new Exception($temp_file);
+            }
+
+            $image->save();
+
+            event(new AlbumAltered($album_slug));
+
+            // Dispatches gobs for thumbnail and web version generation and uploading
+            dispatch(new GenerateThumbnail($image_meta));
+            dispatch(new GenerateWebImage($image_meta));
+            //dispatch(new GenerateBlurThumbnail($image_meta));
+            //dispatch(new RemoteStoreImage($image_meta));
+
+
+            unset($imagick, $image, $image_meta, $temp_file, $image_file_info, $height, $width);
+
+            return "true";
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
-
-        $image->save();
-
-        event(new AlbumAltered($album_slug));
-
-        // Dispatches gobs for thumbnail and web version generation and uploading
-        dispatch(new GenerateThumbnail($image_meta));
-        dispatch(new GenerateWebImage($image_meta));
-        //dispatch(new GenerateBlurThumbnail($image_meta));
-        //dispatch(new RemoteStoreImage($image_meta));
-
-
-        unset($imagick, $image, $image_meta, $temp_file, $image_file_info, $height, $width);
-
-        return "true";
-
-      } catch (Exception $e) {
-
-        return $e->getMessage();
-      }
-
     }
 
     /**
@@ -229,37 +208,33 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function mass_store($images, $temp_folder, $album_slug, $url_folder, $album_id)
+    public function massStore($images, $temp_folder, $album_slug, $url_folder, $album_id)
     {
-      try {
+        try {
+            $folder = $album_slug;
 
-        $folder = $album_slug;
+            foreach ($images as $image) {
+                //Invoke Image store method here
+                $this->store($image, $temp_folder, $album_slug, $album_id);
+            }
 
-        foreach($images as $image){
-          //Invoke Image store method here
-          $this->store($image, $temp_folder, $album_slug, $album_id);
+            //error_log('$folder: ' . $folder);
+            //error_log('$url_folder: ' . $url_folder);
+
+
+            //Create thumbnails and web versions
+
+
+            //Push Images to B2
+            //$b2 = new RemoteFileHandler;
+            //$b2->massStore($folder, $url_folder);
+
+            //error_log(print_r($files, true));
+
+            return true;
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
-
-        //error_log('$folder: ' . $folder);
-        //error_log('$url_folder: ' . $url_folder);
-
-
-        //Create thumbnails and web versions
-
-
-        //Push Images to B2
-        //$b2 = new RemoteFileHandler;
-        //$b2->mass_store($folder, $url_folder);
-
-        //error_log(print_r($files, true));
-
-        return true;
-
-      } catch (Exception $e) {
-
-        return $e->getMessage();
-      }
-
     }
 
     /**
@@ -270,10 +245,8 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-      return $image;
-      //return view('image_show', ['image'=>$image]);
+        return json_encode($image);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -293,9 +266,19 @@ class ImageController extends Controller
      * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request)
     {
-        //
+        try {
+            $image = Image::where('id', $request->get('image_id'))->first();
+            $image->image_name = $request->get('image_name');
+            $image->image_description = $request->get('image_description');
+
+            $image->save();
+
+            echo "success";
+        } catch (Exception $e) {
+            echo $e->getMessage;
+        }
     }
 
     /**

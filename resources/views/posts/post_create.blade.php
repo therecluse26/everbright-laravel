@@ -11,48 +11,51 @@
 
                 <div class="panel-body">
 
-                  {!! Form::open(['route' => 'posts.store', 'id' => 'post-create-form']) !!}
+                  <form action="/blog/posts" method="POST" id="post-create-form">
 
-                  <div class="form-group" id="basic_info">
+                    <div class="form-group" id="basic_info">
 
-                    {{ Form::label('title', 'Post Title') }}
-                    {{ Form::text('title', null, ['class' => 'form-control input-lg', 'style' => 'font-size:2.5rem;font-weight:bold;']) }}
+                      <label for="title">Post Title</label>
+                      <input type="text" name="title" id="title" class="form-control input-lg" style="font-size:2.5rem;font-weight:bold;">
 
-                    {{ Form::label('slug', 'URL Slug') }}
-                    <div class="input-group">
-                      <div class="input-group-addon">{{ URL::to('/blog/posts') . '/' }}</div>
-                      {{ Form::text('slug', null, ['class' => 'form-control']) }}
+                      <label for="slug">Slug</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">{{ URL::to('/blog/posts') . '/' }}</div>
+                        <input type="text" name="slug" id="slug" class="form-control">
+                      </div>
+
+                      <label for="category">Category</label>
+                      <select name="category" id="category" class="form-control custom-select">
+                        @foreach ($categories as $key => $category)
+                          <option value="{{ $key }}">{{ $category }}</option>
+                        @endforeach
+                      </select>
+
+                      <br>
+                    
+                      <label for="tags">Tags</label>
+                      <input type="text" name="tags" id="tags" class="form-control" autocomplete="off">
+
+                      <br><br>
+
+                      <input type="checkbox" name="published[]" id="published">
+                      <label for="published">Published</label>
+
                     </div>
 
-
-                    {{ Form::label('category', 'Category') }}
-                    {{ Form::select('category', $categories, null, ['class' => 'form-control custom-select']) }}
+                      <label for="post-body">Post Content</label>
+                      <textarea name="post-body" id="post-body"></textarea>
+                      
+                      <input name="author_id" value="{{ $author->id }}" hidden readonly>
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <br>
 
-                    {{ Form::label('tags', 'Tags') }}
-                    {{ Form::text('tags', null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                    <div class="form-group">
+                      <input type="submit" value="Create Post" id="submit-btn" class="btn btn-primary form-control">
+                    </div>
 
-                    <br><br>
-
-                    {!! Form::checkbox('published[]', null, null, ['id'=>'published']) !!}
-                    {{ Form::label('published', 'Published') }}
-
-
-                  </div>
-
-
-                    {{ Form::label('post-body', 'Post Content') }}
-                    <br>
-                    {{ Form::textarea('post-body', null , ['id' => 'post-body']) }}
-
-                  <br>
-
-                  <div class="form-group">
-                     {!! Form::submit('Create Post', ['id' => 'submit-btn','class' => 'btn btn-primary form-control']) !!}
-                  </div>
-
-                  {!! Form::close() !!}
+                  </form>
 
                   <div id="alert-msg"></div>
 
@@ -71,7 +74,7 @@
 
   <!-- For post/image tag functionality -->
   <script src="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
-  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet"></link>
+  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet">
   <script src="{{ asset('js/bootstrap-tagsinput/lib/bootstrap3-typeahead.min.js') }}"></script>
 
   <script>

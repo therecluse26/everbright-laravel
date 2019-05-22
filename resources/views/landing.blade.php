@@ -7,63 +7,6 @@
 <link href="{{URL::asset('css/hover-effects-advanced.css')}}" rel="stylesheet" type="text/css">
 <link href="{{URL::asset('css/hover-effects-advanced-styles.css')}}" rel="stylesheet" type="text/css">
 
-
-<script>
-/*$(document).ready(function(){
-    $("a").hover(function(){
-
-      $(this).addClass('hover08-focused');
-
-    }, function(){
-
-      $(this).removeClass('hover08-focused');
-
-    });
-}) */
-/*
-$(document).ready(function(){
-  var right = $('#div-link-right').Vague({
-    intensity:      10,      // Blur Intensity
-    forceSVGUrl:    false,   // Force absolute path to the SVG filter,
-    // default animation options
-      animationOptions: {
-        duration: 4000,
-        easing: 'linear' // here you can use also custom jQuery easing functions
-      }
-  });
-
-  var left = $('#div-link-left').Vague({
-    intensity:      10,      // Blur Intensity
-    forceSVGUrl:    false,   // Force absolute path to the SVG filter,
-    // default animation options
-      animationOptions: {
-        duration: 4000,
-        easing: 'linear' // here you can use also custom jQuery easing functions
-      }
-  });
-
-  $("a").hover(function(){
-
-    if ($(this).attr('id') == 'div-link-right'){
-      right.blur();
-    } else {
-      left.blur();
-    }
-    //$(this).addClass('blur');
-
-  }, function(){
-    //$(this).removeClass('blur');
-    if ($(this).attr('id') == 'div-link-right'){
-      right.unblur();
-    } else {
-      left.unblur();
-    }
-
-  });
-
-}); */
-</script>
-
 <!-- Styles -->
 <style>
 
@@ -101,7 +44,7 @@ $(document).ready(function(){
   .landing-full-pane {
     min-height:100%;
     min-width:100%;
-    background-color:grey;
+    background-color:#fff;
     display:flex;
     align-items:stretch;
     position:relative;
@@ -117,15 +60,12 @@ $(document).ready(function(){
   }
 
   .center-logo {
-    z-index: 9;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 3px;
-    pointer-events: none;
+    position:static;
+    min-height: 12em;
+    vertical-align: middle;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .div-link {
@@ -141,12 +81,10 @@ $(document).ready(function(){
 
   #div-link-right {
     background-image: url("{{URL::asset('storage/photos/site_images/Photo3.jpg')}}");
-
   }
 
   #div-link-left {
     background-image: url("{{URL::asset('storage/photos/site_images/Photo1.jpg')}}");
-
   }
 
 </style>
@@ -158,29 +96,7 @@ $(document).ready(function(){
       <div class="container landing-full-pane">
 
         <div>
-          <img class="center-logo" width="35%" src="{{URL::asset('storage/photos/site_images/TandemLogoSolo.png')}}" />
-        </div>
-
-        <div class="row table-center">
-
-          <a href="#left" class="div-link landing-left-pane">
-              <figure class="effect-honey" id="div-link-left">
-                    <figcaption>
-                      <h2> <span></span> <i>Photography</i></h2>
-                    </figcaption>
-              </figure>
-            </a>
-
-            <a href="#right" class="div-link landing-right-pane">
-              <!--<div class="col-md-6 col-sm-6 middle pull-right landing-right-pane">
-              </div> -->
-              <figure class="effect-honey" id="div-link-right">
-                    <figcaption>
-                      <h2> <span></span> <i>Design</i></h2>
-                    </figcaption>
-              </figure>
-            </a>
-
+          <img class="center-logo" width="35%" src="{{URL::asset('storage/photos/site_images/TandemLogoNew.png')}}" />
         </div>
 
       </div>

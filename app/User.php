@@ -28,39 +28,49 @@ class User extends Authenticatable
         'password', 'remember_token', '_token',
     ];
 
-
-    public function Roles()
+    public function roles()
     {
-      return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->belongsToMany(Role::class, 'user_roles');
     }
 
-    public function Author()
+    public function checkRole($role)
     {
-      if ( $this->isAuthor() ) {
-
-        return $this->hasOne('App\Author');
-
-      } else {
-        
-        return false;
-      }
+        return in_array($this->role, $role);
     }
 
-    public function UserInfo()
+    public function author()
     {
-      return $this->hasOne('App\UserInfo');
+        if ($this->isAuthor()) {
+            return $this->hasOne('App\Author');
+        } else {
+            return false;
+        }
+    }
+
+    //Pulls User Profile Info
+    public function userInfo()
+    {
+        return $this->hasOne('App\UserInfo', 'user_id');
     }
 
     // Role checks
     public function isAdmin()
     {
-       return $this->roles()->where('name', 'Administrator')->exists();
+        return $this->roles()->where('name', 'Administrator')->exists();
     }
 
     public function isAuthor()
     {
-       return $this->roles()->where('name', 'Author')->exists();
+        return $this->roles()->where('name', 'Author')->exists();
     }
 
+    public function isCustomer()
+    {
+        return $this->roles()->where('name', 'Customer')->exists();
+    }
 
+    public function isGuest()
+    {
+        return $this->roles()->where('name', 'Guest')->exists();
+    }
 }

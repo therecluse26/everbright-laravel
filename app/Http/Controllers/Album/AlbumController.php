@@ -11,13 +11,12 @@ use \Cache;
 
 class AlbumController extends Controller
 {
-
     public function __construct()
     {
-      //Implements auth middleware
-      $this->middleware('auth', ['except' => [
-        'index'
-      ]]);
+        //Implements auth middleware
+        $this->middleware('auth', ['except' => [
+          'index'
+        ]]);
     }
 
     /**
@@ -27,9 +26,9 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
-        return 'AlbumController@index';
+        $albums = \App\Album::all();
 
+        return view('albums/album_index', ['albums'=>$albums]);
     }
 
     /**
@@ -39,125 +38,91 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        if(!$this->authorize('create', Album::class)){
-
+        if (!$this->authorize('create', Album::class)) {
         };
 
         $categories_all = \App\Category::all();
 
         $categories = [];
 
-        foreach($categories_all as $cat){
-
-          $categories[$cat['id']] = ucfirst($cat['name']);
-
+        foreach ($categories_all as $cat) {
+            $categories[$cat['id']] = ucfirst($cat['name']);
         }
 
         return view('albums/album_create', ['categories'=>$categories]);
-
-
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created album and attach images
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-      $resp_array = [];
+        $resp_array = [];
 
-      try {
-        //Store post to database
+        //dd($request->all());
 
-        $form_data = json_decode($request->get('formData'));
+        try {
+            $form_data = json_decode($request->get('formData'));
 
-        //error_log($request->get('formData'));
+            $album = new \App\Album;
 
-        /*$album_title = $form_data[1]->value;
-        $album_slug = $form_data[2]->value;
-        $album_tags = $form_data[3]->value;
-        $album_temp_folder = $form_data[4]->value;
-        $album_active = (int)$form_data[5]->value;
-        $images = $form_data[5]->images;*/
+            //Assign form data entries to variables
+            foreach ($form_data as $entry) {
+                if ($entry->name == 'images' || $entry->name == 'temp_folder') {
+                    ${$entry->name} = $entry->value;
+                } elseif ($entry->name == 'active[]'){
+                    $album->active = (int)$entry->value;
+                } else {
+                    $album->{$entry->name} = $entry->value;
+                }
+            }
 
-        $album = new \App\Album;
+            $album->slug = str_slug($album->slug, '-');
 
-        //Assign form data entries to variables
+            unset($album->_token, $album->tags);
 
-        foreach ($form_data as $entry){
-          if($entry->name == 'images' || $entry->name == 'temp_folder'){
-            ${$entry->name} = $entry->value;
-          } else {
-            $album->{$entry->name} = $entry->value;
-          }
+            if (!isset($album->title, $album->slug) || $album->title == '' || $album->slug == '') {
+                throw new \Exception("Title and slug are required");
+            }
+
+            //Pass $images array to image_massStore method on ImageController
+            if (!isset($images)) {
+                throw new \Exception("Images missing");
+            }
+
+            $url_folder = "albums/$album->slug";
+
+            //Stores album
+            $album->save();
+
+            $img_control = new ImageController;
+            $img_control->massStore($images, $temp_folder, $album->slug, $url_folder, $album->id);
+
+            $resp_array['status'] = 'success';
+            $resp_array['msg'] = 'Album created successfully!';
+            $resp_array['slug'] = $album->slug;
+
+            return $resp_array;
+        } catch (\Exception $ex) {
+            $resp_array['status'] = 'error';
+            $resp_array['msg'] = $ex->getMessage();
+
+            return $resp_array;
+        } catch (\Illuminate\Database\QueryException $e) {
+            $resp_array['status'] = 'error';
+
+            if ($e->getCode() === '23000') {
+                $resp_array['msg'] = 'Duplicate Album Title or URL Slug';
+            } else {
+                $resp_array['msg'] = 'Error: ' . $e->getMessage();
+            }
+
+            return $resp_array;
+            //return redirect()->route('posts.create', ['r' => $resp_encrypted]);
         }
-
-        $album->slug = str_slug($album->slug, '-');
-
-        unset($album->_token, $album->tags);
-
-        if (!isset($album->title, $album->slug) || $album->title == '' || $album->slug == '') {
-          throw new \Exception("Title and slug are required");
-        }
-
-        //Pass $images array to image_mass_store method on ImageController
-        if (!isset($images)){
-          throw new \Exception("Images missing");
-        }
-
-        $url_folder = "albums/$album->slug";
-
-        //Stores album
-        $album->save();
-
-        $img_control = new ImageController;
-        $img_control->mass_store($images, $temp_folder, $album->slug, $url_folder, $album->id);
-
-
-        /*//Attaches tags to new album
-        $tags = explode(',', $request->get('tags'));
-        $newtag_array = [];
-        foreach($tags as $tag){
-          $newtag = \App\Tag::firstOrCreate(['tag' => $tag]);
-          array_push($newtag_array, ['post_id'=>$album->id, 'tag_id'=>$newtag->id]);
-        }
-
-        $album->tags()->sync($newtag_array); */
-
-        $resp_array['status'] = 'success';
-        $resp_array['msg'] = 'Album created successfully!';
-        $resp_array['slug'] = $album->slug;
-
-        return $resp_array;
-        //return redirect()->route('posts.edit', ['id' => $id, 'r' => $resp_encrypted]);
-
-      } catch (\Exception $ex) {
-
-        $resp_array['status'] = 'error';
-        $resp_array['msg'] = $ex->getMessage();
-
-        return $resp_array;
-
-      } catch (\Illuminate\Database\QueryException $e) {
-
-        $resp_array['status'] = 'error';
-
-        if($e->getCode() === '23000') {
-
-          $resp_array['msg'] = 'Duplicate Album Title or URL Slug';
-
-        } else {
-
-          $resp_array['msg'] = 'Error: ' . $e->getMessage();
-
-        }
-
-        return $resp_array;
-        //return redirect()->route('posts.create', ['r' => $resp_encrypted]);
-      }
-
     }
 
     /**
@@ -168,13 +133,13 @@ class AlbumController extends Controller
      */
     public function show($slug)
     {
-      //$album = Album::pullBySlug($slug);
+        //$album = Album::pullBySlug($slug);
 
-      $album = Cache::rememberForever('album_'.$slug, function() use ($slug) {
-        return Album::pullBySlug($slug);
-      });
+        $album = Cache::rememberForever('album_'.$slug, function () use ($slug) {
+            return Album::pullBySlug($slug);
+        });
 
-      //return $album;
+        //return $album;
 
         return view('albums/album_show', [ 'album' => $album, 'cacheparam' => uniqid() ]);
     }
@@ -187,20 +152,9 @@ class AlbumController extends Controller
      */
     public function edit($slug)
     {
-        //
-
         $album = Album::pullBySlug($slug);
 
-        return $album;
-
-        /*$album = Album::with(array('images' => function($query)
-        {   $query->select('id', 'album_id', 'image_name', 'image_description',
-            'original_file', 'created_at');
-        }))->select(['id', 'title', 'created_at'])->where('slug', $slug)->first();*/
-
-
-        return view('albums/album_edit', ['album'=>$album]);
-
+        return view('albums/album_edit', ['album'=>$album, 'cacheparam' => uniqid()]);
     }
 
     /**
@@ -214,7 +168,6 @@ class AlbumController extends Controller
     {
         //
         return 'AlbumController@update';
-
     }
 
     /**
@@ -227,6 +180,5 @@ class AlbumController extends Controller
     {
         //
         return 'AlbumController@destroy';
-
     }
 }
