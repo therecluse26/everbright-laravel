@@ -58,13 +58,14 @@ Route::middleware('admin')->namespace('Admin')->group(function () {
     Route::delete('admin/users', 'UserManagement@userDelete');
     Route::get('admin/users/{id}/roles', 'UserManagement@userRolesList');
     Route::post('admin/users/{id}/roles', 'UserManagement@userRolesUpdate');
+    Route::get('admin/jobmonitor', 'JobMonitorController@show')->name('job_monitor');
+    Route::get('admin/api/jobstatus', 'JobMonitorController@monitor');
 });
 
 //User Routes
 Route::get('user/edit', 'UserInfoController@edit')->middleware('auth')->name('user');
 Route::get('user/{id}', 'UserInfoController@show');
 Route::post('user', 'UserInfoController@update');
-
 
 /*----------------------------------------------------------------------------*/
 

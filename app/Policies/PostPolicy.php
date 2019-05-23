@@ -25,9 +25,16 @@ class PostPolicy
          }
      }
 
+     /**
+     * Determine whether the user can view the post.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Post  $post
+     * @return mixed
+     */
     public function view(User $user, Post $post)
     {
-        //
+        return true;
     }
 
     /**
@@ -49,6 +56,18 @@ class PostPolicy
      * @return mixed
      */
     public function update(User $user, Post $post)
+    {
+        return ( $user->id === $post->user_id  && $user->isAuthor() ) || $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can edit the post.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Post  $post
+     * @return mixed
+     */
+    public function edit(User $user, Post $post)
     {
         return ( $user->id === $post->user_id  && $user->isAuthor() ) || $user->isAdmin();
     }

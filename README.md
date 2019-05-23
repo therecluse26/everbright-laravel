@@ -6,6 +6,8 @@ Dependencies
 ------------
 `PHP` 7.1+
 
+`Laravel` 5.5
+
 `Imagick` PHP extension
 
 `Redis` Caching server

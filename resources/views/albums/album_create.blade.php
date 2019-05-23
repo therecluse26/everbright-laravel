@@ -55,8 +55,6 @@
 
                     <br>
 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                     <div class="form-group">
                       <input type="submit" value="Create Album" id="submit-btn" class="btn btn-primary form-control">
 
@@ -81,6 +79,6 @@
 @section('specific_foot')
   <!-- For post/image tag functionality -->
   <script src="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
-  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet"></link>
+  <link href="{{ asset('js/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet">
   <script src="{{ asset('js/bootstrap-tagsinput/lib/bootstrap3-typeahead.min.js') }}"></script>
 @endsection

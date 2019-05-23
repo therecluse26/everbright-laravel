@@ -9,30 +9,31 @@
 
                 <div class="panel-body">
 
-                  {!! Form::model($user, ['url' => 'user', 'id' => 'user-form']) !!}
+                  <form action="/user" method="POST" id="user-form">
 
                   <div class="form-group" id="basic_info">
-                    {{ Form::label('firstname', 'First Name') }}
-                    {{ Form::text('firstname', null, ['class' => 'form-control']) }}
 
-                    {{ Form::label('lastname', 'Last Name') }}
-                    {{ Form::text('lastname', null, ['class' => 'form-control']) }}
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" id="firstname" class="form-control" value="{{ $user->firstname }}">
 
-                    {{ Form::label('email', 'Email') }}
-                    {{ Form::text('email', null, ['class' => 'form-control']) }}
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" id="lastname" class="form-control" value="{{ $user->lastname }}">
 
-                    {{ Form::label('phone', 'Phone') }}
-                    {{ Form::text('phone', null, ['class' => 'form-control']) }}
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" value="{{ $user->email }}">
+
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{ $user->phone }}">
 
                     <br>
 
-                    {!! Form::checkbox('email_notifications', null, $user->email_notifications, ['id'=>'email_notifications']) !!}
-                    {{ Form::label('email_notifications', 'Email Notifications') }}
+                    <input type="checkbox" name="email_notifications" id="email_notifications" value="{{ $user->email_notifications }}">
+                    <label for="email_notifications">Email Notifications</label>
 
                     &nbsp;&nbsp;&nbsp;
 
-                    {!! Form::checkbox('text_notifications', null, $user->text_notifications, ['id'=>'text_notifications']) !!}
-                    {{ Form::label('text_notifications', 'Text Notifications') }}
+                    <input type="checkbox" name="text_notifications" id="text_notifications" value="{{ $user->text_notifications }}">
+                    <label for="text_notifications">Text Notifications</label>
 
                   </div>
 
@@ -40,11 +41,11 @@
                     <hr>
                     <h4>Billing Information</h4>
 
-                    {{ Form::label('userinfo[billing_street]', 'Billing Address 1') }}
-                    {{ Form::text('userinfo[billing_street]', null, ['class' => 'form-control']) }}
+                    <label for="userinfo[billing_street]">Billing Address 1</label>
+                    <input type="text" name="userinfo[billing_street]" id="billing_street" class="form-control" value="{{ $user->billing_street }}">
 
-                    {{ Form::label('userinfo[billing_street2]', 'Billing Address 2') }}
-                    {{ Form::text('userinfo[billing_street2]', null, ['class' => 'form-control']) }}
+                    <label for="userinfo[billing_street2]">Billing Address 2</label>
+                    <input type="text" name="userinfo[billing_street2]" id="billing_street2" class="form-control" value="{{ $user->billing_street2 }}">
 
                     {{ Form::label('userinfo[billing_city]', 'Billing City') }}
                     {{ Form::text('userinfo[billing_city]', null, ['class' => 'form-control']) }}
@@ -86,8 +87,8 @@
                     {!! Form::submit('Update', ['id' => 'submit-btn','class' => 'btn btn-primary form-control']) !!}
                   </div>
 
-                  {!! Form::close() !!}
 
+                  </form>
 
                   @if ($errors->any())
                       <div class="alert alert-danger">

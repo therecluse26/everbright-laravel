@@ -36,8 +36,5 @@ class Post extends Model
   {
     return $query->orderBy('created_at', 'asc');
   }
-    /*public function User()
-    {
-        return $this->hasManyThrough('App\User', 'App\Author');
-    }*/
+
 }

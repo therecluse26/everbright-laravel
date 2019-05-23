@@ -17,38 +17,32 @@
     margin-bottom: 5px;
   }
   </style>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
-
   <div class="row col-md-12 text-center">
-
     <h2>{{ $album->title }}</h2>
     <small>{{ date('m-d-Y', strtotime($album->created_at)) }}</small>
-
   </div>
-
 </div>
 
 <!-- Initialize Masonry grid -->
 <div class="photo-grid" itemscope itemtype="http://schema.org/ImageGallery">
 
 @foreach ($album->images as $image)
-
   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="photo-grid-item">
     <a href="{{ $image->web_file_url . '&c=' . $cacheparam }}" itemprop="contentUrl" data-size="{{ $image->web_dimensions }}">
       <img class="photo-grid-image" src="{{ $image->thumb_file_url }}" width="420px" itemprop="thumbnail" />
     </a>
     <!--<figcaption itemprop="caption description">{{ $image->image_description }}</figcaption> -->
   </figure>
-
 @endforeach
 
 </div>
-
-
 
 @endsection
 

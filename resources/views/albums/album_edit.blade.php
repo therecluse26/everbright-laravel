@@ -47,9 +47,6 @@
 
 </div>
 
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="image_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -65,9 +62,9 @@
             <input id="image_name" name="image_name" value=""/>
             <label for="image_description">Description</label>
             <input id="image_description" name="image_description" value=""/>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
           </form>
         </div>
-
 
       </div>
       <div class="modal-footer">
@@ -78,7 +75,6 @@
     </div>
   </div>
 </div>
-
 
 @endsection
 

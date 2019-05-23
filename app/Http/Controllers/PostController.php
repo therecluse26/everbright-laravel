@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-use App\Author;
 
 class PostController extends Controller
 {
@@ -183,9 +182,7 @@ class PostController extends Controller
 
         $post->author->email = \App\User::select('email')->where('id', $author->user_id)->first();
 
-        //return $author;
-
-        return view('posts/post', ['post'=>$post]);
+        return view('posts/post', ['post'=>$post, 'tags'=>$tags]);
     }
 
     /**

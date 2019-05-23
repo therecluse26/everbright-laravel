@@ -111,7 +111,11 @@ $(document).ready(function(){
     }
   });
 
+  /**
+   * Custom functionality
+   */
 
+  // Automatically updates slug as you type a title
   $('#title').on('change keyup keypress',function(t){
     var slugval = slugify(t.target.value);
     $('#slug').val(slugval);
@@ -134,6 +138,7 @@ $(document).ready(function(){
   //Submit new album for creation
   $('#album-create-form').submit(function(e){
 
+    // Adds title to allImages object prior to sending
     $('.photo_title').each(function(x){
       if(x < allImages.length){
         var photo_id = this.id.substring(0, this.id.indexOf('_'));
@@ -142,6 +147,7 @@ $(document).ready(function(){
       }
     })
 
+    // Adds description to allImages object prior to sending
     $('.photo_description').each(function(x){
         if(x < allImages.length){
           var photo_id = this.id.substring(0, this.id.indexOf('_'));
@@ -150,6 +156,7 @@ $(document).ready(function(){
         }
     })
 
+    // Adds watermark position to allImages object prior to sending
     $('.photo_watermark').each(function(x){
         if(x < allImages.length){
           var photo_id = this.id.substring(0, this.id.indexOf('_'));
@@ -159,6 +166,9 @@ $(document).ready(function(){
     })
 
     e.preventDefault();
+    if(e.isDefaultPrevented){
+      console.log("Default Prevented");
+    }
 
     var sendData = new FormData();
     var formData = $(this).serializeArray();
@@ -173,8 +183,6 @@ $(document).ready(function(){
     sendData.append("_token", $('[name=_token').val());
     sendData.append('formData', formBase64);
 
-    console.log(this.action);
-
     $.ajax({
       type: "POST",
       url: this.action,
@@ -186,15 +194,8 @@ $(document).ready(function(){
 
         if (result.status === 'success') {
 
-          //console.log(result);
-
-          //var return_data = JSON.stringify(result);
-
-          //Pushes to database
-          $('#formdivhidden').html('<form style="display: hidden" action="/albums/'+ result.slug +'" method="GET" id="hiddenform">\
-                                </form>');
-
-          $('#hiddenform').submit();
+          // Redirects to job monitor page on success
+          window.location.replace("/admin/jobmonitor");
 
         } else {
 

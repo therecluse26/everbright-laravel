@@ -10,10 +10,11 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\Http\Controllers\Image\ImageTransformController;
 use Illuminate\Support\Facades\Storage;
 use App\Events\AlbumAltered;
+use romanzipp\QueueMonitor\Traits\QueueMonitor;
 
 class GenerateThumbnail implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, QueueMonitor;
 
     protected $image_meta;
     protected $image_storage_schema;

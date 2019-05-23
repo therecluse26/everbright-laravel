@@ -8,11 +8,12 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Http\Controllers\ImageTransformController;
+use romanzipp\QueueMonitor\Traits\QueueMonitor;
 use Illuminate\Support\Facades\Storage;
 
 class GenerateBlurThumbnail implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, QueueMonitor;
 
     protected $image_meta;
 

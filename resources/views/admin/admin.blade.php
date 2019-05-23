@@ -9,6 +9,12 @@
                 <hr>
 
                   <ul id="admin-controls">
+
+                    <h4>Administrative</h4>
+                    <li>
+                      <a href="{{ route('job_monitor') }}">Job Queue Monitor</a>
+                    </li>
+
                     <h4>Blog</h4>
                     <li>
                       <a href="{{ route('posts.index') }}">Show Posts</a>
@@ -32,10 +38,7 @@
                     </li>
                   </ul>
 
-                </div>
-
-
-                
+                </div>           
             </div>
         </div>
     </div>

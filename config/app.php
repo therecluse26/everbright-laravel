@@ -188,6 +188,9 @@ return [
         // Debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        // Queue monitor
+        romanzipp\QueueMonitor\Providers\QueueMonitorProvider::class,
+
         //GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
         //\Hpolthof\Backblaze\BackblazeServiceProvider::class,
 

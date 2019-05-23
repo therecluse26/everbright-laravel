@@ -34,14 +34,12 @@ class UserInfoController extends Controller
     }
 
     //Update user data
-    public function update()
+    public function update(Request $request)
     {
         try {
             $id = \Auth::user()->id;
-            $input = Request::all();
+            $input = $request->all();
             $user = \App\User::find($id);
-
-            //return $input;
 
             $userinfo_array = [];
 

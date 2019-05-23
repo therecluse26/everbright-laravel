@@ -44,8 +44,6 @@ class ImagePullController extends Controller
         $parsed_images = array();
         $this->search_term = $search_term;
 
-        // print_r($api_image_array["resources"]);
-
         //Filters result by tag
         $filtered_result = array_where($api_image_array["resources"], function ($value, $key) {
             print_r($value);
@@ -59,7 +57,6 @@ class ImagePullController extends Controller
                 return array_search($this->search_term, $value["tag"]);
             }
 
-            //return array_search($this->tags, $value["context"]["custom"]);
         });
 
         foreach ($filtered_result as $image) {
@@ -70,7 +67,6 @@ class ImagePullController extends Controller
             }
 
             $tag_list = rtrim($tag_list, ";");
-
 
             array_push(
                 $parsed_images,
@@ -84,13 +80,8 @@ class ImagePullController extends Controller
                   "cover_image" => $image["context"]["custom"]["cover_image"]
                 )
             );
-            //print_r($image);
-      // array_push("");
+
         }
-
-        //print_r($parsed_images);
-
-        //$parsed_images = $filtered_result;
 
         return $parsed_images;
     }
