@@ -51,7 +51,7 @@
 
                       <br><br>
 
-                      <input type="checkbox" name="active[]" id="active">
+                      <input type="checkbox" name="active" id="active">
                       <label for="active">Album Active</label>
 
                       <br>

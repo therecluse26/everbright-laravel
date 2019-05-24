@@ -20,13 +20,13 @@ class AlbumController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display an album listing.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        if (\Auth::user()->isAdmin()){
+        if (\Auth::user() && \Auth::user()->isAdmin()){
             $albums = \App\Album::all();
         } else {
             $albums = \App\Album::where('active', 1)->get();
@@ -37,15 +37,12 @@ class AlbumController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new album.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        if (!$this->authorize('create', Album::class)) {
-        };
-
         $users = \App\User::all();
 
         $categories_all = \App\Category::all();
@@ -69,8 +66,6 @@ class AlbumController extends Controller
     {
         $resp_array = [];
 
-        //dd($request->all());
-
         try {
             $form_data = json_decode($request->get('formData'));
 
@@ -80,8 +75,13 @@ class AlbumController extends Controller
             foreach ($form_data as $entry) {
                 if ($entry->name == 'images' || $entry->name == 'temp_folder') {
                     ${$entry->name} = $entry->value;
-                } elseif ($entry->name == 'active[]'){
-                    $album->active = (int)$entry->value;
+                } elseif ($entry->name == 'active'){
+                    if ($entry->value == 'on'){
+                        $val = 1;
+                    } else {
+                        $val = 0;
+                    }
+                    $album->{$entry->name} = $val;
                 } else {
                     $album->{$entry->name} = $entry->value;
                 }
@@ -128,31 +128,26 @@ class AlbumController extends Controller
             }
 
             return $resp_array;
-            //return redirect()->route('posts.create', ['r' => $resp_encrypted]);
         }
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified album.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
     {
-        //$album = Album::pullBySlug($slug);
-
         $album = Cache::rememberForever('album_'.$slug, function () use ($slug) {
             return Album::pullBySlug($slug);
         });
-
-        //return $album;
 
         return view('albums/album_show', [ 'album' => $album, 'cacheparam' => uniqid() ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified album.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -165,7 +160,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified album in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -178,7 +173,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified album from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

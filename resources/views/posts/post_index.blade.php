@@ -5,9 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+          
+          <h2>Posts</h2>
+          <hr>
 
-
-          @foreach ($posts as $post)
+          @forelse ($posts as $post)
 
             <h3 style="margin-bottom:-3px;">
               <a href="{{ '/blog/posts/'. $post->id }}">{{ $post->title }}</a>
@@ -36,7 +38,6 @@
                     @else
                     <a href="{{ '/blog/tag/' . urlencode($tag->tag) }}"> {{ $tag->tag }} </a> -
                     @endif
-
                   @endforeach
                 </small>
               </div>
@@ -47,7 +48,10 @@
               {{ substr(strip_tags( \App\Post::select('post_body')->where('id', '=', $post->id)->get()[0]->post_body ), 0, 200) }}...
             </div>
             <hr>
-          @endforeach
+
+          @empty
+            <p>No blog posts :(</p>
+          @endforelse
 
           {{ $posts->links() }}
 

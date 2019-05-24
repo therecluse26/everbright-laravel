@@ -26,7 +26,7 @@ class AlbumPolicy
      */
     public function view(User $user, Album $album)
     {
-        return $user->id === $album->owner_id;
+        return $user->id === $album->owner_id || $album->active;
     }
 
     /**

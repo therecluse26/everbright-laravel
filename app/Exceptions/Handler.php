@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -48,6 +49,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+      // If the exception is due to an unauthorized action
+      if ($exception instanceof AuthorizationException) {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthorized.'], 403);
+        }
+        // Redirects to homepage
+        return redirect('/');
+      }
+    
       // Convert all non-http exceptions to a proper 500 http exception
       // if we don't do this exceptions are shown as a default template
       // instead of our own view in resources/views/errors/500.blade.php

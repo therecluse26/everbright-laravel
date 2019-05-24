@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class Album extends Model
 {
-    protected $active = false;
+    //protected $active = false;
 
     protected $fillable = [
-      'id', 'owner_id'
+      'id', 'owner_id', 'active'
     ];
 
     public function images()
@@ -39,9 +39,6 @@ class Album extends Model
                       'album_id',
                       'image_name',
                       'image_description',
-                      /*'original_file',
-                      'original_file_url',
-                      'original_url_remote',*/
                       'thumb_file_url',
                       'thumb_dimensions',
                       'web_file_url',

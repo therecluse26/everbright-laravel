@@ -9,12 +9,6 @@
                 <hr>
 
                   <ul id="admin-controls">
-
-                    <h4>Administrative</h4>
-                    <li>
-                      <a href="{{ route('job_monitor') }}">Job Queue Monitor</a>
-                    </li>
-
                     <h4>Blog</h4>
                     <li>
                       <a href="{{ route('posts.index') }}">Show Posts</a>
@@ -23,18 +17,19 @@
                       <a href="{{ route('posts.create') }}">New Post</a>
                     </li>
                     <br>
+
                     <h4>Photo Management</h4>
                     <li>
                       <a href="{{ route('albums.create') }}">Create Album</a>
                     </li>
                     <li>
-                      <a href="{{ route('posts.create') }}">Add Photos</a>
-                    </li>
-                    <li>
-                      <a href="{{ route('posts.create') }}">Manage Tags & Categories</a>
-                    </li>
-                    <li>
                       <a href="{{ route('albums.index') }}">View Albums</a>
+                    </li>
+                    <br>
+                    
+                    <h4>Administrative</h4>
+                    <li>
+                      <a href="{{ route('job_monitor') }}">Job Queue Monitor</a>
                     </li>
                   </ul>
 
