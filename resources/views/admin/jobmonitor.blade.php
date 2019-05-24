@@ -7,7 +7,7 @@
 <div class="container">
     <h2 class="text-center">Queued Jobs</h2>
 
-    <div id="status-container" class="text-center">
+    <div id="status-container" class="text-center text-info">
         
     </div>
 </div>

@@ -12,6 +12,7 @@
 
 @section('content')
 
+
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -34,6 +35,13 @@
                         <input type="text" name="slug" id="slug" class="form-control">
                       </div>
 
+                      <label for="owner_id">Owner</label>
+                      <select name="owner_id" id="owner_id" class="form-control">
+                        @foreach ($users as $user)
+                      <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>
+                        @endforeach
+                      </select>
+
                       <br>
 
                       <label for="tags">Tags</label>
@@ -45,6 +53,8 @@
 
                       <input type="checkbox" name="active[]" id="active">
                       <label for="active">Album Active</label>
+
+                      <br>
 
                       <h4>Images</h4>
                         <div id="image-upload" class="dz-container dropzone">

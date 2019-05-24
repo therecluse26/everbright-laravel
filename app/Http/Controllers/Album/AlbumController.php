@@ -26,7 +26,12 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = \App\Album::all();
+        if (\Auth::user()->isAdmin()){
+            $albums = \App\Album::all();
+        } else {
+            $albums = \App\Album::where('active', 1)->get();
+        }
+
 
         return view('albums/album_index', ['albums'=>$albums]);
     }
@@ -41,6 +46,8 @@ class AlbumController extends Controller
         if (!$this->authorize('create', Album::class)) {
         };
 
+        $users = \App\User::all();
+
         $categories_all = \App\Category::all();
 
         $categories = [];
@@ -49,7 +56,7 @@ class AlbumController extends Controller
             $categories[$cat['id']] = ucfirst($cat['name']);
         }
 
-        return view('albums/album_create', ['categories'=>$categories]);
+        return view('albums/album_create', ['categories'=>$categories, 'users'=>$users]);
     }
 
     /**

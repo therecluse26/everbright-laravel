@@ -18,6 +18,11 @@ class Album extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function owner()
+    {
+        return $this->hasOne(User::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('active', 1);
